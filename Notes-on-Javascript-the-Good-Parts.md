@@ -15,7 +15,7 @@ Javascript has a _class free_ object makeup, relying instead on objects inheriti
 <a name="Chapter2"/>
 ##Chapter 2
 
-Always use // for comments, even multi-line ones to avoid having to escape '/*' characters.
+Always use // for comments, even multi-line ones to avoid having to escape `/*` characters.
 
 ###Numbers
 
@@ -28,18 +28,15 @@ Number methods are discussed in [Chapter 8](#Chapter8).
 ###Strings
 
 * 16-bit character set and don't have character tpes.
-* Backslashes (\) are used for **escaping characters** that could cause problems in strings.
-* Strings are **immutable*.
+* Backslashes (\\\) are used for **escaping characters** that could cause problems in strings.
+* Strings are **immutable**.
 
 String methods are discussed in [Chapter 8](#Chapter8).
 
 ###Statements
 
 * _Inside_ a function, the var statement creates variables local to that function
-* _switch, while, for_ and _do_ statements can have an optional **label*  which can be used with         break and         continue to provide more precise [control over exactly which statement to break or continue](http://www.tutorialspoint.com/cgi-bin/practice.cgi?file=javascript_19). Format:
-```javascript
-continue labelname;
-```
+* _switch, while, for_ and _do_ statements can have an optional **label*  which can be used with `break` and `continue` to provide more precise [control over exactly which statement to break or continue](http://www.tutorialspoint.com/cgi-bin/practice.cgi?file=javascript_19). Format: `continue labelname;`
 
 
 <a name="Chapter8"/>
