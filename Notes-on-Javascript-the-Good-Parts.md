@@ -27,9 +27,9 @@ Number methods are discussed in [Chapter 8](#Chapter8).
 
 ###Strings
 
-*16-bit character set and don't have character tpes.
-*Backslashes (\) are used for **escaping characters** that could cause problems in strings.
-*Strings are **immutable*.
+* 16-bit character set and don't have character tpes.
+* Backslashes (\) are used for **escaping characters** that could cause problems in strings.
+* Strings are **immutable*.
 
 String methods are discussed in [Chapter 8](#Chapter8).
 
