@@ -67,7 +67,7 @@ for (myvariable in object) {
 *  _Invocation_ is `(expression1, expression2, etc)`
 *  _refinement_ is either `.name` or `[expression]` as used in an array
 
-##Literals
+###Literals
 
 * _Names_ or _strings used for specifying new objects ([**object literals**](#Chapter3)) or arrays ([**array literals**](#Chapter6))
 * Properties of the object are expressions and must be known at compile time
@@ -166,7 +166,7 @@ for (i = 0; i < properties.length; i++) {
 * Removes property from object, but also **reveals property from further up the prototype chain** if it exists
 * Format: `delete today.month`
 
-###Gloabl Abatement
+###Global Abatement
 
 * One way to mitigate the risks of global variables is to _create a single global variable_ which then contains your whole application
 ```javascript
@@ -190,10 +190,125 @@ MYAPP.today = {
 <a name="Chapter4"/>
 ##Chapter 4 - Functions
 
+> The best thing about JavaScript is its implementation of functions.
+
+###Function Objects
+
+* Functions are objects linked to _function.prototype_ (which is linked to _Object.prototype_).
+* As well as usual object behaviour, they can be **invoked**.
+
+###Function Literal
+
+* A function literal has 4 parts:
+	* The (reserved) word `function` itself
+	* An _optional_ name (un-named functions are considered _anonymous_ functions)
+	* Comma-seperated parameters of the function, in parentheses - `(parameters)`
+	* Set of statements in curly brakcets to be carried out when the function is invoked - `{statements}`
+
+```javascript
+//Format of a function
+function name (parameterA, parameterB){
+	statements;
+}
+```
+<a name="nestedFunctions"/>
+* Functions can be nested within functions and the inner function can access all the parameters of the outer function as well as its own
+
+###Invocation
+
+* Stops the current function from running and tells the function you have invoked both to start and to use the arguments (values in parentheses) you have passed it in the invocation `function (parameters)`
+	* If arguments > number of arguments expected, the **extra values will be ignored**
+	* If arguments < number of arguments expected, the function will assume **undefined in place of the missing arguments**
+	* No error is thrown
+
+* **Note:** The difference between an _argument_ and a _parameter_ is that a parameter is usually what is used in the function literal, when you're setting up the function (almost like the placeholder for the actual values that the function will use when it is active) and an argument is usually the value passed to a function at the time it is invoked
+* Parameters `this` and `arguments` are also passed to the function when it is invoked, but their value depends on how the function is invoked
+
+####Method Invocation Pattern
+
+* When a function is **stored as the property of the object** (invoked with a dot . expression) it is called on and is called a _method_ 
+```javascript
+myObject.incrementFunction();
+```
+* The method is **bound to the object** and therefore can use `this` to **retrieve or update values from the object**
+* These methods are **highly reusable**
+* Because their _object context_ comes from `this` they are considered _public methods_
+
+####Function Invocation Pattern
+
+* When a function is _not_ the property of an object, it is invoked as a _function_
+```javascript
+var sum = **add(3, 4);**
+```
+* These functions are **bound to the global object** (_a "mistake in the design of the language" according to Douglas Crockford)_
+* `this` is therefore also bound to the global object [even in inner functions](#nestedFunctions)
+* **Workaround:** Artificially create a new `this` ... //**NOTES TO BE FINISHED**
+
+####Constructor Invocation Pattern
+
+* When a function is created with `new`, that function contains a link to the function's prototype
+* This means that methods that were created for the **prototype function are also available** to the function created using `new`
+```javascript
+//create a function Quo that takes a string - Quo will be our prototype function as we will see
+var Quo = function (string){
+	this.status = string;
+}
+
+//Now create a get_status method for Quo - this will be a public method
+Quo.prototype.get_status = function {
+	return this.status;
+}
+
+//create a new instance of Quo using the prefix NEW
+var myQuo = new Quo("happy");
+
+//because of the use of the new prefix, myQuo is an instance of Quo which means it can access the public method get_status from it's prototype
+document.writeIn(myQuo.get_status());     //returns 'happy'
+```
+* This style of constructor pattern is not recommended, there will be better examples in [Chapter 5](#Chapter5)
+* The first letter of a constructor function (in this case Quo) **must _always_ be capitalized**
+
+####Apply Invoation Pattern
+
+* The `apply` method lets you **choose the value to be bound to `this`**
+* It also takes the parameters for a function in an array
+* Format:   `function.apply(valueForThis, arrayOfParamentersForFunction);`
+```javascript
+var array = [5, 2]    //will be the parameters for our function
+var sum = add.apply(null, array);     //value of 'this' is null and value of sum is 7 as the 'apply' method passes 5 and 2 to the 'add' method
+```
+
+###Arguments
+
+* Another default parameter of functions is the `arguments` array which contains all the arguments that were supplied when the function was invoked
+* This means you don't have to know the exact number of arguments when you build a function because you can loop through all the arguments provided at invocation with the use of the default `arguments` array
+```javascript
+//inside the function
+for (i = 0; i <arguments.length; i++) {
+	dosomething;  //e.g. sum +=arguments[i]
+}
+```
+* `arguments` **lacks all the array methods except .length** because of a bug
+
+###Return
+
+* When a function gets to a `return` statement, it returns immediately **without carrying out the remaining statements in the function**
+* A function **always returns a `value`** or if unspecified, it returns `undefined`
+* "If the function was invoked with the `new` prefix and the `return` value is not an object, then `this` (the new object) is returned instead."
+
+###Exceptions
+
+* A `throw` statement interrupts the execution of the code is used to handle expected exceptions like an incorrect type of argument (e.g. a string where a number is expected)
+* Each `throw` statement should have an **exception object** with a `name` holding the type of exception and a `message` with an explanation of it
 
 
-<a name="Chapter5"/>
-##Chapter 5
+
+
+
+<a name="Chapter6"/>
+##Chapter 6
+
+Interesting article on prototypes: http://sporto.github.io/blog/2013/02/22/a-plain-english-guide-to-javascript-prototypes/
 
 
 <a name="Chapter8"/>
