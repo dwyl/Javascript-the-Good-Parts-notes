@@ -238,7 +238,7 @@ myObject.incrementFunction();
 
 * When a function is _not_ the property of an object, it is invoked as a _function_
 ```javascript
-var sum = **add(3, 4);**
+var sum = add(3, 4);
 ```
 * These functions are **bound to the global object** (_a "mistake in the design of the language" according to Douglas Crockford)_
 * `this` is therefore also bound to the global object [even in inner functions](#nestedFunctions)
@@ -299,8 +299,196 @@ for (i = 0; i <arguments.length; i++) {
 ###Exceptions
 
 * A `throw` statement interrupts the execution of the code is used to handle expected exceptions like an incorrect type of argument (e.g. a string where a number is expected)
-* Each `throw` statement should have an **exception object** with a `name` holding the type of exception and a `message` with an explanation of it
+* Each `throw` statement should have an **exception object** with a `name` holding the type of exception and a `message` with an explanation of it + any other properties you like
+```javascript
+//Thinking through what exceptions could happen in an add function, the main function contains the throw statement with the exception object
+var add = function (a,b) {
+	if (typeof a !== 'number' || typeof b !== 'number'){
+		throw {
+			name: 'TypeError';
+			message: 'The add function requires numbers';
+		}
+	}
+	return a + b;
+}
+```
+* When you write a function to use _add()_, you include a `try` block where the exception object from the `throw` statement in _add()_ will pass control to a **single catch clause for all exceptions**
+```javascript
+//When you use the function later on, add a try block with a catch clause to catch the exception object
+var try_it = function () {
+	try{
+		add("seven");   //will throw an exception as it is not a number
+	}
+	catch (e) {
+		document.writeIn(e.name + ':' + e.message);
+	}
+}
 
+try_it();    //you could rewrite this function so the argument is passed in here where it is invoked
+```
+
+###Augmenting Types
+
+* Adding a method to the prototype of an object `Object.prototype` (or function, array, string, number, regular expression or boolean), you make it available to all the instances of that object so you don't have to use the `prototype` property again
+* By augmenting the _basic types_ (essentially the root prototypes), we can improve Javascript overall
+* For example, adding a method named _trim_ to remove spaces from the end of strings, available to all String instances in your code:
+```javascript
+String.method ('trim', function {
+	return this.replace(/ˆ\s+|\s+$/g, '');     //uses regular expression
+});
+```
+* To be on the safe side, create a method conditionally, **only when you know the method is missing**
+```javascript
+//Makes a method available to all functions, ONLY when it definitely does not already exist
+
+Function.prototype.method (methodName, func) {
+	if (!this.prototype[methodName]){
+		this.prototype[methodName] = func;
+		return this;
+	}
+};
+```
+* Remember that **_for in_ statements don't work well with prototypes**
+
+###Recursion
+
+* Used when a task can be divided into **simple sub-problems** and a function can _call itself repeatedly_ to solve them
+Takes the format:
+```javascript
+var variable = function functionName (parameters){
+	//wrap the statements to be executed and the recursive call in a loop statement so ir doesn't recurse forever
+	//statements to be executed in the function;
+	functionName(arguments);
+};
+
+functionName (initialArguments); //initial call to the funtion
+```
+* Javascript **does not have _tail recursion optimization_** and therefore does optimize recursive functions - this also means they sometimes fail if they "recurse very deeply"
+
+###Scope
+
+* A _block_ is a set of statements contained in curly brackets {}
+* Javascript **does not have block scope** but **does have function scope**
+	* All variables declared _anywhere_ within a function (even if they are in an inner function) are **available everywhere in that function**
+	* A variable can be _overwritten_ with a new value in an inner function and that new value's scope will be just the body of the inner function - as soon as you're back out to the outer function, the value of that variable will revert to what it was before the inner function began its execution
+	* All variable should be **declared at the top of the function body**
+
+###Closure
+
+* Inner functions have **access to the actual parameters of the outer functions (not copies)**
+* If an object is created as a result of a function and assigned to myObject, myObject continues to share access to the variables in the functions that created it (actual variables, not copies)
+	* It has access to _the context in which it was created - this is _closure_
+	* This includes later on, even if _the outer function has completed its execution and returned_, when the inner function is called, it will still have **access to all the variables it had access to at the time it was defined** (i.e. the variables that were _in context_ when the inner function was defined)
+
+###Callbacks
+
+* A _callback function_ is a function passed to another function as a parameter and executed in this other function
+* When making a request of a server, use an _asynchronous request_ as asynchronous functions return immediately, therefore freeing up the client
+	* In this example, we pass the callback function to the asynchronous request as a parameter so the callback function will only be called when a response is available 
+```javascript
+request = prepare_the_request();
+send_request_asynchronously(request, function(response){     //function being passed in as a parameter
+	display(response);
+});
+```
+
+###Module
+
+* A module is a function or object whose contents can be used, but its state and implementation are hidden
+* It is essentially using function scope and closures keep the variables and functions contained within as private as well as binding them to a non-global object - **shilst still being accessible
+* Using the _module pattern_ is **widely used and good practice** as it promotes information hiding (avoiding naming conflicts, etc) and encapsulation
+	* This is a [good article on how to use the module pattern](http://css-tricks.com/how-do-you-structure-javascript-the-module-pattern-edition/) with examples
+* It can also be used to produce **secure objects**
+	* Methods contained in the object do not make use of `this` or `that` so it becomes impossible to change them from outside of the object except in ways explicitly permitted by the methods (like passing them a parameter)
+	* The methods can be _replaced_ but the secrets of how these methods function (like how they generate a number for example) can't be revealed because they are no tied to a global object
+```javascript
+var Serial_maker = function() {
+	
+	//all variables defined in this object are now fixed and hidden from anything outside this function
+	//see page 42 of book for full example
+};
+//calls to methods passing them parameters are made here
+```
+* **Note:** Whilst Javascript variables are usually lowercase, there is some convention around capitalizing the first letter of a Module
+
+###Cascade
+
+* Some methods return nothing, albeit `undefined`
+* If we alter these methods to **return `this` instead of `undefined`**, they return the object which can then be passed to the next method
+	* This enables _cascades_, where you **call many methods on the same object in sequence because the object is passed from one method to the next**
+* Cascades also stop you from trying to do too much in one method and makes your code more descriptive
+
+###Curry
+
+* A `curry` method allow you to customise an existing function by _partially invoking_ it
+A [simple example](http://javascriptweblog.wordpress.com/2010/04/05/curry-cooking-up-tastier-functions/):
+```javascript
+//set up a simple function that we will customise with curry
+var add = function (a,b){
+	return a + b;
+} 
+
+var addTen = add.curry(10);      //passes 10 as the first argument to the add() function
+addTen(20);                     //The use of the curry method in addTen means addTen === add(10, 20);
+```
+* Javascript **does not have a `curry` method** but this can be added to the `Function.protoype`:
+```javascript
+Function.method('curry', function() {
+	var slice = Array.prototype.slice,
+		args = slice.apply(arguments),
+		that = this;
+	return function () {
+		return that.apply(null, args.concat(slice.apply(arguments)));
+	}
+});
+
+ASK Nelson for his definition of currying. Is it both this and the above?
+**Note:** _Currying_ is transforming a function that takes multiple arguments into a chain of functions that take a single argument each. [For example](http://www.dustindiaz.com/javascript-curry/):
+```javascript
+function update(id) {
+	return function(resp) {           //a curried function
+		documente.getElementById(id).innerHTML = resp.responseText;
+	}
+}
+```
+
+###Memoization
+
+* Storing the results of previous operations in objects (such as arrays) allows them to be reused **without having to keep recalculating the value** - this optimization is called _memoization_
+	* Adding an object to store the results _memoizes the function_
+* Particularly useful when a function is **recursive** and uses the results of its previous iteration in the current iteration
+* A _memoizer_ function can be created to help memoize future functions:
+```javascript
+var meoizer - function (memo, fundamentla) {
+	var shell = function (n) {
+		var result = memo[n];
+		if (typeof result !== 'number') {
+			result = fundamental(shell, n);
+			memo[n] = result;
+		}
+		return result;
+	}
+	return shell;
+}
+```
+
+<a name="Chapter5"/>
+##Chapter 5 - Inheritance
+
+Main benefit of inheritance is **code reuse** - you only have to specify differences
+
+Javascript can _mimic_ classical inheritance but has a much **richer set of code reuse patterns**
+* This chapter looks at the more straightforward patterns but it is always best to **keep it simple**
+
+>Javascript is a prototypal language, which means that objects inherit directly from other objects
+
+###Pseudoclassical
+
+* The pseudoclassical code reuse pattern essentially has constructor functions (functions invoked using the `new` prefix) work like classes to mimic the classical structure
+	* All properties are public
+	* If you forget to use the `new` prefix, `this` is not bound to the new object - it is instead bound to the global object and you'll be unwittingly altering these instead!
+
+* There is no need to use it, **there are better code reuse patterns in JavaScript**
 
 
 
