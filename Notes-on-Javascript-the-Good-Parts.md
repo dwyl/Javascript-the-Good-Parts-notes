@@ -294,7 +294,7 @@ for (i = 0; i <arguments.length; i++) {
 
 * When a function gets to a `return` statement, it returns immediately **without carrying out the remaining statements in the function**
 * A function **always returns a `value`** or if unspecified, it returns `undefined`
-* "If the function was invoked with the `new` prefix and the `return` value is not an object, then `this` (the new object) is returned instead."
+* "If the function was invoked with the `new` prefix (used when creating a new object so it **must** return an object) and the `return` value is not an object, then `this` (the new object) is returned instead."
 
 ###Exceptions
 
@@ -369,7 +369,7 @@ functionName (initialArguments); //initial call to the funtion
 
 * A _block_ is a set of statements contained in curly brackets {}
 * Javascript **does not have block scope** but **does have function scope**
-	* All variables declared _anywhere_ within a function (even if they are in an inner function) are **available everywhere in that function**
+	* All variables declared _anywhere_ within a function are **available everywhere in that function** - i.e. and inner function will have access to the variables of the outer function in which it is defined
 	* A variable can be _overwritten_ with a new value in an inner function and that new value's scope will be just the body of the inner function - as soon as you're back out to the outer function, the value of that variable will revert to what it was before the inner function began its execution
 	* All variable should be **declared at the top of the function body**
 
@@ -391,16 +391,16 @@ send_request_asynchronously(request, function(response){     //function being pa
 	display(response);
 });
 ```
-
+<a name="Module"/>
 ###Module
 
 * A module is a function or object whose contents can be used, but its state and implementation are hidden
 * It is essentially using function scope and closures keep the variables and functions contained within as private as well as binding them to a non-global object - **shilst still being accessible
 * Using the _module pattern_ is **widely used and good practice** as it promotes information hiding (avoiding naming conflicts, etc) and encapsulation
 	* This is a [good article on how to use the module pattern](http://css-tricks.com/how-do-you-structure-javascript-the-module-pattern-edition/) with examples
-* It can also be used to produce **secure objects**
+* It can also be used to produce **secure objects** (see [durable objects](#DurableObject) below)
 	* Methods contained in the object do not make use of `this` or `that` so it becomes impossible to change them from outside of the object except in ways explicitly permitted by the methods (like passing them a parameter)
-	* The methods can be _replaced_ but the secrets of how these methods function (like how they generate a number for example) can't be revealed because they are no tied to a global object
+	* The methods can be _replaced_ but the secrets of how these methods function (like how they generate a number for example) can't be revealed because they are not tied to a global object
 ```javascript
 var Serial_maker = function() {
 	
@@ -441,7 +441,7 @@ Function.method('curry', function() {
 		return that.apply(null, args.concat(slice.apply(arguments)));
 	}
 });
-
+```
 ASK Nelson for his definition of currying. Is it both this and the above?
 **Note:** _Currying_ is transforming a function that takes multiple arguments into a chain of functions that take a single argument each. [For example](http://www.dustindiaz.com/javascript-curry/):
 ```javascript
@@ -490,11 +490,190 @@ Javascript can _mimic_ classical inheritance but has a much **richer set of code
 
 * There is no need to use it, **there are better code reuse patterns in JavaScript**
 
+###Object Specifiers
 
+Rather than: `var myObject = maker (f, l, m, c, s)` which has too many parameters to remember in the right order, use an _object specifier_:
+```javascript
+var myObject = maker ({      //note curly braces
+	first: f,
+	last: l,
+	state: s,
+	city: c
+	}
+;)
+```
+to contain them. They can now be **listed in any order**
+
+Also useful to pass object specifiers to JSON ([see Appendix E notes](#AppendixE))
+
+###Prototypal
+
+* Zero classes, **one object inherits from another**
+* Create an object literal of a useful object and then make an instance of it using the format `var myObject = Object.create(originalObjectName)
+* When you then customise the new object (adding properties or methods through the dot notation for example), this is _differential inheritance_, where you specify the **differences from the original object**
+
+###Functional
+
+* **All properties of an object are visible** (Javascript has no classes so there is no such thing as a 'private variable' which can only be seen within a class as per other languages)
+* When you use a _function_ to create your original object and the same with the object instances, you're essentially utilising Javascript functional scope to create private properties and methods
+The below is an example of how you would create an original object, the `name` and `saying` properties and now completely private and only accessible to the `get_name` and `says` method
+```javascript
+var mammal = function (spec) {
+	var that = {};    //that is a new object which is basically a container of 'secrets' shared to the rest of the inheritance chain
+
+	that.get_name = function () {
+		return spec.name;
+	};
+
+	that.says = function () {
+		return spec.saying || '';  //returns an empty string if no 'saying' argument is passed through the spec object when calling mammal
+	};
+	return that;     //returns the object that contains the now private properties and methods (under functional scope)
+} 
+
+var myMammal = mammal({name: 'Herb'});
+```
+Creating an object 'cat' can now inherit from the `mammal` constructor and only pay attention to the differences between it and `mammal`:
+```javascript
+var cat = function (spec) {
+	spec.saying = spec.saying || 'meow';   //if spec.saying doesn't already exists, make it 'meow'
+	var that = mammal(spec);      //here the object 'container of secrets' is set up inheriting from mammal already
+
+	//functions and property augmentations happen here
+
+	return that;      //as above
+}
+```
+* Requires less effort and gives **better encapsulation** and **information hiding** than the pseudoclassical pattern, as well as **access to super methods** (see page 54 of book for super method example)
+<a name="DurableObject">
+* An **object** created using the functional pattern _and_ making **no use of `this` or `that`** is a _durable object_ and cannot be compromised by attackers
+	* Briefly also discussed in [Module](#Module) section above
+* If you do want something to have access to the object's private properties and methods, you pass it the `that` bundle (i.e. your 'container of secrets')
+
+###Parts
+* An object can be composed out of a set of parts
+	* For example, you can create a function that provides the object it is passed with a number of methods defined in this function
 
 
 <a name="Chapter6"/>
 ##Chapter 6
+
+Javascript only has **array-like objects** which are slower than 'real' arrays.
+
+**Retrieval and updating** of properties works the **same as with an object _except with integer property names_**.
+
+Arrays have their **own literal format** and their own set of methods ([Chapter 8 - Methods](#Chapter8)).
+
+###Array Literals
+
+* An array literal is a **pair of square brackets surrounding zero or more comma-seperated values** `[a, b, c, etc]`
+	* The first value will get the property name '0', the second will be '1' and so on
+* Javascript allows an array to contain **any mixture of values**
+
+###Length
+
+* If you add to the array, the `length` property will increase to contain the new element - it will not give an error
+* If you set the `.length` to a smaller number than the current length of the array, it will **delete any properties with a subscipt >= the new `length`**
+* The `push()` method is sometimes useful to add an element to the end of an array
+`numbers.push('go')    //adds the element 'go' to the end of the numbers array`
+
+
+###Delete
+
+* Elements can be deleted from the array object using `delete` but this **leaves a hole in the array**
+* Use `array.splice(keyInArray, howManyElementsToDelete)` which changes the keys for the remaining values in the array so there is no hole left
+	* May be _slow_ 
+
+###Enumeration
+
+* A `for` statement can be used to iterate over all the properties of an array (as it is an object)
+* **Do not us `for in`** as it does not iterate through the properties in order and pulls in from the prototype chain
+
+###Confusion
+
+> The rule is simple: when the property names [keys] are small sequential integers, you should use an array. Otherwise, use an object.
+* Arrays are most useful when property names are integers _but_ they can also accept strings as property names
+* Javascript doesn't have a good way of telling an object from an array as `typeof array ===object`
+* To accurately detect arrays, have to define our own function:
+```javascript
+var is_array = function (value) {
+	return Object.prototype.toString.apply(value) === '[object Array]';
+}
+```
+
+###Methods
+
+* Array methods are stored in `Array.prototype` which can be augmented using the format:
+```javascript
+Array.method('reduce', function (parameters){     //capital A in Array acts on prototype
+	//define variables and function
+	//return a value
+});
+```
+* Remember, **every array inherits and can use the methods you add to `Array.prototype`**
+* You can also add methods _directly to an array_ because they are objects 
+	* `myArray.total = function () { //statements to execute; }` adds a 'total' function to the array myArray
+* `Object.create()` will create an object - lacking the `length` property - not an array; **do not use**
+
+###Dimensions
+
+* Using `[]` will create an empty array as they are not initialized in JavaScript
+* Accessing a missing element will give you `undefined`
+* If you have an algorithm that relies on the array not being empty and not having `undefined` values, you can write a function that will prep your array to have a certain number of defined values, essentially initializing it with certain values in place
+	* An `Array.dim` function is oulined on page 63 which will allow `var myArray = Array.dim(10,0)` to make an array with 10 zeroes starting from the first position in the array(0)
+* Javascript only has **one dimensional arrays** but **_can_ have arrays of arrays**
+* Two dimensional arrays (matricess) will have to be set up by the programmer 
+	* page 63 gives a method for this and for explicitly setting cell values so as not to have an empty matrix
+
+
+<a name="Chapter7"/>
+##Chapter 7 - Regular Expressions
+> A _regular expression_ is the specification of the syntax of a simple language
+
+Used with `regexp.exec`, `regexp.test`, `string.match`, `string.replace`, `string.search` and `string.split` to interact with string (more in [Chapter 8 - Methods](#Chapter8))
+
+Quite convoluted and difficult to read as **do not allow comments or whitespace** so a JavaScript regular expression **must be on a single line**
+
+###An Example
+
+`ˆ(?:([A-Za-z]+):)?(\/{0,3})([0-9A-Za-z.\-]+)(?::(\d+))?`
+
+Breaking it down one factor at a time, where a factor is denoted by parentheses ():
+* `ˆ` indicates the beginning of a string
+* `(?:([A-Za-z]+):)?` 
+	* `(?:...)` indicates a _noncapturing group_, where the '...' is replaced by the group that you wish to **ignore** - it is identified by the parser and then discarded from the results
+	* Suffix `?` indicates the group is optional, so it could or could not exist in the string - it could even exist more than once
+	* `()` around the _([A-Za-z]+)_ indicates a _capturing group_ which is therefore captured and placed in the `result` array
+		* They're placed in the array in order, so the first will appear in `result[1]`
+	* `[...]` indicates a character class
+	* `A-Za-z` is a character class containing all 26 letters of the alphabet in both upper and lower case
+	* Suffix `+` means character class will be matched _one or more times_
+	* Suffix `:` is matched literally (so the letters will be followed by a colon in this case)
+* `(\/{0,3})`
+	* `\/` The backslash `\` _escapes_ the forward slash `/` (which traditionally symbolises the end of the regular expression literal) and together they indicate that the forward slash `/` should be matched
+	* Suffix `{0,3}` means the slash `/` will be matched between 0 and 3 times
+* `([0-9A-Za-z.\-]+)`
+	* String made up of one or more (note the `+` at the end denoting possible multiple ocurrences) digits, letters (upper or lower case), full stops (.) or hyphens (-)
+		* Note that the hyphen was escaped with a backslash `\-` as hyphens usually denote a _range_
+* `(?::(\d+))?`
+	* 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 Interesting article on prototypes: http://sporto.github.io/blog/2013/02/22/a-plain-english-guide-to-javascript-prototypes/
 
