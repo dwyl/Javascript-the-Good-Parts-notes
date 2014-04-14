@@ -20,7 +20,7 @@ Always use // for comments, even multi-line ones to avoid having to escape `/*` 
 ###Numbers
 
 * There is a single, 64-bit floating point number type.
-* `NaN` (Not-a-Number) is not equal to any value (including itself) and is essentially an **illegal number value**, but _typeOf(NaN)==number is true_
+* `NaN` (Not-a-Number) is not equal to any value (including itself) and is essentially an **illegal number value**, but _typeOf(NaN)===number is true_
 * Use `isNan(number)` to check for NaNs
 
 Number methods are discussed in [Chapter 8](#Chapter8).
@@ -58,7 +58,7 @@ for (myvariable in object) {
 * A _do while_ statement is always executed at least once as the while condition is only checked after the first iteration of the loop
 * `catch` clause in a _try_ statement **must create a new variable** that will catch the exception object
 * Scope of `thro` statement is the `try` block it's in, or the `try` of the function it's in
-* If there is no `return` statement, return==undefined
+* If there is no `return` statement, return===undefined
 * `break` exits the statement and `continue` forces a new iteration of the loop, both with the optional _label_ mentioned above
 
 ###Expressions
@@ -265,7 +265,7 @@ var myQuo = new Quo("happy");
 //because of the use of the new prefix, myQuo is an instance of Quo which means it can access the public method get_status from it's prototype
 document.writeIn(myQuo.get_status());     //returns 'happy'
 ```
-* This style of constructor pattern is not recommended, there will be better examples in [Chapter 5](#Chapter5)
+* **This style of constructor pattern is not recommended**, there will be better examples in [Chapter 5](#Chapter5) - this is noted again in [Appendix B](#new)
 * The first letter of a constructor function (in this case Quo) **must _always_ be capitalized**
 
 ####Apply Invoation Pattern
@@ -556,7 +556,7 @@ var cat = function (spec) {
 
 
 <a name="Chapter6"/>
-##Chapter 6
+##Chapter 6 - Arrays
 
 Javascript only has **array-like objects** which are slower than 'real' arrays.
 
@@ -736,9 +736,9 @@ It's essentially a portion of the full `RegExp`, like what we broke down the reg
 
 As well as escaping special characters in regexp factors, the backslash has additional uses:
 * As in strings, `\f` is the formfeed character, `\n` is new line, `\r` is carriage return, `\t` is tab and `\u` specifies Unicode as a 16-bit hex. But **`\b` is _not_ a backspace character**
-* `\d` == [0-9] and `\D` is the opposite, NOT (ˆ) a digit, [ˆ0-9]
+* `\d` === [0-9] and `\D` is the opposite, NOT (ˆ) a digit, [ˆ0-9]
 * `\s` matches is a partial set of Unicode whitespace characters and `\S` is the opposite
-* `\w` == [0-9A-Za-z] and `\W` == [ˆ0-9A-Za-z] but **useless for any real world language** (because of accents on letters, etc)
+* `\w` === [0-9A-Za-z] and `\W` === [ˆ0-9A-Za-z] but **useless for any real world language** (because of accents on letters, etc)
 * `\1` refers to the text captured in group 1 so it is matched again later on in the regexp
 	* `\2` refers to group 2, `\3` to group 3 and so on
 
@@ -943,7 +943,7 @@ Produces a **new string** converted to upper case.
 
 ####String.fromCharCode(_char..._)
 Produces a **new string** from a series of numbers.
-`var a = String.fromCharCode(67, 97, 116);    //a == 'Cat'
+`var a = String.fromCharCode(67, 97, 116);    //a === 'Cat'
 
 
 <a name="Chapter9"/>
@@ -965,20 +965,138 @@ Produces a **new string** from a series of numbers.
 <a name="Chapter10"/>
 ##Chapter 10 - Beautiful Features
 
+Each feature you add to something has a lot of different costs (documentation costs, specification, design, testing and development costs) and these are often not properly accounted for. 
+> Features that offer value to a minority of users impose a cost on all users
 
-
-
-
-
+> We cope with the complexity of feature-driven design by finding and sticking with the good parts 
+For example, microwaves do a ton of different things, but most people just use one setting, the timer and the clock. So why not design with just the good parts?
 
 
 <a name="AppendixA">
 ##Appendix A - the Awful Parts
 
+**Need to know what all the pitfalls are with these parts.**
+
 ###Global variables
 These are variables that are visible throughout the code in any scope. They can be **changed at any time** by any part of the program which makes them **unreliable in larger complex programs**. This can also lead to naming conflicts which can cause your code to fail or you to accidentally overwrite a global variable.
 
+Defined in three ways:
+* Using a `var` statement **outside** of any function; `var foo = value;
+* By adding a property to the global object (container of all global variables), such as `window` in browsers; `window.foo = value;`
+* Using a variable without declaring it with `var`, which makes it an _implied global_; `foo = value`
+
+###Scope
+Although JavaScript has block _syntax_ (i.e. is written in blocks) like a lot of other programming languages, it has **functional scope** and _not_ block scope.
+
+Variables should all be declared at the top of the function and not littered throughout the block.
+
 <a name="#SemicolonInsertion">
+###Semicolon Insertion
+Attempts to correct faulty programs by automatically inserting semicolons. **Do not depend on this** as it can hide underlying issues.
+
+Also ensure opening curly braces ({) are on the first line of a statement, otherwise semicolons will be erroneously inserted and cause problems:
+```javascript
+//Ensure curly braces open on the first line of a statement
+return {
+	status: true	//for example
+};
+//instead of
+return
+{
+	status:true
+};
+```
+###Reserved Words
+Most JavaScript reserved words are not used in the language but **cannot be used to name variables or parameters**.
+
+If used as the key in object literals, they _must_ be quoted. For example `object - {'case' : value};` or `object['final'] = value;` as _case_ and _final_ are both reserved words.
+
+###Unicode
+JavaScript characters are 16 bits which only cover the original Unicode Basic Multilingual Place.
+
+###typeof
+Watch out for:
+* `typeof null` which returns 'object' instead of 'null'
+* incorrect reporting on typeof regular expressions, with some implementations returning 'object' and some returning 'function'
+* arrays are objects in JavaScript so `typeof array` will return 'object'
+
+All `object`s are _truthy_ and `null` is _falsy_, so you can use the following to tell them apart:
+```javascript
+if (my_value && typeof my_value === 'object') {
+	//then my value is definitely an object or an array because not only is its 'typeof' an object but it's also truthy (first statement)
+}
+```
+
+###NaN
+* `typeof NaN === 'number'` even though it stands for _not-a-number_
+* If you have a chain of formulas that together produce a `NaN` then at least _one_ of them will have generated `NaN`
+* Surprisingly `NaN !=== NaN`
+* `isNaN(value)` can be used to distinguish numbers from NaN
+
+For numbers, best use your own isNumber formula:
+```javascript
+var isNumber = function isNumber(value) {
+	return typeof value === 'number' && isFinite(value);	//isFinite() rejects NaN and Infinity, but is only good for numbers, not strings
+}
+```
+
+###Phony Arrays
+JavaScript **doesn't have real arrays**, it has _array-like objects_.
+	* Good: No need to give them dimensions and don't generate out-of-bounds errors
+	* Bad: Slower than 'real' arrays
+
+To test if value is an array:
+```javascript 
+if (my_value && typeof my_value === 'object' && typeof my_value.length === 'number' &&
+	!(my_value.propertyIsEnumerable('length'))) {
+		//my_value is definitelyy an array!
+}
+```
+The `arguments` array isn't an array, just an object with a length property.
+
+###Falsy Values
+`0`, `NaN`, `''`, `false`, `null` and `undefined` are all _falsy_ values, but **they are not interchangeable**. When testing for a missing member of an object for example, you need to use `undefined` and not `null`.
+
+`undefined` and `NaN` are actually global variables instead of constants but **don't change their values**.
+
+###Object
+JavaScript objects inherit members from the prototype chain so they are _never truly empty_.
+
+To test for membership without prototype chain involvement, use the `hasOwnProperty` method or limit your results (for example, to specific types like number so you know you're not dragging in object members from up the prototype for example if that's what's causing the problem).
+
+<a name="AppendixB">
+##Appendix B - the Bad Parts
+
+**Avoid these altogether**
+
+* `==` **and** `!=`: Don't function properly when result is false, use `===` or `!==` instead
+* `with` **statement**: Intended to provide a shortcut to properties of an object but results vary every time it is run
+* `eval`: Adds unnecessary complication and compromises the security of the application
+	* Giving string arguments to `setTimeout` and `setInterval` should also be avoided as this makes them act like `eval`
+* `continue` **statement**: Forces a loop into its next iteration but the code is usually much improved when re-written _without_ `continue`
+* `switch` **fall through**: In a `switch` statement, each `case` falls through to the next `case` unless you explicityly disrup the flow, but using these _intentional_ fall throughs makes the _unintentional_ ones that are causing errors basically impossible to find
+	* This is one of those parts of JavaScript that appears useful but you're better off avoiding because it's occasionally very dangerous
+* **Block-less statements**: _Always_ use curly braces `{}` to block in statements so as to avoid misinterpretation and aid error finding
+* **Bitwise operators**: Shouldn't really be doing this kind of manipulations because they are quite slow in JavaScript, therefore there shouldn't be a need to use `&`, `|`, `ˆ`, `˜`, `>>`, `>>>` or `<<`
+	* This doesn't mean you can't use `&&` for example
+* `++` **and** `--`: This one seems debatable to me; Douglas Crockford finds it makes his coding style much more cryptic and difficult to read (the book uses `+=1` and `-=1` instead)
+
+**The function statement vs the function expression:** 
+To use JavaScript well, important to understand that **functions are values**.
+* A function _statement_ is shorthand for a var statement with a function value, so `function foo() {}` (a function statement) means pretty much the same as `var foo = function foo(){};` (a function expression)
+* Logically, to write the language well you should define a function before using it, but in JavaScript, function statements (using just `function foo(){}`) are _hoisted_ to the top of the scope in which they are defined - this encourages sloppy programming and should be avoided
+* function statements also don't function consistently in `if` statements
+* if you need to start a function expression with the word _function_, **wrap it in parentheses** (), or JavaScript assumes it's a function _statement_
+
+**Typed wrappers:**
+**Don't use `new Boolean` or `new String` or `new Number`**, it's completely unnecessary. Also avoid `new Object` and `new Array` and use `{}` and `[]` instead.
+
+<a name="#new">
+**`new` operator:**
+Functions that are intended to be used with `new` (conventionally starting with a capital letter) should be avoided (don't define them) as they can cause all kinds of issues and complex bugs which are difficult to catch.
+
+**void**:
+In JavaScript, this actually _takes_ a value and _returns_ `undefined`, which is hugely confusing and not helpful. **Don't use it**.
 
 
 
