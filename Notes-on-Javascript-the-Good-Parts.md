@@ -1,3 +1,20 @@
+##Table of Contents
+* [Chapter 1 - Good Parts](#chapter1)
+* [Chapter 2 - Grammar](#chapter2)
+* [Chapter 3 - Objects](#chapter3)
+* [Chapter 4 - Functions](#chapter4)
+* [Chapter 5 - Inheritance](#chapter5)
+* [Chapter 6 - Arrays](#chapter6)
+* [Chapter 7 - Regular Expressions](#chapter7)
+* [Chapter 8 - Methods](#chapter8)
+* [Chapter 9 - Style](#chapter9)
+* [Chapter 10 - Beautiful Features](#chapter10)
+* [Appendix A - the Awful Parts](#AppendixA)
+* [Appendix B - the Bad Parts](#AppendixB)
+* [Appendix C - JSLint](#AppendixC)
+
+
+<a name="chapter1"/>
 ##Chapter 1
 
 > Most programming languages contain good parts and bad parts. I discovered that I could be a better programmer by using only the good parts and avoiding the bad parts. After all, how can you build something good out of bad parts?
@@ -12,7 +29,7 @@ The worst parts include global variables - there is a common _global object_ nam
 
 Javascript has a _class free_ object makeup, relying instead on objects inheriting properties directly from other objects - this is **prototypal inheritance**.
 
-<a name="Chapter2"/>
+<a name="chapter2"/>
 ##Chapter 2 - Grammar
 
 Always use // for comments, even multi-line ones to avoid having to escape `/*` characters.
@@ -23,7 +40,7 @@ Always use // for comments, even multi-line ones to avoid having to escape `/*` 
 * `NaN` (Not-a-Number) is not equal to any value (including itself) and is essentially an **illegal number value**, but _typeOf(NaN)===number is true_
 * Use `isNan(number)` to check for NaNs
 
-Number methods are discussed in [Chapter 8](#Chapter8).
+Number methods are discussed in [Chapter 8](#chapter8).
 
 ###Strings
 
@@ -31,7 +48,7 @@ Number methods are discussed in [Chapter 8](#Chapter8).
 * Backslashes (\\\) are used for **escaping characters** that could cause problems in strings.
 * Strings are **immutable**.
 
-String methods are discussed in [Chapter 8](#Chapter8).
+String methods are discussed in [Chapter 8](#chapter8).
 
 ###Statements
 
@@ -69,15 +86,15 @@ for (myvariable in object) {
 
 ###Literals
 
-* _Names_ or _strings used for specifying new objects ([**object literals**](#Chapter3)) or arrays ([**array literals**](#Chapter6))
+* _Names_ or _strings_ used for specifying new objects ([**object literals**](#chapter3)) or arrays ([**array literals**](#chapter6))
 * Properties of the object are expressions and must be known at compile time
 
 ###Functions
 * A function literal defines a function value
-* More details in [Chapter 4](#Chapter4)
+* More details in [Chapter 4](#chapter4)
 
 
-<a name="Chapter3"/>
+<a name="chapter3"/>
 ##Chapter 3 - Objects
 
 Javascript simple types:
@@ -135,7 +152,7 @@ var today = {
 	* If the property *does note exist* anywhere in the chain, it will return _undefined_
 * A new property is _immediately visible_ to all of the objects below it in the chain once created
 
-More details in [Chapter 6](#Chapter6)
+More details in [Chapter 6](#chapter6)
 
 ###Reflection
 
@@ -169,6 +186,7 @@ for (i = 0; i < properties.length; i++) {
 ###Global Abatement
 
 * One way to mitigate the risks of global variables is to _create a single global variable_ which then contains your whole application
+
 ```javascript
 var MYAPP = {}
 
@@ -184,10 +202,10 @@ MYAPP.today = {
 }
 //Making sure all other variables (like today) are contained within this one global variable (MYAPP) means none of them have global scope and therefore the risk of naming conflicts, etc in your application is reduced
 ```
-* [Closures](#Chapter4) are also a way of mitigating the risks of global variables
-* Note: **Most [Javascript MVCs](http://coding.smashingmagazine.com/2012/07/27/journey-through-the-javascript-mvc-jungle/) these days (2014) will take care of the wrapping your app for you**
+* [Closures](#chapter4) are also a way of mitigating the risks of global variables
+* Note: **Most [Javascript MVCs](http://coding.smashingmagazine.com/2012/07/27/journey-through-the-javascript-mvc-jungle/) these days (2014) will take care of wrapping your app for you**
 
-<a name="Chapter4"/>
+<a name="chapter4"/>
 ##Chapter 4 - Functions
 
 > The best thing about JavaScript is its implementation of functions.
@@ -226,7 +244,7 @@ function name (parameterA, parameterB){
 
 ####Method Invocation Pattern
 
-* When a function is **stored as the property of the object** (invoked with a dot . expression) it is called on and is called a _method_ 
+* When a function is **stored as the property of the object** (invoked with a dot . expression) it is called on and is called a _method_
 ```javascript
 myObject.incrementFunction();
 ```
@@ -248,6 +266,7 @@ var sum = add(3, 4);
 
 * When a function is created with `new`, that function contains a link to the function's prototype
 * This means that methods that were created for the **prototype function are also available** to the function created using `new`
+
 ```javascript
 //create a function Quo that takes a string - Quo will be our prototype function as we will see
 var Quo = function (string){
@@ -265,14 +284,15 @@ var myQuo = new Quo("happy");
 //because of the use of the new prefix, myQuo is an instance of Quo which means it can access the public method get_status from it's prototype
 document.writeIn(myQuo.get_status());     //returns 'happy'
 ```
-* **This style of constructor pattern is not recommended**, there will be better examples in [Chapter 5](#Chapter5) - this is noted again in [Appendix B](#new)
+* **This style of constructor pattern is not recommended**, there will be better examples in [Chapter 5](#chapter5) - this is noted again in [Appendix B](#new)
 * The first letter of a constructor function (in this case Quo) **must _always_ be capitalized**
 
-####Apply Invoation Pattern
+####Apply Invocation Pattern
 
 * The `apply` method lets you **choose the value to be bound to `this`**
 * It also takes the parameters for a function in an array
 * Format:   `function.apply(valueForThis, arrayOfParamentersForFunction);`
+
 ```javascript
 var array = [5, 2]    //will be the parameters for our function
 var sum = add.apply(null, array);     //value of 'this' is null and value of sum is 7 as the 'apply' method passes 5 and 2 to the 'add' method
@@ -313,6 +333,7 @@ var add = function (a,b) {
 }
 ```
 * When you write a function to use _add()_, you include a `try` block where the exception object from the `throw` statement in _add()_ will pass control to a **single catch clause for all exceptions**
+
 ```javascript
 //When you use the function later on, add a try block with a catch clause to catch the exception object
 var try_it = function () {
@@ -338,6 +359,7 @@ String.method ('trim', function {
 });
 ```
 * To be on the safe side, create a method conditionally, **only when you know the method is missing**
+
 ```javascript
 //Makes a method available to all functions, ONLY when it definitely does not already exist
 
@@ -354,6 +376,7 @@ Function.prototype.method (methodName, func) {
 
 * Used when a task can be divided into **simple sub-problems** and a function can _call itself repeatedly_ to solve them
 Takes the format:
+
 ```javascript
 var variable = function functionName (parameters){
 	//wrap the statements to be executed and the recursive call in a loop statement so ir doesn't recurse forever
@@ -377,25 +400,26 @@ functionName (initialArguments); //initial call to the funtion
 
 * Inner functions have **access to the actual parameters of the outer functions (not copies)**
 * If an object is created as a result of a function and assigned to myObject, myObject continues to share access to the variables in the functions that created it (actual variables, not copies)
-	* It has access to _the context in which it was created - this is _closure_
+	* It has access to _the context in which it was created_ - this is _closure_
 	* This includes later on, even if _the outer function has completed its execution and returned_, when the inner function is called, it will still have **access to all the variables it had access to at the time it was defined** (i.e. the variables that were _in context_ when the inner function was defined)
 
 ###Callbacks
 
 * A _callback function_ is a function passed to another function as a parameter and executed in this other function
 * When making a request of a server, use an _asynchronous request_ as asynchronous functions return immediately, therefore freeing up the client
-	* In this example, we pass the callback function to the asynchronous request as a parameter so the callback function will only be called when a response is available 
+	* In this example, we pass the callback function to the asynchronous request as a parameter so the callback function will only be called when a response is available
 ```javascript
 request = prepare_the_request();
 send_request_asynchronously(request, function(response){     //function being passed in as a parameter
 	display(response);
 });
 ```
+
 <a name="Module"/>
 ###Module
 
 * A module is a function or object whose contents can be used, but its state and implementation are hidden
-* It is essentially using function scope and closures keep the variables and functions contained within as private as well as binding them to a non-global object - **shilst still being accessible
+* It is essentially using function scope and closures keep the variables and functions contained within as private as well as binding them to a non-global object - **whilst still being accessible**
 * Using the _module pattern_ is **widely used and good practice** as it promotes information hiding (avoiding naming conflicts, etc) and encapsulation
 	* This is a [good article on how to use the module pattern](http://css-tricks.com/how-do-you-structure-javascript-the-module-pattern-edition/) with examples
 * It can also be used to produce **secure objects** (see [durable objects](#DurableObject) below)
@@ -403,7 +427,7 @@ send_request_asynchronously(request, function(response){     //function being pa
 	* The methods can be _replaced_ but the secrets of how these methods function (like how they generate a number for example) can't be revealed because they are not tied to a global object
 ```javascript
 var Serial_maker = function() {
-	
+
 	//all variables defined in this object are now fixed and hidden from anything outside this function
 	//see page 42 of book for full example
 };
@@ -422,11 +446,12 @@ var Serial_maker = function() {
 
 * A `curry` method allow you to customise an existing function by _partially invoking_ it
 A [simple example](http://javascriptweblog.wordpress.com/2010/04/05/curry-cooking-up-tastier-functions/):
+
 ```javascript
 //set up a simple function that we will customise with curry
 var add = function (a,b){
 	return a + b;
-} 
+}
 
 var addTen = add.curry(10);      //passes 10 as the first argument to the add() function
 addTen(20);                     //The use of the curry method in addTen means addTen === add(10, 20);
@@ -472,7 +497,7 @@ var meoizer = function (memo, fundamental) {
 }
 ```
 
-<a name="Chapter5"/>
+<a name="chapter5"/>
 ##Chapter 5 - Inheritance
 
 Main benefit of inheritance is **code reuse** - you only have to specify differences
@@ -509,7 +534,7 @@ Also useful to pass object specifiers to JSON ([see Appendix E notes](#AppendixE
 ###Prototypal
 
 * Zero classes, **one object inherits from another**
-* Create an object literal of a useful object and then make an instance of it using the format `var myObject = Object.create(originalObjectName)
+* Create an object literal of a useful object and then make an instance of it using the format `var myObject = Object.create(originalObjectName)`
 * When you then customise the new object (adding properties or methods through the dot notation for example), this is _differential inheritance_, where you specify the **differences from the original object**
 
 ###Functional
@@ -517,6 +542,7 @@ Also useful to pass object specifiers to JSON ([see Appendix E notes](#AppendixE
 * **All properties of an object are visible** (Javascript has no classes so there is no such thing as a 'private variable' which can only be seen within a class as per other languages)
 * When you use a _function_ to create your original object and the same with the object instances, you're essentially utilising Javascript functional scope to create private properties and methods
 The below is an example of how you would create an original object, the `name` and `saying` properties and now completely private and only accessible to the `get_name` and `says` method
+
 ```javascript
 var mammal = function (spec) {
 	var that = {};    //that is a new object which is basically a container of 'secrets' shared to the rest of the inheritance chain
@@ -529,7 +555,7 @@ var mammal = function (spec) {
 		return spec.saying || '';  //returns an empty string if no 'saying' argument is passed through the spec object when calling mammal
 	};
 	return that;     //returns the object that contains the now private properties and methods (under functional scope)
-} 
+}
 
 var myMammal = mammal({name: 'Herb'});
 ```
@@ -555,14 +581,14 @@ var cat = function (spec) {
 	* For example, you can create a function that provides the object it is passed with a number of methods defined in this function
 
 
-<a name="Chapter6"/>
+<a name="chapter6"/>
 ##Chapter 6 - Arrays
 
 Javascript only has **array-like objects** which are slower than 'real' arrays.
 
 **Retrieval and updating** of properties works the **same as with an object _except with integer property names_**.
 
-Arrays have their **own literal format** and their own set of methods ([Chapter 8 - Methods](#Chapter8)).
+Arrays have their **own literal format** and their own set of methods ([Chapter 8 - Methods](#chapter8)).
 
 ###Array Literals
 
@@ -582,7 +608,7 @@ Arrays have their **own literal format** and their own set of methods ([Chapter 
 
 * Elements can be deleted from the array object using `delete` but this **leaves a hole in the array**
 * Use `array.splice(keyInArray, howManyElementsToDelete)` which changes the keys for the remaining values in the array so there is no hole left
-	* May be _slow_ 
+	* May be _slow_
 
 ###Enumeration
 
@@ -611,7 +637,7 @@ Array.method('reduce', function (parameters){     //capital A in Array acts on p
 });
 ```
 * Remember, **every array inherits and can use the methods you add to `Array.prototype`**
-* You can also add methods _directly to an array_ because they are objects 
+* You can also add methods _directly to an array_ because they are objects
 	* `myArray.total = function () { //statements to execute; }` adds a 'total' function to the array myArray
 * `Object.create()` will create an object - lacking the `length` property - not an array; **do not use**
 
@@ -622,15 +648,15 @@ Array.method('reduce', function (parameters){     //capital A in Array acts on p
 * If you have an algorithm that relies on the array not being empty and not having `undefined` values, you can write a function that will prep your array to have a certain number of defined values, essentially initializing it with certain values in place
 	* An `Array.dim` function is oulined on page 63 which will allow `var myArray = Array.dim(10,0)` to make an array with 10 zeroes starting from the first position in the array(0)
 * Javascript only has **one dimensional arrays** but **_can_ have arrays of arrays**
-* Two dimensional arrays (matricess) will have to be set up by the programmer 
+* Two dimensional arrays (matricess) will have to be set up by the programmer
 	* page 63 gives a method for this and for explicitly setting cell values so as not to have an empty matrix
 
 
-<a name="Chapter7"/>
+<a name="chapter7"/>
 ##Chapter 7 - Regular Expressions
 > A _regular expression_ is the specification of the syntax of a simple language
 
-Used with `regexp.exec`, `regexp.test`, `string.match`, `string.replace`, `string.search` and `string.split` to interact with string (more in [Chapter 8 - Methods](#Chapter8))
+Used with `regexp.exec`, `regexp.test`, `string.match`, `string.replace`, `string.search` and `string.split` to interact with string (more in [Chapter 8 - Methods](#chapter8))
 
 Quite convoluted and difficult to read as **do not allow comments or whitespace** so a JavaScript regular expression **must be on a single line**
 
@@ -641,7 +667,7 @@ Quite convoluted and difficult to read as **do not allow comments or whitespace*
 Breaking it down one portion([factor](#Factors)) at a time:
 * Note that the string starts and ends with a slash `/`
 * `ˆ` indicates the beginning of a string
-* `(?:([A-Za-z]+):)?` 
+* `(?:([A-Za-z]+):)?`
 	* `(?:...)` indicates a [_noncapturing group_](#Noncapturing), where the '...' is replaced by the group that you wish to match, but not save to anywhere
 	* Suffix `?` indicates the group is optional, so it could or could not exist in the string - it could even exist more than once
 	* `()` around the _([A-Za-z]+)_ indicates a [_capturing group_](#Capturing) which is therefore captured and placed in the `result` array
@@ -664,7 +690,7 @@ Breaking it down one portion([factor](#Factors)) at a time:
 * `(?:\/([ˆ?#]*))?`
 	* Another optional grou (`?`), beginning with a literal slash `/` (escaped by the backslash)
 	* The `ˆ` at the beginning of character class `[ˆ?#]` means it includes _all_ characters _except_ ? and #
-		* This acutally leave the regexp open to attack because too many characters are included in the character class 
+		* This acutally leave the regexp open to attack because too many characters are included in the character class
 	* The `*` indicates the character class will appear _zero or more_ times
 * `(?:\?([ˆ#]*))?`
 	* We've seen everything here before: An optional capturing group starting with a literal `?` (escaped by the backslash) with zero or more characters that are not #
@@ -692,13 +718,14 @@ Most of this we have seen before but here are the new bits:
 3 flags exist in regular expressions: `i` means insensitive - ignore the character case, 'g` means global - to match multiple items and `m` means multiline - where ˆ and $ can match line-ending characters
 
 Two ways to build a regular expression:
-1. _Regular Expression literals_ as per the examples above start and end with a slash `/` 
+1. _Regular Expression literals_ as per the examples above start and end with a slash `/`
 	* Here the flags are appended after the final slash, for example `/i`
 	* Be careful: `RegExp` objects made by regular expression literals share a single instance
 2. Use `RegExp` constructor
 	* The first parameter is the string to be made into a `RegExp` object, the second is the flag
 	* Useful when all information for creating the regular expression is not available at time of programming
-	* Backslashes mean something in the constructor, so these must be doubled and quotes must be escaped 
+	* Backslashes mean something in the constructor, so these must be doubled and quotes must be escaped
+
 ```javascript
 //example creating a regular expression object that matches a JavaScript string
 
@@ -752,7 +779,8 @@ Four kinds of groups:
 * _Positive lookahead_, a **bad** part: `(?=...)` acts like a noncapturing group except after the match is made, it goes back to where text started
 * _Negative lookahead_, a **bad** part: `(?!...)` is like a positive lookahead but only matches if there is no match with what is in it
 
-<a name="#RegexpClass">####Regexp Class
+<a name="#RegexpClass"/>
+####Regexp Class
 
 * Conveniently and easily specifies one of a set of characters using square brackets `[]`, for example vowels: `[aeiou]`
 * Can shorten specification of all 32 ASCII special characters to **[!-\/:-@\[-'{-˜]** (note that the ' in this piece of code should be a back-tick which I can't use as part of these notes)
@@ -774,7 +802,7 @@ A _quantifier_ at the en of a factor indicates how many times the factor should 
 **Prefer to use 'zero or more' or 'one or more' matching over the 'zero or one' matching** - i.e. prefer _greedy_ matching over _lazy_ matching
 
 
-<a name="Chapter8"/>
+<a name="chapter8"/>
 ##Chapter 8 - Methods
 
 ###Arrays
@@ -914,7 +942,7 @@ Similar to `.indexOf(string)` but takes a `regexp` instead of a `string`, return
 The `g` flag is **ignored**.
 
 ####_string_.slice(_start, end_)
-Createsa **new string** by copying the characters from the `start` position to the character before the `end` position in _string_. 
+Createsa **new string** by copying the characters from the `start` position to the character before the `end` position in _string_.
 
 The `end` parameter is _optiona_ and defaults to _string_.length. If either parameter is negative, _string_.length is added to it.
 
@@ -943,14 +971,16 @@ Produces a **new string** converted to upper case.
 
 ####String.fromCharCode(_char..._)
 Produces a **new string** from a series of numbers.
-`var a = String.fromCharCode(67, 97, 116);    //a === 'Cat'
+`var a = String.fromCharCode(67, 97, 116);    //a === 'Cat'`
 
 
-<a name="Chapter9"/>
+<a name="chapter9"/>
 ##Chapter 9 - Style
 > JavaScripts's loose typing and excessive error tolerance provide little compile-time assurance of our programs' quality, so to compensate, we should code with strict discipline.
+
 * We should **avoid** the _bad parts_ of JavaScript, but also the **useful parts that can be occasionally dangerous**
 >the likelihood a program will work [as intended] is significantly enhanced by our ability to read it
+
 * Must be written in a clear, consistent style, including:
 	* Good use of whitespace
 	* Put at most one statement on a line
@@ -962,13 +992,13 @@ Produces a **new string** from a series of numbers.
 > I use a single global variable to contain an application or library. Every object has its own namespace, so it is easy to use objects to organize my code. Use of closure provides further information hiding, increasing the strength of my modules.
 
 
-<a name="Chapter10"/>
+<a name="chapter10"/>
 ##Chapter 10 - Beautiful Features
 
-Each feature you add to something has a lot of different costs (documentation costs, specification, design, testing and development costs) and these are often not properly accounted for. 
+Each feature you add to something has a lot of different costs (documentation costs, specification, design, testing and development costs) and these are often not properly accounted for.
 > Features that offer value to a minority of users impose a cost on all users
 
-> We cope with the complexity of feature-driven design by finding and sticking with the good parts 
+> We cope with the complexity of feature-driven design by finding and sticking with the good parts
 For example, microwaves do a ton of different things, but most people just use one setting, the timer and the clock. So why not design with just the good parts?
 
 
@@ -1046,7 +1076,7 @@ JavaScript **doesn't have real arrays**, it has _array-like objects_.
 	* Bad: Slower than 'real' arrays
 
 To test if value is an array:
-```javascript 
+```javascript
 if (my_value && typeof my_value === 'object' && typeof my_value.length === 'number' &&
 	!(my_value.propertyIsEnumerable('length'))) {
 		//my_value is definitelyy an array!
@@ -1081,7 +1111,7 @@ To test for membership without prototype chain involvement, use the `hasOwnPrope
 	* This doesn't mean you can't use `&&` for example
 * `++` **and** `--`: This one seems debatable to me; Douglas Crockford finds it makes his coding style much more cryptic and difficult to read (the book uses `+=1` and `-=1` instead)
 
-**The function statement vs the function expression:** 
+**The function statement vs the function expression:**
 To use JavaScript well, important to understand that **functions are values**.
 * A function _statement_ is shorthand for a var statement with a function value, so `function foo() {}` (a function statement) means pretty much the same as `var foo = function foo(){};` (a function expression)
 * Logically, to write the language well you should define a function before using it, but in JavaScript, function statements (using just `function foo(){}`) are _hoisted_ to the top of the scope in which they are defined - this encourages sloppy programming and should be avoided
@@ -1109,6 +1139,3 @@ Having read through this appendix (you can read more about (JSLint here)[http://
 
 
 Interesting article on prototypes: http://sporto.github.io/blog/2013/02/22/a-plain-english-guide-to-javascript-prototypes/
-
-
-
