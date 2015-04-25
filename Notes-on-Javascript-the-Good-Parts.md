@@ -258,9 +258,25 @@ myObject.incrementFunction();
 ```javascript
 var sum = add(3, 4);
 ```
-* These functions are **bound to the global object** (_a "mistake in the design of the language" according to Douglas Crockford)_
-* `this` is therefore also bound to the global object [even in inner functions](#nestedFunctions)
-* **Workaround:** Artificially create a new `this` ... //**NOTES TO BE FINISHED**
+* These functions are **bound to the global object** (_a "mistake in the design of the language" according to Douglas Crockford)_ and consequently so is `this`[even in inner functions](#nestedFunctions)
+* Invoking `this` within an inner function will therefore refer to its _own_ `this` and **not** the one in global scope
+
+**Workaround:** Artificially create a new `this`:
+```javascript
+myObject.double = function() {
+	//in the book, the var here is called `that` but name changed for clarity
+	var globalScopeThis = this; //workaround
+
+	var innerFunc = function() {
+		globalScopeThis.value = add(globalScopeThis.value, globalScopeThis.value);
+	};
+
+	innerFunc(); //invoke innerFunc as function
+};
+
+myObject.double();
+console.log(myObject.value);
+```
 
 ####Constructor Invocation Pattern
 
@@ -438,8 +454,8 @@ var Serial_maker = function() {
 ###Cascade
 
 * Some methods return nothing, albeit `undefined`
-* If we alter these methods to **return `this` instead of `undefined`**, they return the object which can then be passed to the next method
-	* This enables _cascades_, where you **call many methods on the same object in sequence because the object is passed from one method to the next**
+* If we alter these methods to **return `this` instead of `undefined`**, they return the object which can then be passed to the next method, e.g `getElement(myBox).move(350,150)` gets the element and then passes is to the _move_ function for the next action
+	* This enables _cascades_, where you **call many methods on the same object in sequence because the object is passed from one method to the next** (usually separated by `.` as above)
 * Cascades also stop you from trying to do too much in one method and makes your code more descriptive
 
 ###Curry
