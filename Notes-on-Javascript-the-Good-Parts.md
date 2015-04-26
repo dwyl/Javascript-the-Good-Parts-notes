@@ -460,8 +460,9 @@ var Serial_maker = function() {
 
 ###Curry
 
-* A `curry` method allow you to customise an existing function by _partially invoking_ it
-A [simple example](http://javascriptweblog.wordpress.com/2010/04/05/curry-cooking-up-tastier-functions/):
+* A `curry` method allows you to _partially evaluate_ an existing function
+	* An example is below where the function _expects **two** arguments_, but it is first invoked with only **one**  (in this case using `curry` as in `add.curry(10);`) and then later passed the second argument
+* It can also be explained as transforming a function that takes multiple arguments (`add(a,b)`) into a chain of functions that take a single argument each (`addA = add(A); addA(B);` where the two functions are now `add()` & `addA()`)
 
 ```javascript
 //set up a simple function that we will customise with curry
@@ -472,7 +473,7 @@ var add = function (a,b){
 var addTen = add.curry(10);      //passes 10 as the first argument to the add() function
 addTen(20);                     //The use of the curry method in addTen means addTen === add(10, 20);
 ```
-* Javascript **does not have a `curry` method** but this can be added to the `Function.protoype`:
+* Javascript **does not have a `curry` method** natively but this can be added to the `Function.protoype`:
 ```javascript
 Function.method('curry', function() {
 	var slice = Array.prototype.slice,
@@ -482,15 +483,6 @@ Function.method('curry', function() {
 		return that.apply(null, args.concat(slice.apply(arguments)));
 	}
 });
-```
-ASK Nelson for his definition of currying. Is it both this and the above?
-**Note:** _Currying_ is transforming a function that takes multiple arguments into a chain of functions that take a single argument each. [For example](http://www.dustindiaz.com/javascript-curry/):
-```javascript
-function update(id) {
-	return function(resp) {           //a curried function
-		documente.getElementById(id).innerHTML = resp.responseText;
-	}
-}
 ```
 
 ###Memoization
@@ -629,17 +621,19 @@ Arrays have their **own literal format** and their own set of methods ([Chapter 
 ###Enumeration
 
 * A `for` statement can be used to iterate over all the properties of an array (as it is an object)
-* **Do not us `for in`** as it does not iterate through the properties in order and pulls in from the prototype chain
+* **Do not us `for in`** as it does not iterate through the properties in order and sometimes pulls in from furhter up the prototype chain
 
 ###Confusion
 
 > The rule is simple: when the property names [keys] are small sequential integers, you should use an array. Otherwise, use an object.
+
 * Arrays are most useful when property names are integers _but_ they can also accept strings as property names
-* Javascript doesn't have a good way of telling an object from an array as `typeof array ===object`
+* Javascript doesn't have a good way of telling an object from an array as `typeof array === object`
 * To accurately detect arrays, have to define our own function:
 ```javascript
 var is_array = function (value) {
 	return Object.prototype.toString.apply(value) === '[object Array]';
+	//apply(value) binds `value` to `this` & returns true if `this` is an array
 }
 ```
 
@@ -647,15 +641,16 @@ var is_array = function (value) {
 
 * Array methods are stored in `Array.prototype` which can be augmented using the format:
 ```javascript
-Array.method('reduce', function (parameters){     //capital A in Array acts on prototype
+//capital A in Array means this refers to the prototype
+Array.method('reduce', function (parameters){
 	//define variables and function
 	//return a value
 });
 ```
 * Remember, **every array inherits and can use the methods you add to `Array.prototype`**
 * You can also add methods _directly to an array_ because they are objects
-	* `myArray.total = function () { //statements to execute; }` adds a 'total' function to the array myArray
-* `Object.create()` will create an object - lacking the `length` property - not an array; **do not use**
+	* `myArray.total = function () { //statements to execute; }` adds a 'total' function to the array `myArray`
+* **DO NOT USE:** `Object.create()` will create an object - lacking the `length` property - not an array.
 
 ###Dimensions
 
@@ -678,7 +673,7 @@ Quite convoluted and difficult to read as **do not allow comments or whitespace*
 
 ###An Example
 
-`/ˆ(?:([A-Za-z]+):)?(\/{0,3})([0-9A-Za-z.\-]+)(?::(\d+))?(?:\/([ˆ?#]*))?(?:\?([ˆ#]*))?(?:#(.*))?$/`
+`/ˆ(?:([A-Za-z]+):)?(\/{0,3})([0-9.\-A-Za-z]+)(?::(\d+))?(?:\/([ˆ?#]*))?(?:\?([ˆ#]*))?(?:#(.*))?$/`
 
 Breaking it down one portion([factor](#Factors)) at a time:
 * Note that the string starts and ends with a slash `/`
@@ -688,7 +683,8 @@ Breaking it down one portion([factor](#Factors)) at a time:
 	* Suffix `?` indicates the group is optional, so it could or could not exist in the string - it could even exist more than once
 	* `()` around the _([A-Za-z]+)_ indicates a [_capturing group_](#Capturing) which is therefore captured and placed in the `result` array
 		* They groups are placed in the array in order, so the first will appear in `result[1]`
-		* **Non-capturing groups are preferred to capturing groups** because capturing groups have a performance penalty (on account of saving to the result array)
+		* **Noncapturing groups are preferred to capturing groups** because capturing groups have a performance penalty (on account of saving to the result array)
+		* You can also have **capturing groups _within_ noncapturing groups** such as [`(?:Bob says: (\w+))`](http://www.rexegg.com/regex-disambiguation.html)
 	* `[...]` indicates a character class
 	* `A-Za-z` is a character class containing all 26 letters of the alphabet in both upper and lower case
 	* Suffix `+` means character class will be matched _one or more times_
@@ -696,9 +692,9 @@ Breaking it down one portion([factor](#Factors)) at a time:
 * `(\/{0,3})`
 	* `\/` The backslash `\` _escapes_ the forward slash `/` (which traditionally symbolises the end of the regular expression literal) and together they indicate that the forward slash `/` should be matched
 	* Suffix `{0,3}` means the slash `/` will be matched between 0 and 3 times
-* `([0-9A-Za-z.\-]+)`
+* `([0-9.\-A-Za-z]+)`
 	* String made up of one or more (note the `+` at the end denoting possible multiple ocurrences) digits, letters (upper or lower case), full stops (.) or hyphens (-)
-		* Note that the hyphen was escaped with a backslash `\-` as hyphens usually denote a _range_
+		* Note that the hyphen was escaped with a backslash `\-` as hyphens usually denote a _range_ but in this case is a hyphen within the expression
 * `(?::(\d+))?`
 	* `\d` represents a _digit character_ so this will be a sequence of _one or more_ digit characters (as per the `+`)
 	* The digit characters will be immediately preceded by a colon `:`
@@ -865,7 +861,7 @@ Works like `push` but adds items **to the front of the array** instead of the en
 
 ###Function
 
-####_function_.apply(_thisArg, argArray_)
+####_function_.apply(_thisArg, [argArray]_)
 The `apply` method invokes a function, passing in the object that will be bound to `this` and _optional_ array of arguments.
 
 ###Number
