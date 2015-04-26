@@ -1,3 +1,12 @@
+#Notes on _Douglas Crockford's_ Javascript the Good Parts :rocket:
+This book calls out the best parts of Javascript and tells you what to avoid (the 'bad parts').
+It's about making sure you **know the really important parts of the language** and **create good habits** instead of having to break bad ones down the line.
+
+[![contributions welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat)](https://github.com/ideaq/time/issues) **Please don't hesitate to submit PRs** to improve these notes wherever you feel something can be clarified, improved on or have an example added to it.
+
+The idea of these notes is to collect the excellent information from an already dense book into note form, **translating these ideas into _'plain English'_** where possible and _adding explanations_ throughout where the book might not make things obvious as it assumes prior knowledge.
+
+
 ##Table of Contents
 * [Chapter 1 - Good Parts](#chapter1)
 * [Chapter 2 - Grammar](#chapter2)
