@@ -258,9 +258,25 @@ myObject.incrementFunction();
 ```javascript
 var sum = add(3, 4);
 ```
-* These functions are **bound to the global object** (_a "mistake in the design of the language" according to Douglas Crockford)_
-* `this` is therefore also bound to the global object [even in inner functions](#nestedFunctions)
-* **Workaround:** Artificially create a new `this` ... //**NOTES TO BE FINISHED**
+* These functions are **bound to the global object** (_a "mistake in the design of the language" according to Douglas Crockford)_ and consequently so is `this`[even in inner functions](#nestedFunctions)
+* Invoking `this` within an inner function will therefore refer to its _own_ `this` and **not** the one in global scope
+
+**Workaround:** Artificially create a new `this`:
+```javascript
+myObject.double = function() {
+	//in the book, the var here is called `that` but name changed for clarity
+	var globalScopeThis = this; //workaround
+
+	var innerFunc = function() {
+		globalScopeThis.value = add(globalScopeThis.value, globalScopeThis.value);
+	};
+
+	innerFunc(); //invoke innerFunc as function
+};
+
+myObject.double();
+console.log(myObject.value);
+```
 
 ####Constructor Invocation Pattern
 
@@ -438,14 +454,15 @@ var Serial_maker = function() {
 ###Cascade
 
 * Some methods return nothing, albeit `undefined`
-* If we alter these methods to **return `this` instead of `undefined`**, they return the object which can then be passed to the next method
-	* This enables _cascades_, where you **call many methods on the same object in sequence because the object is passed from one method to the next**
+* If we alter these methods to **return `this` instead of `undefined`**, they return the object which can then be passed to the next method, e.g `getElement(myBox).move(350,150)` gets the element and then passes is to the _move_ function for the next action
+	* This enables _cascades_, where you **call many methods on the same object in sequence because the object is passed from one method to the next** (usually separated by `.` as above)
 * Cascades also stop you from trying to do too much in one method and makes your code more descriptive
 
 ###Curry
 
-* A `curry` method allow you to customise an existing function by _partially invoking_ it
-A [simple example](http://javascriptweblog.wordpress.com/2010/04/05/curry-cooking-up-tastier-functions/):
+* A `curry` method allows you to _partially evaluate_ an existing function
+	* An example is below where the function _expects **two** arguments_, but it is first invoked with only **one**  (in this case using `curry` as in `add.curry(10);`) and then later passed the second argument
+* It can also be explained as transforming a function that takes multiple arguments (`add(a,b)`) into a chain of functions that take a single argument each (`addA = add(A); addA(B);` where the two functions are now `add()` & `addA()`)
 
 ```javascript
 //set up a simple function that we will customise with curry
@@ -456,7 +473,7 @@ var add = function (a,b){
 var addTen = add.curry(10);      //passes 10 as the first argument to the add() function
 addTen(20);                     //The use of the curry method in addTen means addTen === add(10, 20);
 ```
-* Javascript **does not have a `curry` method** but this can be added to the `Function.protoype`:
+* Javascript **does not have a `curry` method** natively but this can be added to the `Function.protoype`:
 ```javascript
 Function.method('curry', function() {
 	var slice = Array.prototype.slice,
@@ -466,15 +483,6 @@ Function.method('curry', function() {
 		return that.apply(null, args.concat(slice.apply(arguments)));
 	}
 });
-```
-ASK Nelson for his definition of currying. Is it both this and the above?
-**Note:** _Currying_ is transforming a function that takes multiple arguments into a chain of functions that take a single argument each. [For example](http://www.dustindiaz.com/javascript-curry/):
-```javascript
-function update(id) {
-	return function(resp) {           //a curried function
-		documente.getElementById(id).innerHTML = resp.responseText;
-	}
-}
 ```
 
 ###Memoization
@@ -499,13 +507,12 @@ var meoizer = function (memo, fundamental) {
 
 <a name="chapter5"/>
 ##Chapter 5 - Inheritance
+>Javascript is a prototypal language, which means that objects inherit directly from other objects
 
-Main benefit of inheritance is **code reuse** - you only have to specify differences
+Main benefit of inheritance is **code reuse** - you only have to specify differences.
 
 Javascript can _mimic_ classical inheritance but has a much **richer set of code reuse patterns**
 * This chapter looks at the more straightforward patterns but it is always best to **keep it simple**
-
->Javascript is a prototypal language, which means that objects inherit directly from other objects
 
 ###Pseudoclassical
 
@@ -541,7 +548,7 @@ Also useful to pass object specifiers to JSON ([see Appendix E notes](#AppendixE
 
 * **All properties of an object are visible** (Javascript has no classes so there is no such thing as a 'private variable' which can only be seen within a class as per other languages)
 * When you use a _function_ to create your original object and the same with the object instances, you're essentially utilising Javascript functional scope to create private properties and methods
-The below is an example of how you would create an original object, the `name` and `saying` properties and now completely private and only accessible to the `get_name` and `says` method
+The below is an example of how you would create an original object, the `name` and `saying` properties are now completely private and only accessible to the `get_name` and `says` method
 
 ```javascript
 var mammal = function (spec) {
@@ -578,7 +585,7 @@ var cat = function (spec) {
 
 ###Parts
 * An object can be composed out of a set of parts
-	* For example, you can create a function that provides the object it is passed with a number of methods defined in this function
+	* For example, you can create a function that provides the object it is passed with a number of methods (which are defined in this function), where each method is a part that is added to the object
 
 
 <a name="chapter6"/>
@@ -613,17 +620,19 @@ Arrays have their **own literal format** and their own set of methods ([Chapter 
 ###Enumeration
 
 * A `for` statement can be used to iterate over all the properties of an array (as it is an object)
-* **Do not us `for in`** as it does not iterate through the properties in order and pulls in from the prototype chain
+* **Do not us `for in`** as it does not iterate through the properties in order and sometimes pulls in from furhter up the prototype chain
 
 ###Confusion
 
 > The rule is simple: when the property names [keys] are small sequential integers, you should use an array. Otherwise, use an object.
+
 * Arrays are most useful when property names are integers _but_ they can also accept strings as property names
-* Javascript doesn't have a good way of telling an object from an array as `typeof array ===object`
+* Javascript doesn't have a good way of telling an object from an array as `typeof array === object`
 * To accurately detect arrays, have to define our own function:
 ```javascript
 var is_array = function (value) {
 	return Object.prototype.toString.apply(value) === '[object Array]';
+	//apply(value) binds `value` to `this` & returns true if `this` is an array
 }
 ```
 
@@ -631,15 +640,16 @@ var is_array = function (value) {
 
 * Array methods are stored in `Array.prototype` which can be augmented using the format:
 ```javascript
-Array.method('reduce', function (parameters){     //capital A in Array acts on prototype
+//capital A in Array means this refers to the prototype
+Array.method('reduce', function (parameters){
 	//define variables and function
 	//return a value
 });
 ```
 * Remember, **every array inherits and can use the methods you add to `Array.prototype`**
 * You can also add methods _directly to an array_ because they are objects
-	* `myArray.total = function () { //statements to execute; }` adds a 'total' function to the array myArray
-* `Object.create()` will create an object - lacking the `length` property - not an array; **do not use**
+	* `myArray.total = function () { //statements to execute; }` adds a 'total' function to the array `myArray`
+* **DO NOT USE:** `Object.create()` will create an object - lacking the `length` property - not an array.
 
 ###Dimensions
 
@@ -662,7 +672,7 @@ Quite convoluted and difficult to read as **do not allow comments or whitespace*
 
 ###An Example
 
-`/ˆ(?:([A-Za-z]+):)?(\/{0,3})([0-9A-Za-z.\-]+)(?::(\d+))?(?:\/([ˆ?#]*))?(?:\?([ˆ#]*))?(?:#(.*))?$/`
+`/ˆ(?:([A-Za-z]+):)?(\/{0,3})([0-9.\-A-Za-z]+)(?::(\d+))?(?:\/([ˆ?#]*))?(?:\?([ˆ#]*))?(?:#(.*))?$/`
 
 Breaking it down one portion([factor](#Factors)) at a time:
 * Note that the string starts and ends with a slash `/`
@@ -672,7 +682,8 @@ Breaking it down one portion([factor](#Factors)) at a time:
 	* Suffix `?` indicates the group is optional, so it could or could not exist in the string - it could even exist more than once
 	* `()` around the _([A-Za-z]+)_ indicates a [_capturing group_](#Capturing) which is therefore captured and placed in the `result` array
 		* They groups are placed in the array in order, so the first will appear in `result[1]`
-		* **Non-capturing groups are preferred to capturing groups** because capturing groups have a performance penalty (on account of saving to the result array)
+		* **Noncapturing groups are preferred to capturing groups** because capturing groups have a performance penalty (on account of saving to the result array)
+		* You can also have **capturing groups _within_ noncapturing groups** such as [`(?:Bob says: (\w+))`](http://www.rexegg.com/regex-disambiguation.html)
 	* `[...]` indicates a character class
 	* `A-Za-z` is a character class containing all 26 letters of the alphabet in both upper and lower case
 	* Suffix `+` means character class will be matched _one or more times_
@@ -680,9 +691,9 @@ Breaking it down one portion([factor](#Factors)) at a time:
 * `(\/{0,3})`
 	* `\/` The backslash `\` _escapes_ the forward slash `/` (which traditionally symbolises the end of the regular expression literal) and together they indicate that the forward slash `/` should be matched
 	* Suffix `{0,3}` means the slash `/` will be matched between 0 and 3 times
-* `([0-9A-Za-z.\-]+)`
+* `([0-9.\-A-Za-z]+)`
 	* String made up of one or more (note the `+` at the end denoting possible multiple ocurrences) digits, letters (upper or lower case), full stops (.) or hyphens (-)
-		* Note that the hyphen was escaped with a backslash `\-` as hyphens usually denote a _range_
+		* Note that the hyphen was escaped with a backslash `\-` as hyphens usually denote a _range_ but in this case is a hyphen within the expression
 * `(?::(\d+))?`
 	* `\d` represents a _digit character_ so this will be a sequence of _one or more_ digit characters (as per the `+`)
 	* The digit characters will be immediately preceded by a colon `:`
@@ -849,7 +860,7 @@ Works like `push` but adds items **to the front of the array** instead of the en
 
 ###Function
 
-####_function_.apply(_thisArg, argArray_)
+####_function_.apply(_thisArg, [argArray]_)
 The `apply` method invokes a function, passing in the object that will be bound to `this` and _optional_ array of arguments.
 
 ###Number
@@ -919,6 +930,8 @@ Compares _string_ to `that` parameter and returns:
 * 0 if _string_ === `that`
 * -1 if _string_ < `that`
 
+_NB. 'a' < 'A', comparison is not just in length._
+
 ####_string_.match(_regexp_)
 Works the same way as `regexp.exec(string)` **if** there is no `g` flag in the `regexp`.
 
@@ -972,6 +985,7 @@ Produces a **new string** converted to upper case.
 ####String.fromCharCode(_char..._)
 Produces a **new string** from a series of numbers.
 `var a = String.fromCharCode(67, 97, 116);    //a === 'Cat'`
+_NB. You're calling the prototype here, not replacing 'String' with your own variable._
 
 
 <a name="chapter9"/>
@@ -1011,7 +1025,7 @@ For example, microwaves do a ton of different things, but most people just use o
 These are variables that are visible throughout the code in any scope. They can be **changed at any time** by any part of the program which makes them **unreliable in larger complex programs**. This can also lead to naming conflicts which can cause your code to fail or you to accidentally overwrite a global variable.
 
 Defined in three ways:
-* Using a `var` statement **outside** of any function; `var foo = value;
+* Using a `var` statement **outside** of any function; `var foo = value`;
 * By adding a property to the global object (container of all global variables), such as `window` in browsers; `window.foo = value;`
 * Using a variable without declaring it with `var`, which makes it an _implied global_; `foo = value`
 
