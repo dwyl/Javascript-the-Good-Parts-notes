@@ -507,13 +507,12 @@ var meoizer = function (memo, fundamental) {
 
 <a name="chapter5"/>
 ##Chapter 5 - Inheritance
+>Javascript is a prototypal language, which means that objects inherit directly from other objects
 
-Main benefit of inheritance is **code reuse** - you only have to specify differences
+Main benefit of inheritance is **code reuse** - you only have to specify differences.
 
 Javascript can _mimic_ classical inheritance but has a much **richer set of code reuse patterns**
 * This chapter looks at the more straightforward patterns but it is always best to **keep it simple**
-
->Javascript is a prototypal language, which means that objects inherit directly from other objects
 
 ###Pseudoclassical
 
@@ -549,7 +548,7 @@ Also useful to pass object specifiers to JSON ([see Appendix E notes](#AppendixE
 
 * **All properties of an object are visible** (Javascript has no classes so there is no such thing as a 'private variable' which can only be seen within a class as per other languages)
 * When you use a _function_ to create your original object and the same with the object instances, you're essentially utilising Javascript functional scope to create private properties and methods
-The below is an example of how you would create an original object, the `name` and `saying` properties and now completely private and only accessible to the `get_name` and `says` method
+The below is an example of how you would create an original object, the `name` and `saying` properties are now completely private and only accessible to the `get_name` and `says` method
 
 ```javascript
 var mammal = function (spec) {
@@ -586,7 +585,7 @@ var cat = function (spec) {
 
 ###Parts
 * An object can be composed out of a set of parts
-	* For example, you can create a function that provides the object it is passed with a number of methods defined in this function
+	* For example, you can create a function that provides the object it is passed with a number of methods (which are defined in this function), where each method is a part that is added to the object
 
 
 <a name="chapter6"/>
@@ -931,6 +930,8 @@ Compares _string_ to `that` parameter and returns:
 * 0 if _string_ === `that`
 * -1 if _string_ < `that`
 
+_NB. 'a' < 'A', comparison is not just in length._
+
 ####_string_.match(_regexp_)
 Works the same way as `regexp.exec(string)` **if** there is no `g` flag in the `regexp`.
 
@@ -984,6 +985,7 @@ Produces a **new string** converted to upper case.
 ####String.fromCharCode(_char..._)
 Produces a **new string** from a series of numbers.
 `var a = String.fromCharCode(67, 97, 116);    //a === 'Cat'`
+_NB. You're calling the prototype here, not replacing 'String' with your own variable._
 
 
 <a name="chapter9"/>
@@ -1023,7 +1025,7 @@ For example, microwaves do a ton of different things, but most people just use o
 These are variables that are visible throughout the code in any scope. They can be **changed at any time** by any part of the program which makes them **unreliable in larger complex programs**. This can also lead to naming conflicts which can cause your code to fail or you to accidentally overwrite a global variable.
 
 Defined in three ways:
-* Using a `var` statement **outside** of any function; `var foo = value;
+* Using a `var` statement **outside** of any function; `var foo = value`;
 * By adding a property to the global object (container of all global variables), such as `window` in browsers; `window.foo = value;`
 * Using a variable without declaring it with `var`, which makes it an _implied global_; `foo = value`
 
