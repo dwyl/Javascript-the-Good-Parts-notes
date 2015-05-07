@@ -84,7 +84,7 @@ for (myvariable in object) {
 * A _do while_ statement is always executed at least once as the while condition is only checked after the first iteration of the loop
 * `catch` clause in a _try_ statement **must create a new variable** that will catch the exception object
 * Scope of `thro` statement is the `try` block it's in, or the `try` of the function it's in
-* If there is no `return` statement, return===undefined
+* If there is no `return` statement, `return===undefined`
 * `break` exits the statement and `continue` forces a new iteration of the loop, both with the optional _label_ mentioned above
 
 ###Expressions
@@ -139,7 +139,7 @@ var today = {
 
 ###Retrieval
 
-* Can be done with either dot notation `today.weather.morning` or with square brackets `today[month]`
+* Can be done with either dot notation `today.weather.morning` or with square brackets `today['month']`
 * Or operand (||) can be used to fill in default values for nonexistent data to prevent and _undefined_ error: `var weath = today.weather.evening || "unknown"`
 
 
@@ -329,7 +329,7 @@ var sum = add.apply(null, array);     //value of 'this' is null and value of sum
 * This means you don't have to know the exact number of arguments when you build a function because you can loop through all the arguments provided at invocation with the use of the default `arguments` array
 ```javascript
 //inside the function
-for (i = 0; i <arguments.length; i++) {
+for (i = 0; i < arguments.length; i++) {
 	dosomething;  //e.g. sum +=arguments[i]
 }
 ```
