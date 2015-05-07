@@ -846,7 +846,7 @@ _Modifies_ the array by **reversing the order of the elements**.
 Removes the _first_ element of the array (does not leave a hole in the array - same effect as using the `.splice(a,b)` method) and returns that first element.
 
 ####_array_.slice(_start, end_)
-**Different to `splice`.
+Different to `splice`.
 
 'slice' creates a **new array**, copying from the `start` element and stopping at the element _before_ the `end` value given. If no `end` is given, default is `array.length`.
 
@@ -964,7 +964,7 @@ Similar to `.indexOf(string)` but takes a `regexp` instead of a `string`, return
 The `g` flag is **ignored**.
 
 ####_string_.slice(_start, end_)
-Createsa **new string** by copying the characters from the `start` position to the character before the `end` position in _string_.
+Creates a **new string** by copying the characters from the `start` position to the character before the `end` position in _string_.
 
 The `end` parameter is _optiona_ and defaults to _string_.length. If either parameter is negative, _string_.length is added to it.
 
@@ -1011,7 +1011,7 @@ _NB. You're calling the prototype here, not replacing 'String' with your own var
 	* _Always_ use blocks (curly braces {}) with structured statements like `if` and `while` to avoid confusion on what the statement is actually doing
 		* Put the opening brace `{` on the same (first) line as the statement to avoid JavaScript's [semicolon insertion](#SemicolonInsertion) issues - i.e `if (a) { ...`
 	* Use line comments `//comment` and not block commenting (unless you're _commenting out_ code)
-	* Declare all your variables at the *beginning of the function**, due to JavaScript's functional scope
+	* Declare all your variables at the *beginning of the function*, due to JavaScript's functional scope
 > I use a single global variable to contain an application or library. Every object has its own namespace, so it is easy to use objects to organize my code. Use of closure provides further information hiding, increasing the strength of my modules.
 
 
@@ -1095,8 +1095,9 @@ var isNumber = function isNumber(value) {
 
 ###Phony Arrays
 JavaScript **doesn't have real arrays**, it has _array-like objects_.
-	* Good: No need to give them dimensions and don't generate out-of-bounds errors
-	* Bad: Slower than 'real' arrays
+
+* Good: No need to give them dimensions and don't generate out-of-bounds errors
+* Bad: Slower than 'real' arrays
 
 To test if value is an array:
 ```javascript
