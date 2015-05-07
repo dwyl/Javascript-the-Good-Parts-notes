@@ -24,7 +24,7 @@ The idea of these notes is to collect the excellent information from an already 
 
 
 <a name="chapter1"/>
-##Chapter 1
+##Chapter 1 - Good Parts
 
 > Most programming languages contain good parts and bad parts. I discovered that I could be a better programmer by using only the good parts and avoiding the bad parts. After all, how can you build something good out of bad parts?
 
