@@ -2,7 +2,7 @@
 This book calls out the best parts of Javascript and tells you what to avoid (the 'bad parts').
 It's about making sure you **know the really important parts of the language** and **create good habits** instead of having to break bad ones down the line.
 
-[![contributions welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat)](https://github.com/ideaq/time/issues) **Please don't hesitate to submit PRs** to improve these notes wherever you feel something can be clarified, improved on or have an example added to it.
+[![contributions welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat)](https://github.com/iteles/Javascript-the-Good-Parts-notes/issues) **Please don't hesitate to submit PRs** to improve these notes wherever you feel something can be clarified, improved on or have an example added to it.
 
 The idea of these notes is to collect the excellent information from an already dense book into note form, **translating these ideas into _'plain English'_** where possible and _adding explanations_ throughout where the book might not make things obvious as it assumes prior knowledge.
 
@@ -1158,7 +1158,7 @@ In JavaScript, this actually _takes_ a value and _returns_ `undefined`, which is
 
 JSLint is a **code quality tool** for JavaScript which checks your syntax.
 
-Having read through this appendix (you can read more about [JSLint here](http://www.jslint.com), I tend more towards [**_JSHint_**](http://jshint.com/about/), a _fork_ of JSLint. It allows programmers to customise for themselves which the good parts and bad parts are and define their own subset, although naturally there are a number of pre-defined options. [This is a really fantastic article on using JSHint](https://github.com/nelsonic/learn-jshint); it's simple and aimed at having you using JSHint in a few minutes as well as providing various sources for pre-defined subsets.
+Having read through this appendix (you can read more about [JSLint here](http://www.jslint.com)), I tend more towards [**_JSHint_**](http://jshint.com/about/), a _fork_ of JSLint. It allows programmers to customise for themselves which the good parts and bad parts are and define their own subset, although naturally there are a number of pre-defined options. [This is a really fantastic article on using JSHint](https://github.com/nelsonic/learn-jshint); it's simple and aimed at having you using JSHint in a few minutes as well as providing various sources for pre-defined subsets.
 
 
 
