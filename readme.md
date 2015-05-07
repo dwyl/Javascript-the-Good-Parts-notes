@@ -24,7 +24,7 @@ The idea of these notes is to collect the excellent information from an already 
 
 
 <a name="chapter1"/>
-##Chapter 1
+##Chapter 1 - Good Parts
 
 > Most programming languages contain good parts and bad parts. I discovered that I could be a better programmer by using only the good parts and avoiding the bad parts. After all, how can you build something good out of bad parts?
 
@@ -84,7 +84,7 @@ for (myvariable in object) {
 * A _do while_ statement is always executed at least once as the while condition is only checked after the first iteration of the loop
 * `catch` clause in a _try_ statement **must create a new variable** that will catch the exception object
 * Scope of `thro` statement is the `try` block it's in, or the `try` of the function it's in
-* If there is no `return` statement, return===undefined
+* If there is no `return` statement, `return===undefined`
 * `break` exits the statement and `continue` forces a new iteration of the loop, both with the optional _label_ mentioned above
 
 ###Expressions
@@ -139,7 +139,7 @@ var today = {
 
 ###Retrieval
 
-* Can be done with either dot notation `today.weather.morning` or with square brackets `today[month]`
+* Can be done with either dot notation `today.weather.morning` or with square brackets `today['month']`
 * Or operand (||) can be used to fill in default values for nonexistent data to prevent and _undefined_ error: `var weath = today.weather.evening || "unknown"`
 
 
@@ -329,7 +329,7 @@ var sum = add.apply(null, array);     //value of 'this' is null and value of sum
 * This means you don't have to know the exact number of arguments when you build a function because you can loop through all the arguments provided at invocation with the use of the default `arguments` array
 ```javascript
 //inside the function
-for (i = 0; i <arguments.length; i++) {
+for (i = 0; i < arguments.length; i++) {
 	dosomething;  //e.g. sum +=arguments[i]
 }
 ```
@@ -846,7 +846,7 @@ _Modifies_ the array by **reversing the order of the elements**.
 Removes the _first_ element of the array (does not leave a hole in the array - same effect as using the `.splice(a,b)` method) and returns that first element.
 
 ####_array_.slice(_start, end_)
-**Different to `splice`.
+Different to `splice`.
 
 'slice' creates a **new array**, copying from the `start` element and stopping at the element _before_ the `end` value given. If no `end` is given, default is `array.length`.
 
@@ -964,7 +964,7 @@ Similar to `.indexOf(string)` but takes a `regexp` instead of a `string`, return
 The `g` flag is **ignored**.
 
 ####_string_.slice(_start, end_)
-Createsa **new string** by copying the characters from the `start` position to the character before the `end` position in _string_.
+Creates a **new string** by copying the characters from the `start` position to the character before the `end` position in _string_.
 
 The `end` parameter is _optiona_ and defaults to _string_.length. If either parameter is negative, _string_.length is added to it.
 
@@ -1011,7 +1011,7 @@ _NB. You're calling the prototype here, not replacing 'String' with your own var
 	* _Always_ use blocks (curly braces {}) with structured statements like `if` and `while` to avoid confusion on what the statement is actually doing
 		* Put the opening brace `{` on the same (first) line as the statement to avoid JavaScript's [semicolon insertion](#SemicolonInsertion) issues - i.e `if (a) { ...`
 	* Use line comments `//comment` and not block commenting (unless you're _commenting out_ code)
-	* Declare all your variables at the *beginning of the function**, due to JavaScript's functional scope
+	* Declare all your variables at the *beginning of the function*, due to JavaScript's functional scope
 > I use a single global variable to contain an application or library. Every object has its own namespace, so it is easy to use objects to organize my code. Use of closure provides further information hiding, increasing the strength of my modules.
 
 
@@ -1095,8 +1095,9 @@ var isNumber = function isNumber(value) {
 
 ###Phony Arrays
 JavaScript **doesn't have real arrays**, it has _array-like objects_.
-	* Good: No need to give them dimensions and don't generate out-of-bounds errors
-	* Bad: Slower than 'real' arrays
+
+* Good: No need to give them dimensions and don't generate out-of-bounds errors
+* Bad: Slower than 'real' arrays
 
 To test if value is an array:
 ```javascript
@@ -1157,7 +1158,7 @@ In JavaScript, this actually _takes_ a value and _returns_ `undefined`, which is
 
 JSLint is a **code quality tool** for JavaScript which checks your syntax.
 
-Having read through this appendix (you can read more about (JSLint here)[http://www.jslint.com]), I tend more towards (**_JSHint_**)[http://jshint.com/about/], a _fork_ of JSLint. It allows programmers to customise for themselves which the good parts and bad parts are and define their own subset, although naturally there are a number of pre-defined options. (This is a really fantastic article on using JSHint)[https://github.com/nelsonic/learn-jshint]; it's simple and aimed at having you using JSHint in a few minutes as well as providing various sources for pre-defined subsets.
+Having read through this appendix (you can read more about [JSLint here](http://www.jslint.com), I tend more towards [**_JSHint_**](http://jshint.com/about/), a _fork_ of JSLint. It allows programmers to customise for themselves which the good parts and bad parts are and define their own subset, although naturally there are a number of pre-defined options. [This is a really fantastic article on using JSHint](https://github.com/nelsonic/learn-jshint); it's simple and aimed at having you using JSHint in a few minutes as well as providing various sources for pre-defined subsets.
 
 
 
