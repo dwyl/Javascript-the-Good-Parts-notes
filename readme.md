@@ -47,7 +47,7 @@ Always use // for comments, even multi-line ones to avoid having to escape `/*` 
 
 * There is a single, 64-bit floating point number type.
 * `NaN` (Not-a-Number) is not equal to any value (including itself) and is essentially an **illegal number value**, but _typeOf(NaN)===number is true_
-* Use `isNan(number)` to check for NaNs
+* Use `isNaN(number)` to check for NaNs
 
 Number methods are discussed in [Chapter 8](#chapter8).
 
