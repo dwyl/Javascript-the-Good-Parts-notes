@@ -54,7 +54,7 @@ Number methods are discussed in [Chapter 8](#chapter8).
 
 ###Strings
 
-* 16-bit character set and don't have character tpes.
+* 16-bit character set and don't have character types.
 * Backslashes (\\\) are used for **escaping characters** that could cause problems in strings.
 * Strings are **immutable**.
 
