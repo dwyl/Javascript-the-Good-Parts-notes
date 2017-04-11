@@ -1,4 +1,4 @@
-#Notes on _Douglas Crockford's_ Javascript the Good Parts :rocket:
+# Notes on _Douglas Crockford's_ Javascript the Good Parts :rocket:
 This book calls out the best parts of Javascript and tells you what to avoid (the 'bad parts').
 It's about making sure you **know the really important parts of the language** and **create good habits** instead of having to break bad ones down the line.
 
@@ -8,7 +8,7 @@ The idea of these notes is to collect the excellent information from an already 
 
 You can [buy the book from O'Reilly](http://shop.oreilly.com/product/9780596517748.do) (non-affiliate link) or follow [Douglas Crockford on Github](https://github.com/douglascrockford).
 
-##Table of Contents
+## Table of Contents
 * [Chapter 1 - Good Parts](#chapter1)
 * [Chapter 2 - Grammar](#chapter2)
 * [Chapter 3 - Objects](#chapter3)
@@ -25,7 +25,7 @@ You can [buy the book from O'Reilly](http://shop.oreilly.com/product/97805965177
 
 
 <a name="chapter1"/>
-##Chapter 1 - Good Parts
+## Chapter 1 - Good Parts
 
 > Most programming languages contain good parts and bad parts. I discovered that I could be a better programmer by using only the good parts and avoiding the bad parts. After all, how can you build something good out of bad parts?
 
@@ -40,11 +40,11 @@ The worst parts include global variables - there is a common _global object_ nam
 Javascript has a _class free_ object makeup, relying instead on objects inheriting properties directly from other objects - this is **prototypal inheritance**.
 
 <a name="chapter2"/>
-##Chapter 2 - Grammar
+## Chapter 2 - Grammar
 
 Always use // for comments, even multi-line ones to avoid having to escape `/*` characters.
 
-###Numbers
+### Numbers
 
 * There is a single, 64-bit floating point number type.
 * `NaN` (Not-a-Number) is not equal to any value (including itself) and is essentially an **illegal number value**, but _typeOf(NaN)===number is true_
@@ -52,7 +52,7 @@ Always use // for comments, even multi-line ones to avoid having to escape `/*` 
 
 Number methods are discussed in [Chapter 8](#chapter8).
 
-###Strings
+### Strings
 
 * 16-bit character set and don't have character types.
 * Backslashes (\\\) are used for **escaping characters** that could cause problems in strings.
@@ -60,7 +60,7 @@ Number methods are discussed in [Chapter 8](#chapter8).
 
 String methods are discussed in [Chapter 8](#chapter8).
 
-###Statements
+### Statements
 
 * _Inside_ a function, the var statement creates variables local to that function
 * _switch, while, for_ and _do_ statements can have an optional **label**  which can be used with `break` and `continue` to provide more precise [control over exactly which statement to break or continue](http://www.tutorialspoint.com/cgi-bin/practice.cgi?file=javascript_19). Format: `labelname: statement` and then `continue labelname;`
@@ -88,24 +88,24 @@ for (myvariable in object) {
 * If there is no `return` statement, `return===undefined`
 * `break` exits the statement and `continue` forces a new iteration of the loop, both with the optional _label_ mentioned above
 
-###Expressions
+### Expressions
 
 * For `expression ? expression2 : expression3`, if expression is _truthy_, execute expresion2; it it's _falsy_, execute expression3
 *  _Invocation_ is `(expression1, expression2, etc)`
 *  _refinement_ is either `.name` or `[expression]` as used in an array
 
-###Literals
+### Literals
 
 * _Names_ or _strings_ used for specifying new objects ([**object literals**](#chapter3)) or arrays ([**array literals**](#chapter6))
 * Properties of the object are expressions and must be known at compile time
 
-###Functions
+### Functions
 * A function literal defines a function value
 * More details in [Chapter 4](#chapter4)
 
 
 <a name="chapter3"/>
-##Chapter 3 - Objects
+## Chapter 3 - Objects
 
 Javascript simple types:
 * numbers _(has object-like methods but they are immutable)_
@@ -118,7 +118,7 @@ Javascript simple types:
 
 Objects are **class free**, can contain other objects and can inherit properties from their prototypes (which can _reduce object initialisatioin time and memory consumption_).
 
-###Object Literals
+### Object Literals
 
 * An object literal is _zero or more comma-separated name/value pairs surrounded by curly braces_ {}
 
@@ -138,17 +138,17 @@ var today = {
 }
 ```
 
-###Retrieval
+### Retrieval
 
 * Can be done with either dot notation `today.weather.morning` or with square brackets `today['month']`
 * Or operand (||) can be used to fill in default values for nonexistent data to prevent and _undefined_ error: `var weath = today.weather.evening || "unknown"`
 
 
-###Update
+### Update
 
 * Assigning a property value to an object **overwrites** any existing property values with that property name
 
-###Reference
+### Reference
 
 * Objects refer to each other, they don't hold duplicate copies of data
 
@@ -164,7 +164,7 @@ var today = {
 
 More details in [Chapter 6](#chapter6)
 
-###Reflection
+### Reflection
 
 * Determining what properties an object has
 * Using `typeof` **includes all properties in the prototype chain** including functions
@@ -174,7 +174,7 @@ today.hasOwnProperty('number')  //will return true
 today.hasOwnProperty('constructor')   //will return false
 ```
 
-###Enumeration
+### Enumeration
 
 * Best way to enumerate all the properties you want is a for loop:
 ```javascript
@@ -188,12 +188,12 @@ for (i = 0; i < properties.length; i++) {
 ```
 * This ensures you get the **properties you want** (i.e. not up the prototype chain) and in the **order you want**, as opposed to a _for in_ loop which achieves neither of these
 
-###Delete
+### Delete
 
 * Removes property from object, but also **reveals property from further up the prototype chain** if it exists
 * Format: `delete today.month`
 
-###Global Abatement
+### Global Abatement
 
 * One way to mitigate the risks of global variables is to _create a single global variable_ which then contains your whole application
 
@@ -216,16 +216,16 @@ MYAPP.today = {
 * Note: **Most [Javascript MVCs](http://coding.smashingmagazine.com/2012/07/27/journey-through-the-javascript-mvc-jungle/) these days (2014) will take care of wrapping your app for you**
 
 <a name="chapter4"/>
-##Chapter 4 - Functions
+## Chapter 4 - Functions
 
 > The best thing about JavaScript is its implementation of functions.
 
-###Function Objects
+### Function Objects
 
 * Functions are objects linked to _function.prototype_ (which is linked to _Object.prototype_).
 * As well as usual object behaviour, they can be **invoked**.
 
-###Function Literal
+### Function Literal
 
 * A function literal has 4 parts:
 	* The (reserved) word `function` itself
@@ -242,7 +242,7 @@ function name (parameterA, parameterB){
 <a name="nestedFunctions"/>
 * Functions can be nested within functions and the inner function can access all the parameters of the outer function as well as its own
 
-###Invocation
+### Invocation
 
 * Stops the current function from running and tells the function you have invoked both to start and to use the arguments (values in parentheses) you have passed it in the invocation `function (parameters)`
 	* If arguments > number of arguments expected, the **extra values will be ignored**
@@ -252,7 +252,7 @@ function name (parameterA, parameterB){
 * **Note:** The difference between an _argument_ and a _parameter_ is that a parameter is usually what is used in the function literal, when you're setting up the function (almost like the placeholder for the actual values that the function will use when it is active) and an argument is usually the value passed to a function at the time it is invoked
 * Parameters `this` and `arguments` are also passed to the function when it is invoked, but their value depends on how the function is invoked
 
-####Method Invocation Pattern
+#### Method Invocation Pattern
 
 * When a function is **stored as the property of the object** (invoked with a dot . expression) it is called on and is called a _method_
 ```javascript
@@ -262,7 +262,7 @@ myObject.incrementFunction();
 * These methods are **highly reusable**
 * Because their _object context_ comes from `this` they are considered _public methods_
 
-####Function Invocation Pattern
+#### Function Invocation Pattern
 
 * When a function is _not_ the property of an object, it is invoked as a _function_
 ```javascript
@@ -288,7 +288,7 @@ myObject.double();
 console.log(myObject.value);
 ```
 
-####Constructor Invocation Pattern
+#### Constructor Invocation Pattern
 
 * When a function is created with `new`, that function contains a link to the function's prototype
 * This means that methods that were created for the **prototype function are also available** to the function created using `new`
@@ -313,7 +313,7 @@ document.writeIn(myQuo.get_status());     //returns 'happy'
 * **This style of constructor pattern is not recommended**, there will be better examples in [Chapter 5](#chapter5) - this is noted again in [Appendix B](#new)
 * The first letter of a constructor function (in this case Quo) **must _always_ be capitalized**
 
-####Apply Invocation Pattern
+#### Apply Invocation Pattern
 
 * The `apply` method lets you **choose the value to be bound to `this`**
 * It also takes the parameters for a function in an array
@@ -324,7 +324,7 @@ var array = [5, 2]    //will be the parameters for our function
 var sum = add.apply(null, array);     //value of 'this' is null and value of sum is 7 as the 'apply' method passes 5 and 2 to the 'add' method
 ```
 
-###Arguments
+### Arguments
 
 * Another default parameter of functions is the `arguments` array which contains all the arguments that were supplied when the function was invoked
 * This means you don't have to know the exact number of arguments when you build a function because you can loop through all the arguments provided at invocation with the use of the default `arguments` array
@@ -336,13 +336,13 @@ for (i = 0; i < arguments.length; i++) {
 ```
 * `arguments` **lacks all the array methods except .length** because of a bug
 
-###Return
+### Return
 
 * When a function gets to a `return` statement, it returns immediately **without carrying out the remaining statements in the function**
 * A function **always returns a `value`** or if unspecified, it returns `undefined`
 * "If the function was invoked with the `new` prefix (used when creating a new object so it **must** return an object) and the `return` value is not an object, then `this` (the new object) is returned instead."
 
-###Exceptions
+### Exceptions
 
 * A `throw` statement interrupts the execution of the code is used to handle expected exceptions like an incorrect type of argument (e.g. a string where a number is expected)
 * Each `throw` statement should have an **exception object** with a `name` holding the type of exception and a `message` with an explanation of it + any other properties you like
@@ -374,7 +374,7 @@ var try_it = function () {
 try_it();    //you could rewrite this function so the argument is passed in here where it is invoked
 ```
 
-###Augmenting Types
+### Augmenting Types
 
 * Adding a method to the prototype of an object `Object.prototype` (or function, array, string, number, regular expression or boolean), you make it available to all the instances of that object so you don't have to use the `prototype` property again
 * By augmenting the _basic types_ (essentially the root prototypes), we can improve Javascript overall
@@ -398,7 +398,7 @@ Function.prototype.method (methodName, func) {
 ```
 * Remember that **_for in_ statements don't work well with prototypes**
 
-###Recursion
+### Recursion
 
 * Used when a task can be divided into **simple sub-problems** and a function can _call itself repeatedly_ to solve them
 Takes the format:
@@ -414,7 +414,7 @@ functionName (initialArguments); //initial call to the funtion
 ```
 * Javascript **does not have _tail recursion optimization_** and therefore does optimize recursive functions - this also means they sometimes fail if they "recurse very deeply"
 
-###Scope
+### Scope
 
 * A _block_ is a set of statements contained in curly brackets {}
 * Javascript **does not have block scope** but **does have function scope**
@@ -422,14 +422,14 @@ functionName (initialArguments); //initial call to the funtion
 	* A variable can be _overwritten_ with a new value in an inner function and that new value's scope will be just the body of the inner function - as soon as you're back out to the outer function, the value of that variable will revert to what it was before the inner function began its execution
 	* All variable should be **declared at the top of the function body**
 
-###Closure
+### Closure
 
 * Inner functions have **access to the actual parameters of the outer functions (not copies)**
 * If an object is created as a result of a function and assigned to myObject, myObject continues to share access to the variables in the functions that created it (actual variables, not copies)
 	* It has access to _the context in which it was created_ - this is _closure_
 	* This includes later on, even if _the outer function has completed its execution and returned_, when the inner function is called, it will still have **access to all the variables it had access to at the time it was defined** (i.e. the variables that were _in context_ when the inner function was defined)
 
-###Callbacks
+### Callbacks
 
 * A _callback function_ is a function passed to another function as a parameter and executed in this other function
 * When making a request of a server, use an _asynchronous request_ as asynchronous functions return immediately, therefore freeing up the client
@@ -442,7 +442,7 @@ send_request_asynchronously(request, function(response){     //function being pa
 ```
 
 <a name="Module"/>
-###Module
+### Module
 
 * A module is a function or object whose contents can be used, but its state and implementation are hidden
 * It is essentially using function scope and closures keep the variables and functions contained within as private as well as binding them to a non-global object - **whilst still being accessible**
@@ -461,14 +461,14 @@ var Serial_maker = function() {
 ```
 * **Note:** Whilst Javascript variables are usually lowercase, there is some convention around capitalizing the first letter of a Module
 
-###Cascade
+### Cascade
 
 * Some methods return nothing, albeit `undefined`
 * If we alter these methods to **return `this` instead of `undefined`**, they return the object which can then be passed to the next method, e.g `getElement(myBox).move(350,150)` gets the element and then passes is to the _move_ function for the next action
 	* This enables _cascades_, where you **call many methods on the same object in sequence because the object is passed from one method to the next** (usually separated by `.` as above)
 * Cascades also stop you from trying to do too much in one method and makes your code more descriptive
 
-###Curry
+### Curry
 
 * A `curry` method allows you to _partially evaluate_ an existing function
 	* An example is below where the function _expects **two** arguments_, but it is first invoked with only **one**  (in this case using `curry` as in `add.curry(10);`) and then later passed the second argument
@@ -495,7 +495,7 @@ Function.method('curry', function() {
 });
 ```
 
-###Memoization
+### Memoization
 
 * Storing the results of previous operations in objects (such as arrays) allows them to be reused **without having to keep recalculating the value** - this optimization is called _memoization_
 	* Adding an object to store the results _memoizes the function_
@@ -516,7 +516,7 @@ var meoizer = function (memo, fundamental) {
 ```
 
 <a name="chapter5"/>
-##Chapter 5 - Inheritance
+## Chapter 5 - Inheritance
 >Javascript is a prototypal language, which means that objects inherit directly from other objects
 
 Main benefit of inheritance is **code reuse** - you only have to specify differences.
@@ -524,7 +524,7 @@ Main benefit of inheritance is **code reuse** - you only have to specify differe
 Javascript can _mimic_ classical inheritance but has a much **richer set of code reuse patterns**
 * This chapter looks at the more straightforward patterns but it is always best to **keep it simple**
 
-###Pseudoclassical
+### Pseudoclassical
 
 * The pseudoclassical code reuse pattern essentially has constructor functions (functions invoked using the `new` prefix) work like classes to mimic the classical structure
 	* All properties are public
@@ -532,7 +532,7 @@ Javascript can _mimic_ classical inheritance but has a much **richer set of code
 
 * There is no need to use it, **there are better code reuse patterns in JavaScript**
 
-###Object Specifiers
+### Object Specifiers
 
 Rather than: `var myObject = maker (f, l, m, c, s)` which has too many parameters to remember in the right order, use an _object specifier_:
 ```javascript
@@ -548,13 +548,13 @@ to contain them. They can now be **listed in any order**
 
 Also useful to pass object specifiers to JSON ([see Appendix E notes](#AppendixE))
 
-###Prototypal
+### Prototypal
 
 * Zero classes, **one object inherits from another**
 * Create an object literal of a useful object and then make an instance of it using the format `var myObject = Object.create(originalObjectName)`
 * When you then customise the new object (adding properties or methods through the dot notation for example), this is _differential inheritance_, where you specify the **differences from the original object**
 
-###Functional
+### Functional
 
 * **All properties of an object are visible** (Javascript has no classes so there is no such thing as a 'private variable' which can only be seen within a class as per other languages)
 * When you use a _function_ to create your original object and the same with the object instances, you're essentially utilising Javascript functional scope to create private properties and methods
@@ -593,13 +593,13 @@ var cat = function (spec) {
 	* Briefly also discussed in [Module](#Module) section above
 * If you do want something to have access to the object's private properties and methods, you pass it the `that` bundle (i.e. your 'container of secrets')
 
-###Parts
+### Parts
 * An object can be composed out of a set of parts
 	* For example, you can create a function that provides the object it is passed with a number of methods (which are defined in this function), where each method is a part that is added to the object
 
 
 <a name="chapter6"/>
-##Chapter 6 - Arrays
+## Chapter 6 - Arrays
 
 Javascript only has **array-like objects** which are slower than 'real' arrays.
 
@@ -607,13 +607,13 @@ Javascript only has **array-like objects** which are slower than 'real' arrays.
 
 Arrays have their **own literal format** and their own set of methods ([Chapter 8 - Methods](#chapter8)).
 
-###Array Literals
+### Array Literals
 
 * An array literal is a **pair of square brackets surrounding zero or more comma-seperated values** `[a, b, c, etc]`
 	* The first value will get the property name '0', the second will be '1' and so on
 * Javascript allows an array to contain **any mixture of values**
 
-###Length
+### Length
 
 * If you add to the array, the `length` property will increase to contain the new element - it will not give an error
 * If you set the `.length` to a smaller number than the current length of the array, it will **delete any properties with a subscipt >= the new `length`**
@@ -621,18 +621,18 @@ Arrays have their **own literal format** and their own set of methods ([Chapter 
 `numbers.push('go')    //adds the element 'go' to the end of the numbers array`
 
 
-###Delete
+### Delete
 
 * Elements can be deleted from the array object using `delete` but this **leaves a hole in the array**
 * Use `array.splice(keyInArray, howManyElementsToDelete)` which changes the keys for the remaining values in the array so there is no hole left
 	* May be _slow_
 
-###Enumeration
+### Enumeration
 
 * A `for` statement can be used to iterate over all the properties of an array (as it is an object)
 * **Do not us `for in`** as it does not iterate through the properties in order and sometimes pulls in from furhter up the prototype chain
 
-###Confusion
+### Confusion
 
 > The rule is simple: when the property names [keys] are small sequential integers, you should use an array. Otherwise, use an object.
 
@@ -661,7 +661,7 @@ Array.method('reduce', function (parameters){
 	* `myArray.total = function () { //statements to execute; }` adds a 'total' function to the array `myArray`
 * **DO NOT USE:** `Object.create()` will create an object - lacking the `length` property - not an array.
 
-###Dimensions
+### Dimensions
 
 * Using `[]` will create an empty array as they are not initialized in JavaScript
 * Accessing a missing element will give you `undefined`
@@ -673,7 +673,7 @@ Array.method('reduce', function (parameters){
 
 
 <a name="chapter7"/>
-##Chapter 7 - Regular Expressions
+## Chapter 7 - Regular Expressions
 > A _regular expression_ is the specification of the syntax of a simple language
 
 Used with `regexp.exec`, `regexp.test`, `string.match`, `string.replace`, `string.search` and `string.split` to interact with string (more in [Chapter 8 - Methods](#chapter8))
@@ -734,7 +734,7 @@ Most of this we have seen before but here are the new bits:
 * `(?:\.\d*)` matches a decimal point followed by _zero or more_ digits (123.6834.4442284 _does not match_)
 * Note this expression only uses _noncapturing_ groups
 
-###Construction
+### Construction
 
 3 flags exist in regular expressions: `i` means insensitive - ignore the character case, 'g` means global - to match multiple items and `m` means multiline - where ˆ and $ can match line-ending characters
 
@@ -753,20 +753,20 @@ Two ways to build a regular expression:
 var my_regexp = new RegExp("'(?:\\\\.|[ˆ\\\\\\'])*'", 'g');
 ```
 
-###Elements
+### Elements
 
-####Regexp Choice
+#### Regexp Choice
 
 `|` provides a match if any of the sequences provided match.
 
 In `"into".match(/in|int/);`, the _in_ will be a match so it doesn't even look at the _int_.
 
-####Regexp Sequence
+#### Regexp Sequence
 
 A _regexp sequence_ is made up of one or more regexp [factors](#Factors). If there are no quantifiers after the factor (like `?`, `*` or `+`), the factor will be **matched one time**.
 
 <a name="Factors"/>
-###Regexp Factor
+### Regexp Factor
 
 > A _regexp factor_ can be a character, a parenthesized group, a character class, or an escape sequence.
 
@@ -780,7 +780,7 @@ It's essentially a portion of the full `RegExp`, like what we broke down the reg
 	* Having `ˆ` inside a [character class](#RegexpClass) means NOT, so [ˆ0-9] means _does not_ match a digit
 	* `$` matches the beginning of the text or a line-ending character when the `m` flag is present
 
-####Regexp Escape
+#### Regexp Escape
 
 As well as escaping special characters in regexp factors, the backslash has additional uses:
 * As in strings, `\f` is the formfeed character, `\n` is new line, `\r` is carriage return, `\t` is tab and `\u` specifies Unicode as a 16-bit hex. But **`\b` is _not_ a backspace character**
@@ -801,17 +801,17 @@ Four kinds of groups:
 * _Negative lookahead_, a **bad** part: `(?!...)` is like a positive lookahead but only matches if there is no match with what is in it
 
 <a name="#RegexpClass"/>
-####Regexp Class
+#### Regexp Class
 
 * Conveniently and easily specifies one of a set of characters using square brackets `[]`, for example vowels: `[aeiou]`
 * Can shorten specification of all 32 ASCII special characters to **[!-\/:-@\[-'{-˜]** (note that the ' in this piece of code should be a back-tick which I can't use as part of these notes)
 * Also allows `ˆ` as the first character after the opening `[` to mean _NOT_ the characters in the character set
 
-####Regexp Class Escape
+#### Regexp Class Escape
 
 There are **_specific_ characters that must be escaped in a character class**: -  /  [  \  ]  ˆ
 
-####Regexp Quantifier
+#### Regexp Quantifier
 
 A _quantifier_ at the en of a factor indicates how many times the factor should be matched
 * A number in curly braces means the factor should match that many times, so `/o{3}` matches _ooo_
@@ -824,76 +824,76 @@ A _quantifier_ at the en of a factor indicates how many times the factor should 
 
 
 <a name="chapter8"/>
-##Chapter 8 - Methods
+## Chapter 8 - Methods
 
-###Arrays
+### Arrays
 
-####_array_.concat(_item..._)
+#### _array_.concat(_item..._)
 Produces **new array** copying the original array with the `items` appended to it (does not modify the original array like `array.push(item)` does. If the `item` is an array, its elements are appended.
 
-####_array_.join(_separator_)
+#### _array_.join(_separator_)
 Creates a string of all the array's elements, separated by the `separator`. Use an empty string `separator` ('') to join without separation.
 
-####_array_.pop()
+#### _array_.pop()
 Removes _last element_ of array. Returns `undefined` for empty arrays.
 
-####_array_.push(_item..._)
+#### _array_.push(_item..._)
 **Modifies the _array_**, appending `items` onto the end. Returns the new `length` of the array.
 
-####_array_.reverse()
+#### _array_.reverse()
 _Modifies_ the array by **reversing the order of the elements**.
 
-####_array_.shift()
+#### _array_.shift()
 Removes the _first_ element of the array (does not leave a hole in the array - same effect as using the `.splice(a,b)` method) and returns that first element.
 
-####_array_.slice(_start, end_)
+#### _array_.slice(_start, end_)
 Different to `splice`.
 
 'slice' creates a **new array**, copying from the `start` element and stopping at the element _before_ the `end` value given. If no `end` is given, default is `array.length`.
 
 Negative values for `start` and `end` will have `array.length` added to them and if `start`>`end`, it will return an **empty** array.
 
-####_array_.sort(_comparefn_)
+#### _array_.sort(_comparefn_)
 JavaScript has a `sort()` method which was created only to compare strings and therefore sorts numbers incorrectly (it will sort them as 1, 15, 2, 23, 54 for example). Therefore, we have to write a comparison function which returns _0_ if the two elements you are comparing are equal, a _positive number_ if the first element should come first and a _negative number_ if the second element should come first. Then pass this comparison function to `sort()` as a parameter to allow it to sort array elements _intelligently_.
 
 Page 80-82 in the book takes you through various iterations of the comparison functions - for numbers, simple strings, objects and objects with multiple keys (for example if you want to sort objects by first _and_ last names). These should be taken from the book when required.
 
-####_array_.splice(_start, deleteCount, item..._)
+#### _array_.splice(_start, deleteCount, item..._)
 Removes elements from the array making sure there are no holes left in the array. It is most popularly used for deleting elements from an array.
 
 It removes the `deleteCount` number of elements from the array starting from the `start` position. If there are `item` parameters passed to it, it will replace the deleted elements in the array with the `items`.
 
 It returns an **array containing the deleted elements**.
 
-####_array_.unshift(_item..._)
+#### _array_.unshift(_item..._)
 Works like `push` but adds items **to the front of the array** instead of the end. Returns the new `length` of the array.
 
-###Function
+### Function
 
-####_function_.apply(_thisArg, [argArray]_)
+#### _function_.apply(_thisArg, [argArray]_)
 The `apply` method invokes a function, passing in the object that will be bound to `this` and _optional_ array of arguments.
 
-###Number
+### Number
 
-####_number_.toExponentional(_fractionDigits_)
+#### _number_.toExponentional(_fractionDigits_)
 Converts _number_ to a string in **exponential form** (e.g. 3.14e+0). `fractionDigits` (from 0 to 20) gives the number of decimal places.
 
-####_number_.toFixed(_fractionDigits_)
+#### _number_.toFixed(_fractionDigits_)
 Converts _number_ to a string in **decimal form** (e.g. 3.1415927). `fractionDigits` (from 0 to 20) gives the number of decimal places.
 
-####_number_.toPrecision(_precision_)
+#### _number_.toPrecision(_precision_)
 Converts _number_ to a string in decimal form (e.g. 3.1415927). The difference from `toFixed` is that `fractionDigits` (from 0 to 20) gives the number of **total digits*.
 
-####_number_.toString(_radix_)
+#### _number_.toString(_radix_)
 Converts _number_ to a **string**. `radix` is an _optional_ parameter between 2 and 36 and gives the _base_. The default radix is 10.
 
-###Object
+### Object
 
-####_object_.hasOwnProperty(_name_)
+#### _object_.hasOwnProperty(_name_)
 *Does not look at the property chain**. Returns true if the _object_ contains the property `name`.
 
-###RegExp
-####_regexp_.exec(_string_)
+### RegExp
+#### _regexp_.exec(_string_)
 Most powerful (and _slowest_) regexp method.
 
 Checks the `string` against the _regexp_ (starting at position 0) and returns an **array** containing the matches.
@@ -911,43 +911,43 @@ If the **_regexp_ contains a `g` flag** (e.g. `var regexp = /[ˆ<>]+|<(\/?)([A-Z
 
 Example on page 87 of the book is worth reading to improve understanding.
 
-####_regexp_.test(_string_)
+#### _regexp_.test(_string_)
 Simplest (and _fastest_) regexp method.
 
 If _regexp_ matches the `string` it returns _true_. Otherwise it returns _false_.
 **Do not use the `g` flag with this method**.
 
-###String
-####_string_.charAt(_pos_)
+### String
+#### _string_.charAt(_pos_)
 Returns character at position `po` in the string _starting from 0_. If `pos` is less than zero or bigger than the string itself it return an **empty string**.
 
-####_string_.charCodeAt(_pos_)
+#### _string_.charCodeAt(_pos_)
 Same as `charAt` except it returns the **integer** that represents the _code point value of the character at position `pos`_.
 Returns `NaN` is  _string_.length < `pos` < 0.
 
-####_string_.concat(_string..._)
+#### _string_.concat(_string..._)
 Creates **new string** concatenating various strings. `+` tends to be used instead of this method (e.g. `var cat = 'c'+'a'+'t';`)
 
-####_string_.indexOf(_searchString, position_)
+#### _string_.indexOf(_searchString, position_)
 Searches for `searchString` within _string_ starting at position `position` (an optional parameter). If `position` is not provided, search starts at the beginning of the _string_.
 Returns the integer _position of the first matched character_ or _-1_ if no match is found.
 
-####_string_.lastIndexOf(_searchString, position_)
+#### _string_.lastIndexOf(_searchString, position_)
 Same as `indexOf` but searches **from the end of the string** instead of the beginning.
 
-####_string_.localeCompare(_that_)
+#### _string_.localeCompare(_that_)
 Compares _string_ to `that` parameter and returns:
 * 0 if _string_ === `that`
 * -1 if _string_ < `that`
 
 _NB. 'a' < 'A', comparison is not just in length._
 
-####_string_.match(_regexp_)
+#### _string_.match(_regexp_)
 Works the same way as `regexp.exec(string)` **if** there is no `g` flag in the `regexp`.
 
 If there is a `g` flag in teh `regexp`, it produces an array of the matches **but excludes the capturing groups**
 
-####_string_.replace(_searchValue, replaceValue_)
+#### _string_.replace(_searchValue, replaceValue_)
 Searches for the `searchValue` in _string_ and replaces it with the `replaceValue`.
 
 If `searchValue` is a:
@@ -960,16 +960,16 @@ If `replaceValue` is a:
 	* string result of the first call will replace capture group 1 of the _string_ and so on
 
 
-####_string_.search(_regexp_)
+#### _string_.search(_regexp_)
 Similar to `.indexOf(string)` but takes a `regexp` instead of a `string`, returning the **position of the first match** (or -1 if there is no match).
 The `g` flag is **ignored**.
 
-####_string_.slice(_start, end_)
+#### _string_.slice(_start, end_)
 Creates a **new string** by copying the characters from the `start` position to the character before the `end` position in _string_.
 
 The `end` parameter is _optiona_ and defaults to _string_.length. If either parameter is negative, _string_.length is added to it.
 
-####_string_.split(_separator, limit_)
+#### _string_.split(_separator, limit_)
 Creates an **array of strings** by splitting apart _string_ at the points where the `separator` appears (e.g. if the separator is '.', ab.cd' becomes ['ab', 'cd']).
 * If separator is an _empty string_, an array of single characters is produced.
 * `limit` is _optional_ and determines how many pieces are to be split off from the original _string_.
@@ -977,29 +977,29 @@ Creates an **array of strings** by splitting apart _string_ at the points where 
 	* text from capturing groups within the regexp will be included in the split - e.g. in `var e = text.split(/\s*(,)\s*/);` the commas (,) will each be included as a separate element in the resulting array
 	* some systems _ignore empty strings_ when the `separator` is a `regexp`
 
-####_string_.substring(_start, end_)
+#### _string_.substring(_start, end_)
 No reason to use, **use `slice` instead**.
 
-####_string_.toLocaleLowerCase()
+#### _string_.toLocaleLowerCase()
 Produces a **new string** converted to lower case, _using the rules for the particular locale_ (geography).
 
-####_string_.toLocaleUpperCase()
+#### _string_.toLocaleUpperCase()
 Produces a **new string** converted to upper case, _using the rules for the particular locale_ (geography).
 
-####_string_.toLowerCase()
+#### _string_.toLowerCase()
 Produces a **new string** converted to lower case.
 
-####_string_.toUpperCase()
+#### _string_.toUpperCase()
 Produces a **new string** converted to upper case.
 
-####String.fromCharCode(_char..._)
+#### String.fromCharCode(_char..._)
 Produces a **new string** from a series of numbers.
 `var a = String.fromCharCode(67, 97, 116);    //a === 'Cat'`
 _NB. You're calling the prototype here, not replacing 'String' with your own variable._
 
 
 <a name="chapter9"/>
-##Chapter 9 - Style
+## Chapter 9 - Style
 > JavaScripts's loose typing and excessive error tolerance provide little compile-time assurance of our programs' quality, so to compensate, we should code with strict discipline.
 
 * We should **avoid** the _bad parts_ of JavaScript, but also the **useful parts that can be occasionally dangerous**
@@ -1010,14 +1010,14 @@ _NB. You're calling the prototype here, not replacing 'String' with your own var
 	* Put at most one statement on a line
 	* If you have to break a statement into 2 or more lines, indent the 2nd line onwards (an extra four spaces)
 	* _Always_ use blocks (curly braces {}) with structured statements like `if` and `while` to avoid confusion on what the statement is actually doing
-		* Put the opening brace `{` on the same (first) line as the statement to avoid JavaScript's [semicolon insertion](#SemicolonInsertion) issues - i.e `if (a) { ...`
+		* Put the opening brace `{` on the same (first) line as the statement to avoid JavaScript's [semicolon insertion](# SemicolonInsertion) issues - i.e `if (a) { ...`
 	* Use line comments `//comment` and not block commenting (unless you're _commenting out_ code)
 	* Declare all your variables at the *beginning of the function*, due to JavaScript's functional scope
 > I use a single global variable to contain an application or library. Every object has its own namespace, so it is easy to use objects to organize my code. Use of closure provides further information hiding, increasing the strength of my modules.
 
 
 <a name="chapter10"/>
-##Chapter 10 - Beautiful Features
+## Chapter 10 - Beautiful Features
 
 Each feature you add to something has a lot of different costs (documentation costs, specification, design, testing and development costs) and these are often not properly accounted for.
 > Features that offer value to a minority of users impose a cost on all users
@@ -1027,11 +1027,11 @@ For example, microwaves do a ton of different things, but most people just use o
 
 
 <a name="AppendixA">
-##Appendix A - the Awful Parts
+## Appendix A - the Awful Parts
 
 **Need to know what all the pitfalls are with these parts.**
 
-###Global variables
+### Global variables
 These are variables that are visible throughout the code in any scope. They can be **changed at any time** by any part of the program which makes them **unreliable in larger complex programs**. This can also lead to naming conflicts which can cause your code to fail or you to accidentally overwrite a global variable.
 
 Defined in three ways:
@@ -1039,13 +1039,13 @@ Defined in three ways:
 * By adding a property to the global object (container of all global variables), such as `window` in browsers; `window.foo = value;`
 * Using a variable without declaring it with `var`, which makes it an _implied global_; `foo = value`
 
-###Scope
+### Scope
 Although JavaScript has block _syntax_ (i.e. is written in blocks) like a lot of other programming languages, it has **functional scope** and _not_ block scope.
 
 Variables should all be declared at the top of the function and not littered throughout the block.
 
 <a name="#SemicolonInsertion">
-###Semicolon Insertion
+### Semicolon Insertion
 Attempts to correct faulty programs by automatically inserting semicolons. **Do not depend on this** as it can hide underlying issues.
 
 Also ensure opening curly braces ({) are on the first line of a statement, otherwise semicolons will be erroneously inserted and cause problems:
@@ -1060,15 +1060,15 @@ return
 	status:true
 };
 ```
-###Reserved Words
+### Reserved Words
 Most JavaScript reserved words are not used in the language but **cannot be used to name variables or parameters**.
 
 If used as the key in object literals, they _must_ be quoted. For example `object - {'case' : value};` or `object['final'] = value;` as _case_ and _final_ are both reserved words.
 
-###Unicode
+### Unicode
 JavaScript characters are 16 bits which only cover the original Unicode Basic Multilingual Place.
 
-###typeof
+### typeof
 Watch out for:
 * `typeof null` which returns 'object' instead of 'null'
 * incorrect reporting on typeof regular expressions, with some implementations returning 'object' and some returning 'function'
@@ -1081,7 +1081,7 @@ if (my_value && typeof my_value === 'object') {
 }
 ```
 
-###NaN
+### NaN
 * `typeof NaN === 'number'` even though it stands for _not-a-number_
 * If you have a chain of formulas that together produce a `NaN` then at least _one_ of them will have generated `NaN`
 * Surprisingly `NaN !=== NaN`
@@ -1094,7 +1094,7 @@ var isNumber = function isNumber(value) {
 }
 ```
 
-###Phony Arrays
+### Phony Arrays
 JavaScript **doesn't have real arrays**, it has _array-like objects_.
 
 * Good: No need to give them dimensions and don't generate out-of-bounds errors
@@ -1109,18 +1109,18 @@ if (my_value && typeof my_value === 'object' && typeof my_value.length === 'numb
 ```
 The `arguments` array isn't an array, just an object with a length property.
 
-###Falsy Values
+### Falsy Values
 `0`, `NaN`, `''`, `false`, `null` and `undefined` are all _falsy_ values, but **they are not interchangeable**. When testing for a missing member of an object for example, you need to use `undefined` and not `null`.
 
 `undefined` and `NaN` are actually global variables instead of constants but **don't change their values**.
 
-###Object
+### Object
 JavaScript objects inherit members from the prototype chain so they are _never truly empty_.
 
 To test for membership without prototype chain involvement, use the `hasOwnProperty` method or limit your results (for example, to specific types like number so you know you're not dragging in object members from up the prototype for example if that's what's causing the problem).
 
 <a name="AppendixB">
-##Appendix B - the Bad Parts
+## Appendix B - the Bad Parts
 
 **Avoid these altogether**
 
@@ -1155,7 +1155,7 @@ In JavaScript, this actually _takes_ a value and _returns_ `undefined`, which is
 
 
 <a name="AppendixC">
-##Appendix C - JSLint
+## Appendix C - JSLint
 
 JSLint is a **code quality tool** for JavaScript which checks your syntax.
 
