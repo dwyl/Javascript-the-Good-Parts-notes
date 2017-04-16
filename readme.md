@@ -646,7 +646,7 @@ var is_array = function (value) {
 }
 ```
 
-###Methods
+### Methods
 
 * Array methods are stored in `Array.prototype` which can be augmented using the format:
 ```javascript
@@ -680,7 +680,7 @@ Used with `regexp.exec`, `regexp.test`, `string.match`, `string.replace`, `strin
 
 Quite convoluted and difficult to read as **do not allow comments or whitespace** so a JavaScript regular expression **must be on a single line**
 
-###An Example
+### An Example
 
 `/ˆ(?:([A-Za-z]+):)?(\/{0,3})([0-9.\-A-Za-z]+)(?::(\d+))?(?:\/([ˆ?#]*))?(?:\?([ˆ#]*))?(?:#(.*))?$/`
 
@@ -792,7 +792,7 @@ As well as escaping special characters in regexp factors, the backslash has addi
 
 *`\b` is a _bad part_. It was supposed to be a word-boundary anchor but is useless for multilingual applications
 
-####Regexp Group
+#### Regexp Group
 
 Four kinds of groups:
 <a name="Capturing"/>* **Capturing:** `(...)` where each group is captured into the `result` array - the first capturing group in the regexp goes into `result[1]`, the second into `result[2]` and so on
