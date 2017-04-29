@@ -24,9 +24,7 @@ You can [buy the book from O'Reilly](http://shop.oreilly.com/product/97805965177
 * [Appendix C - JSLint](#AppendixC)
 
 
-<a name="chapter1"/>
-## Chapter 1 - Good Parts
-
+## <a name="chapter1"/> Chapter 1 - Good Parts
 > Most programming languages contain good parts and bad parts. I discovered that I could be a better programmer by using only the good parts and avoiding the bad parts. After all, how can you build something good out of bad parts?
 
 The best parts of Javascript include:
@@ -39,8 +37,8 @@ The worst parts include global variables - there is a common _global object_ nam
 
 Javascript has a _class free_ object makeup, relying instead on objects inheriting properties directly from other objects - this is **prototypal inheritance**.
 
-<a name="chapter2"/>
-## Chapter 2 - Grammar
+
+## <a name="chapter2"/> Chapter 2 - Grammar
 
 Always use // for comments, even multi-line ones to avoid having to escape `/*` characters.
 
@@ -104,8 +102,7 @@ for (myvariable in object) {
 * More details in [Chapter 4](#chapter4)
 
 
-<a name="chapter3"/>
-## Chapter 3 - Objects
+## <a name="chapter3"/> Chapter 3 - Objects
 
 Javascript simple types:
 * numbers _(has object-like methods but they are immutable)_
@@ -215,9 +212,8 @@ MYAPP.today = {
 * [Closures](#chapter4) are also a way of mitigating the risks of global variables
 * Note: **Most [Javascript MVCs](http://coding.smashingmagazine.com/2012/07/27/journey-through-the-javascript-mvc-jungle/) these days (2014) will take care of wrapping your app for you**
 
-<a name="chapter4"/>
-## Chapter 4 - Functions
 
+## <a name="chapter4"/> Chapter 4 - Functions
 > The best thing about JavaScript is its implementation of functions.
 
 ### Function Objects
@@ -441,8 +437,7 @@ send_request_asynchronously(request, function(response){     //function being pa
 });
 ```
 
-<a name="Module"/>
-### Module
+### <a name="Module"/> Module
 
 * A module is a function or object whose contents can be used, but its state and implementation are hidden
 * It is essentially using function scope and closures keep the variables and functions contained within as private as well as binding them to a non-global object - **whilst still being accessible**
@@ -515,8 +510,8 @@ var meoizer = function (memo, fundamental) {
 }
 ```
 
-<a name="chapter5"/>
-## Chapter 5 - Inheritance
+
+## <a name="chapter5"/> Chapter 5 - Inheritance
 >Javascript is a prototypal language, which means that objects inherit directly from other objects
 
 Main benefit of inheritance is **code reuse** - you only have to specify differences.
@@ -588,8 +583,7 @@ var cat = function (spec) {
 }
 ```
 * Requires less effort and gives **better encapsulation** and **information hiding** than the pseudoclassical pattern, as well as **access to super methods** (see page 54 of book for super method example)
-<a name="DurableObject">
-* An **object** created using the functional pattern _and_ making **no use of `this` or `that`** is a _durable object_ and cannot be compromised by attackers
+* <a name="DurableObject"/> An **object** created using the functional pattern _and_ making **no use of `this` or `that`** is a _durable object_ and cannot be compromised by attackers
 	* Briefly also discussed in [Module](#Module) section above
 * If you do want something to have access to the object's private properties and methods, you pass it the `that` bundle (i.e. your 'container of secrets')
 
@@ -598,8 +592,7 @@ var cat = function (spec) {
 	* For example, you can create a function that provides the object it is passed with a number of methods (which are defined in this function), where each method is a part that is added to the object
 
 
-<a name="chapter6"/>
-## Chapter 6 - Arrays
+## <a name="chapter6"/> Chapter 6 - Arrays
 
 Javascript only has **array-like objects** which are slower than 'real' arrays.
 
@@ -630,7 +623,7 @@ Arrays have their **own literal format** and their own set of methods ([Chapter 
 ### Enumeration
 
 * A `for` statement can be used to iterate over all the properties of an array (as it is an object)
-* **Do not us `for in`** as it does not iterate through the properties in order and sometimes pulls in from furhter up the prototype chain
+* **Do not use `for in`** as it does not iterate through the properties in order and sometimes pulls in from further up the prototype chain
 
 ### Confusion
 
@@ -667,18 +660,17 @@ Array.method('reduce', function (parameters){
 * Accessing a missing element will give you `undefined`
 * If you have an algorithm that relies on the array not being empty and not having `undefined` values, you can write a function that will prep your array to have a certain number of defined values, essentially initializing it with certain values in place
 	* An `Array.dim` function is oulined on page 63 which will allow `var myArray = Array.dim(10,0)` to make an array with 10 zeroes starting from the first position in the array(0)
-* Javascript only has **one dimensional arrays** but **_can_ have arrays of arrays**
-* Two dimensional arrays (matricess) will have to be set up by the programmer
+* Javascript only has **one dimensional arrays** but **_can_ have array of arrays**
+* Two dimensional arrays (matrices) will have to be set up by the programmer
 	* page 63 gives a method for this and for explicitly setting cell values so as not to have an empty matrix
 
 
-<a name="chapter7"/>
-## Chapter 7 - Regular Expressions
+## <a name="chapter7"/> Chapter 7 - Regular Expressions
 > A _regular expression_ is the specification of the syntax of a simple language
 
 Used with `regexp.exec`, `regexp.test`, `string.match`, `string.replace`, `string.search` and `string.split` to interact with string (more in [Chapter 8 - Methods](#chapter8))
 
-Quite convoluted and difficult to read as **do not allow comments or whitespace** so a JavaScript regular expression **must be on a single line**
+Quite convoluted and difficult to read as they **do not allow comments or whitespace** so a JavaScript regular expression **must be on a single line**
 
 ### An Example
 
@@ -707,9 +699,9 @@ Breaking it down one portion([factor](#Factors)) at a time:
 * `(?::(\d+))?`
 	* `\d` represents a _digit character_ so this will be a sequence of _one or more_ digit characters (as per the `+`)
 	* The digit characters will be immediately preceded by a colon `:`
-	* `(\d+) will be the fourth capturing group in this expression, it is also _optional_ (`?`) and inside a non-capturing group (`(?:...)`
+	* `(\d+)` will be the fourth capturing group in this expression, it is also _optional_ (`?`) and inside a non-capturing group `(?:...)`
 * `(?:\/([ˆ?#]*))?`
-	* Another optional grou (`?`), beginning with a literal slash `/` (escaped by the backslash)
+	* Another optional group (`?`), beginning with a literal slash `/` (escaped by the backslash)
 	* The `ˆ` at the beginning of character class `[ˆ?#]` means it includes _all_ characters _except_ ? and #
 		* This acutally leave the regexp open to attack because too many characters are included in the character class
 	* The `*` indicates the character class will appear _zero or more_ times
@@ -736,7 +728,7 @@ Most of this we have seen before but here are the new bits:
 
 ### Construction
 
-3 flags exist in regular expressions: `i` means insensitive - ignore the character case, 'g` means global - to match multiple items and `m` means multiline - where ˆ and $ can match line-ending characters
+3 flags exist in regular expressions: `i` means insensitive - ignore the character case, `g` means global - to match multiple items and `m` means multiline - where ˆ and $ can match line-ending characters
 
 Two ways to build a regular expression:
 1. _Regular Expression literals_ as per the examples above start and end with a slash `/`
@@ -765,8 +757,7 @@ In `"into".match(/in|int/);`, the _in_ will be a match so it doesn't even look a
 
 A _regexp sequence_ is made up of one or more regexp [factors](#Factors). If there are no quantifiers after the factor (like `?`, `*` or `+`), the factor will be **matched one time**.
 
-<a name="Factors"/>
-### Regexp Factor
+#### <a name="Factors"/> Regexp Factor
 
 > A _regexp factor_ can be a character, a parenthesized group, a character class, or an escape sequence.
 
@@ -795,16 +786,15 @@ As well as escaping special characters in regexp factors, the backslash has addi
 #### Regexp Group
 
 Four kinds of groups:
-<a name="Capturing"/>* **Capturing:** `(...)` where each group is captured into the `result` array - the first capturing group in the regexp goes into `result[1]`, the second into `result[2]` and so on
-<a name="Noncapturing"/>* **Noncapturing** `(?:...)` where the text is matched, but not captured and saved anywhere, making is _slightly faster_ than a capturing group (has no bearing on numbering of capturing groups)
+* <a name="Capturing"/> **Capturing:** `(...)` where each group is captured into the `result` array - the first capturing group in the regexp goes into `result[1]`, the second into `result[2]` and so on
+* <a name="Noncapturing"/> **Noncapturing** `(?:...)` where the text is matched, but not captured and saved anywhere, making is _slightly faster_ than a capturing group (has no bearing on numbering of capturing groups)
 * _Positive lookahead_, a **bad** part: `(?=...)` acts like a noncapturing group except after the match is made, it goes back to where text started
 * _Negative lookahead_, a **bad** part: `(?!...)` is like a positive lookahead but only matches if there is no match with what is in it
 
-<a name="#RegexpClass"/>
-#### Regexp Class
+#### <a name="RegexpClass"/> Regexp Class
 
 * Conveniently and easily specifies one of a set of characters using square brackets `[]`, for example vowels: `[aeiou]`
-* Can shorten specification of all 32 ASCII special characters to **[!-\/:-@\[-'{-˜]** (note that the ' in this piece of code should be a back-tick which I can't use as part of these notes)
+* Can shorten specification of all 32 ASCII special characters to **[!-\/:-@\[-\`{-˜]** (note that the \` in this piece of code is a back-tick)
 * Also allows `ˆ` as the first character after the opening `[` to mean _NOT_ the characters in the character set
 
 #### Regexp Class Escape
@@ -813,7 +803,7 @@ There are **_specific_ characters that must be escaped in a character class**: -
 
 #### Regexp Quantifier
 
-A _quantifier_ at the en of a factor indicates how many times the factor should be matched
+A _quantifier_ at the end of a factor indicates how many times the factor should be matched
 * A number in curly braces means the factor should match that many times, so `/o{3}` matches _ooo_
 * Two comma-seperated numbers in curly braces provide the _range_ of times a factor should match, so `{3,5}` indicates it will match 3, 4 or 5 times
 * _Zero or **one**_ times (same thing as saying something is optional) can be `?` or `{0,1}`
@@ -823,13 +813,12 @@ A _quantifier_ at the en of a factor indicates how many times the factor should 
 **Prefer to use 'zero or more' or 'one or more' matching over the 'zero or one' matching** - i.e. prefer _greedy_ matching over _lazy_ matching
 
 
-<a name="chapter8"/>
-## Chapter 8 - Methods
+## <a name="chapter8"/> Chapter 8 - Methods
 
 ### Arrays
 
 #### _array_.concat(_item..._)
-Produces **new array** copying the original array with the `items` appended to it (does not modify the original array like `array.push(item)` does. If the `item` is an array, its elements are appended.
+Produces **new array** copying the original array with the `items` appended to it (does not modify the original array like `array.push(item)` does). If the `item` is an array, its elements are appended.
 
 #### _array_.join(_separator_)
 Creates a string of all the array's elements, separated by the `separator`. Use an empty string `separator` ('') to join without separation.
@@ -882,7 +871,7 @@ Converts _number_ to a string in **exponential form** (e.g. 3.14e+0). `fractionD
 Converts _number_ to a string in **decimal form** (e.g. 3.1415927). `fractionDigits` (from 0 to 20) gives the number of decimal places.
 
 #### _number_.toPrecision(_precision_)
-Converts _number_ to a string in decimal form (e.g. 3.1415927). The difference from `toFixed` is that `fractionDigits` (from 0 to 20) gives the number of **total digits*.
+Converts _number_ to a string in decimal form (e.g. 3.1415927). The difference from `toFixed` is that `precision` (from 0 to 21) gives the number of **total digits**.
 
 #### _number_.toString(_radix_)
 Converts _number_ to a **string**. `radix` is an _optional_ parameter between 2 and 36 and gives the _base_. The default radix is 10.
@@ -890,7 +879,7 @@ Converts _number_ to a **string**. `radix` is an _optional_ parameter between 2 
 ### Object
 
 #### _object_.hasOwnProperty(_name_)
-*Does not look at the property chain**. Returns true if the _object_ contains the property `name`.
+**Does not look at the property chain**. Returns true if the _object_ contains the property `name`.
 
 ### RegExp
 #### _regexp_.exec(_string_)
@@ -898,7 +887,7 @@ Most powerful (and _slowest_) regexp method.
 
 Checks the `string` against the _regexp_ (starting at position 0) and returns an **array** containing the matches.
 The _regexp_ is set up with various capturing groups and these determine the elements that go in the array:
-* the 0 element of the array will contain the part of `string` that matched the _regexp
+* the 0 element of the array will contain the part of `string` that matched the _regexp_
 * element 1 of the array will contain the text captured by the first capturing group in _regexp_
 * element 2 of the array will contain the text captured by the second capturing group in _regexp_ and so on
 * if the match fails, it returns `null`
@@ -919,11 +908,11 @@ If _regexp_ matches the `string` it returns _true_. Otherwise it returns _false_
 
 ### String
 #### _string_.charAt(_pos_)
-Returns character at position `po` in the string _starting from 0_. If `pos` is less than zero or bigger than the string itself it return an **empty string**.
+Returns character at position `pos` in the string _starting from 0_. If `pos` is less than zero or bigger than the string itself it return an **empty string**.
 
 #### _string_.charCodeAt(_pos_)
 Same as `charAt` except it returns the **integer** that represents the _code point value of the character at position `pos`_.
-Returns `NaN` is  _string_.length < `pos` < 0.
+Returns `NaN` if  _string_.length < `pos` < 0.
 
 #### _string_.concat(_string..._)
 Creates **new string** concatenating various strings. `+` tends to be used instead of this method (e.g. `var cat = 'c'+'a'+'t';`)
@@ -967,7 +956,7 @@ The `g` flag is **ignored**.
 #### _string_.slice(_start, end_)
 Creates a **new string** by copying the characters from the `start` position to the character before the `end` position in _string_.
 
-The `end` parameter is _optiona_ and defaults to _string_.length. If either parameter is negative, _string_.length is added to it.
+The `end` parameter is _optional_ and defaults to _string_.length. If either parameter is negative, _string_.length is added to it.
 
 #### _string_.split(_separator, limit_)
 Creates an **array of strings** by splitting apart _string_ at the points where the `separator` appears (e.g. if the separator is '.', ab.cd' becomes ['ab', 'cd']).
@@ -998,8 +987,7 @@ Produces a **new string** from a series of numbers.
 _NB. You're calling the prototype here, not replacing 'String' with your own variable._
 
 
-<a name="chapter9"/>
-## Chapter 9 - Style
+## <a name="chapter9"/> Chapter 9 - Style
 > JavaScripts's loose typing and excessive error tolerance provide little compile-time assurance of our programs' quality, so to compensate, we should code with strict discipline.
 
 * We should **avoid** the _bad parts_ of JavaScript, but also the **useful parts that can be occasionally dangerous**
@@ -1010,24 +998,21 @@ _NB. You're calling the prototype here, not replacing 'String' with your own var
 	* Put at most one statement on a line
 	* If you have to break a statement into 2 or more lines, indent the 2nd line onwards (an extra four spaces)
 	* _Always_ use blocks (curly braces {}) with structured statements like `if` and `while` to avoid confusion on what the statement is actually doing
-		* Put the opening brace `{` on the same (first) line as the statement to avoid JavaScript's [semicolon insertion](# SemicolonInsertion) issues - i.e `if (a) { ...`
+		* Put the opening brace `{` on the same (first) line as the statement to avoid JavaScript's [semicolon insertion](#SemicolonInsertion) issues - i.e `if (a) { ...`
 	* Use line comments `//comment` and not block commenting (unless you're _commenting out_ code)
-	* Declare all your variables at the *beginning of the function*, due to JavaScript's functional scope
+	* Declare all your variables at the **beginning of the function**, due to JavaScript's functional scope
 > I use a single global variable to contain an application or library. Every object has its own namespace, so it is easy to use objects to organize my code. Use of closure provides further information hiding, increasing the strength of my modules.
 
 
-<a name="chapter10"/>
-## Chapter 10 - Beautiful Features
+## <a name="chapter10"/> Chapter 10 - Beautiful Features
 
 Each feature you add to something has a lot of different costs (documentation costs, specification, design, testing and development costs) and these are often not properly accounted for.
 > Features that offer value to a minority of users impose a cost on all users
 
-> We cope with the complexity of feature-driven design by finding and sticking with the good parts
-For example, microwaves do a ton of different things, but most people just use one setting, the timer and the clock. So why not design with just the good parts?
+> We cope with the complexity of feature-driven design by finding and sticking with the good parts. For example, microwaves do a ton of different things, but most people just use one setting, the timer and the clock. So why not design with just the good parts?
 
 
-<a name="AppendixA">
-## Appendix A - the Awful Parts
+## <a name="AppendixA"/> Appendix A - the Awful Parts
 
 **Need to know what all the pitfalls are with these parts.**
 
@@ -1044,8 +1029,7 @@ Although JavaScript has block _syntax_ (i.e. is written in blocks) like a lot of
 
 Variables should all be declared at the top of the function and not littered throughout the block.
 
-<a name="#SemicolonInsertion">
-### Semicolon Insertion
+### <a name="SemicolonInsertion"/> Semicolon Insertion
 Attempts to correct faulty programs by automatically inserting semicolons. **Do not depend on this** as it can hide underlying issues.
 
 Also ensure opening curly braces ({) are on the first line of a statement, otherwise semicolons will be erroneously inserted and cause problems:
@@ -1104,7 +1088,7 @@ To test if value is an array:
 ```javascript
 if (my_value && typeof my_value === 'object' && typeof my_value.length === 'number' &&
 	!(my_value.propertyIsEnumerable('length'))) {
-		//my_value is definitelyy an array!
+		//my_value is definitely an array!
 }
 ```
 The `arguments` array isn't an array, just an object with a length property.
@@ -1119,8 +1103,7 @@ JavaScript objects inherit members from the prototype chain so they are _never t
 
 To test for membership without prototype chain involvement, use the `hasOwnProperty` method or limit your results (for example, to specific types like number so you know you're not dragging in object members from up the prototype for example if that's what's causing the problem).
 
-<a name="AppendixB">
-## Appendix B - the Bad Parts
+## <a name="AppendixB"/> Appendix B - the Bad Parts
 
 **Avoid these altogether**
 
@@ -1129,7 +1112,7 @@ To test for membership without prototype chain involvement, use the `hasOwnPrope
 * `eval`: Adds unnecessary complication and compromises the security of the application
 	* Giving string arguments to `setTimeout` and `setInterval` should also be avoided as this makes them act like `eval`
 * `continue` **statement**: Forces a loop into its next iteration but the code is usually much improved when re-written _without_ `continue`
-* `switch` **fall through**: In a `switch` statement, each `case` falls through to the next `case` unless you explicityly disrup the flow, but using these _intentional_ fall throughs makes the _unintentional_ ones that are causing errors basically impossible to find
+* `switch` **fall through**: In a `switch` statement, each `case` falls through to the next `case` unless you explicitly disrupt the flow, but using these _intentional_ fall throughs makes the _unintentional_ ones that are causing errors basically impossible to find
 	* This is one of those parts of JavaScript that appears useful but you're better off avoiding because it's occasionally very dangerous
 * **Block-less statements**: _Always_ use curly braces `{}` to block in statements so as to avoid misinterpretation and aid error finding
 * **Bitwise operators**: Shouldn't really be doing this kind of manipulations because they are quite slow in JavaScript, therefore there shouldn't be a need to use `&`, `|`, `ˆ`, `˜`, `>>`, `>>>` or `<<`
@@ -1146,16 +1129,14 @@ To use JavaScript well, important to understand that **functions are values**.
 **Typed wrappers:**
 **Don't use `new Boolean` or `new String` or `new Number`**, it's completely unnecessary. Also avoid `new Object` and `new Array` and use `{}` and `[]` instead.
 
-<a name="#new">
-**`new` operator:**
+**<a name="new"/>`new` operator:**
 Functions that are intended to be used with `new` (conventionally starting with a capital letter) should be avoided (don't define them) as they can cause all kinds of issues and complex bugs which are difficult to catch.
 
 **void**:
 In JavaScript, this actually _takes_ a value and _returns_ `undefined`, which is hugely confusing and not helpful. **Don't use it**.
 
 
-<a name="AppendixC">
-## Appendix C - JSLint
+## <a name="AppendixC"/> Appendix C - JSLint
 
 JSLint is a **code quality tool** for JavaScript which checks your syntax.
 
