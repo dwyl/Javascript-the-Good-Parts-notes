@@ -799,8 +799,8 @@ Four kinds of groups:
 * _Positive lookahead_, a **bad** part: `(?=...)` acts like a noncapturing group except after the match is made, it goes back to where text started
 * _Negative lookahead_, a **bad** part: `(?!...)` is like a positive lookahead but only matches if there is no match with what is in it
 
-<a name="#RegexpClass"/>
-#### Regexp Class
+
+#### <a name="RegexpClass"/> Regexp Class
 
 * Conveniently and easily specifies one of a set of characters using square brackets `[]`, for example vowels: `[aeiou]`
 * Can shorten specification of all 32 ASCII special characters to **[!-\/:-@\[-'{-˜]** (note that the ' in this piece of code should be a back-tick which I can't use as part of these notes)
