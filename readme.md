@@ -587,8 +587,7 @@ var cat = function (spec) {
 }
 ```
 * Requires less effort and gives **better encapsulation** and **information hiding** than the pseudoclassical pattern, as well as **access to super methods** (see page 54 of book for super method example)
-
-* <a name="DurableObject"/>An **object** created using the functional pattern _and_ making **no use of `this` or `that`** is a _durable object_ and cannot be compromised by attackers
+* <a name="DurableObject"/> An **object** created using the functional pattern _and_ making **no use of `this` or `that`** is a _durable object_ and cannot be compromised by attackers
 	* Briefly also discussed in [Module](#Module) section above
 * If you do want something to have access to the object's private properties and methods, you pass it the `that` bundle (i.e. your 'container of secrets')
 
@@ -764,7 +763,6 @@ In `"into".match(/in|int/);`, the _in_ will be a match so it doesn't even look a
 
 A _regexp sequence_ is made up of one or more regexp [factors](#Factors). If there are no quantifiers after the factor (like `?`, `*` or `+`), the factor will be **matched one time**.
 
-
 #### <a name="Factors"/> Regexp Factor
 
 > A _regexp factor_ can be a character, a parenthesized group, a character class, or an escape sequence.
@@ -798,7 +796,6 @@ Four kinds of groups:
 <a name="Noncapturing"/>* **Noncapturing** `(?:...)` where the text is matched, but not captured and saved anywhere, making is _slightly faster_ than a capturing group (has no bearing on numbering of capturing groups)
 * _Positive lookahead_, a **bad** part: `(?=...)` acts like a noncapturing group except after the match is made, it goes back to where text started
 * _Negative lookahead_, a **bad** part: `(?!...)` is like a positive lookahead but only matches if there is no match with what is in it
-
 
 #### <a name="RegexpClass"/> Regexp Class
 
