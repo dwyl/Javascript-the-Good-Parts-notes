@@ -587,8 +587,8 @@ var cat = function (spec) {
 }
 ```
 * Requires less effort and gives **better encapsulation** and **information hiding** than the pseudoclassical pattern, as well as **access to super methods** (see page 54 of book for super method example)
-<a name="DurableObject">
-* An **object** created using the functional pattern _and_ making **no use of `this` or `that`** is a _durable object_ and cannot be compromised by attackers
+
+* <a name="DurableObject"/>An **object** created using the functional pattern _and_ making **no use of `this` or `that`** is a _durable object_ and cannot be compromised by attackers
 	* Briefly also discussed in [Module](#Module) section above
 * If you do want something to have access to the object's private properties and methods, you pass it the `that` bundle (i.e. your 'container of secrets')
 
