@@ -90,7 +90,7 @@ for (myvariable in object) {
 
 ### Expressions
 
-* For `expression ? expression2 : expression3`, if expression is _truthy_, execute expresion2; it it's _falsy_, execute expression3
+* For `expression ? expression2 : expression3`, if expression is _truthy_, execute expresion2; if it's _falsy_, execute expression3
 *  _Invocation_ is `(expression1, expression2, etc)`
 *  _refinement_ is either `.name` or `[expression]` as used in an array
 
