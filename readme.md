@@ -764,8 +764,8 @@ In `"into".match(/in|int/);`, the _in_ will be a match so it doesn't even look a
 
 A _regexp sequence_ is made up of one or more regexp [factors](#Factors). If there are no quantifiers after the factor (like `?`, `*` or `+`), the factor will be **matched one time**.
 
-<a name="Factors"/>
-### Regexp Factor
+
+#### <a name="Factors"/> Regexp Factor
 
 > A _regexp factor_ can be a character, a parenthesized group, a character class, or an escape sequence.
 
