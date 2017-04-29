@@ -405,7 +405,7 @@ Takes the format:
 
 ```javascript
 var variable = function functionName (parameters){
-	//wrap the statements to be executed and the recursive call in a loop statement so ir doesn't recurse forever
+	//wrap the statements to be executed and the recursive call in a loop statement so it doesn't recurse forever
 	//statements to be executed in the function;
 	functionName(arguments);
 };
