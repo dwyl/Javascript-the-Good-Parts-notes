@@ -84,13 +84,13 @@ for (myvariable in object) {
 ```
 * A _do while_ statement is always executed at least once as the while condition is only checked after the first iteration of the loop
 * `catch` clause in a _try_ statement **must create a new variable** that will catch the exception object
-* Scope of `thro` statement is the `try` block it's in, or the `try` of the function it's in
+* Scope of `throw` statement is the `try` block it's in, or the `try` of the function it's in
 * If there is no `return` statement, `return===undefined`
 * `break` exits the statement and `continue` forces a new iteration of the loop, both with the optional _label_ mentioned above
 
 ### Expressions
 
-* For `expression ? expression2 : expression3`, if expression is _truthy_, execute expresion2; it it's _falsy_, execute expression3
+* For `expression ? expression2 : expression3`, if expression is _truthy_, execute expresion2; if it's _falsy_, execute expression3
 *  _Invocation_ is `(expression1, expression2, etc)`
 *  _refinement_ is either `.name` or `[expression]` as used in an array
 
@@ -405,14 +405,14 @@ Takes the format:
 
 ```javascript
 var variable = function functionName (parameters){
-	//wrap the statements to be executed and the recursive call in a loop statement so ir doesn't recurse forever
+	//wrap the statements to be executed and the recursive call in a loop statement so it doesn't recurse forever
 	//statements to be executed in the function;
 	functionName(arguments);
 };
 
 functionName (initialArguments); //initial call to the funtion
 ```
-* Javascript **does not have _tail recursion optimization_** and therefore does optimize recursive functions - this also means they sometimes fail if they "recurse very deeply"
+* Javascript **does not have _tail recursion optimization_** and therefore does not optimize recursive functions - this also means they sometimes fail if they "recurse very deeply"; On a side note, _tail call optimization_ is now supported in [ECMA-262](https://www.ecma-international.org/ecma-262/7.0/index.html#sec-tail-position-calls)
 
 ### Scope
 
@@ -432,7 +432,7 @@ functionName (initialArguments); //initial call to the funtion
 ### Callbacks
 
 * A _callback function_ is a function passed to another function as a parameter and executed in this other function
-* When making a request of a server, use an _asynchronous request_ as asynchronous functions return immediately, therefore freeing up the client
+* When making a request to a server, use an _asynchronous request_ as asynchronous functions return immediately, therefore freeing up the client
 	* In this example, we pass the callback function to the asynchronous request as a parameter so the callback function will only be called when a response is available
 ```javascript
 request = prepare_the_request();
