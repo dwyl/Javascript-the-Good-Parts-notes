@@ -432,7 +432,7 @@ functionName (initialArguments); //initial call to the funtion
 ### Callbacks
 
 * A _callback function_ is a function passed to another function as a parameter and executed in this other function
-* When making a request of a server, use an _asynchronous request_ as asynchronous functions return immediately, therefore freeing up the client
+* When making a request to a server, use an _asynchronous request_ as asynchronous functions return immediately, therefore freeing up the client
 	* In this example, we pass the callback function to the asynchronous request as a parameter so the callback function will only be called when a response is available
 ```javascript
 request = prepare_the_request();
