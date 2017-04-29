@@ -441,8 +441,7 @@ send_request_asynchronously(request, function(response){     //function being pa
 });
 ```
 
-<a name="Module"/>
-### Module
+### <a name="Module"/> Module
 
 * A module is a function or object whose contents can be used, but its state and implementation are hidden
 * It is essentially using function scope and closures keep the variables and functions contained within as private as well as binding them to a non-global object - **whilst still being accessible**
