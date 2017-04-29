@@ -84,7 +84,7 @@ for (myvariable in object) {
 ```
 * A _do while_ statement is always executed at least once as the while condition is only checked after the first iteration of the loop
 * `catch` clause in a _try_ statement **must create a new variable** that will catch the exception object
-* Scope of `thro` statement is the `try` block it's in, or the `try` of the function it's in
+* Scope of `throw` statement is the `try` block it's in, or the `try` of the function it's in
 * If there is no `return` statement, `return===undefined`
 * `break` exits the statement and `continue` forces a new iteration of the loop, both with the optional _label_ mentioned above
 
