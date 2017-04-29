@@ -412,7 +412,7 @@ var variable = function functionName (parameters){
 
 functionName (initialArguments); //initial call to the funtion
 ```
-* Javascript **does not have _tail recursion optimization_** and therefore does optimize recursive functions - this also means they sometimes fail if they "recurse very deeply"
+* Javascript **does not have _tail recursion optimization_** and therefore does not optimize recursive functions - this also means they sometimes fail if they "recurse very deeply"; On a side note, _tail call optimization_ is now supported in [ECMA-262](https://www.ecma-international.org/ecma-262/7.0/index.html#sec-tail-position-calls)
 
 ### Scope
 
