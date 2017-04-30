@@ -803,7 +803,7 @@ There are **_specific_ characters that must be escaped in a character class**: -
 
 #### Regexp Quantifier
 
-A _quantifier_ at the en of a factor indicates how many times the factor should be matched
+A _quantifier_ at the end of a factor indicates how many times the factor should be matched
 * A number in curly braces means the factor should match that many times, so `/o{3}` matches _ooo_
 * Two comma-seperated numbers in curly braces provide the _range_ of times a factor should match, so `{3,5}` indicates it will match 3, 4 or 5 times
 * _Zero or **one**_ times (same thing as saying something is optional) can be `?` or `{0,1}`
