@@ -670,7 +670,7 @@ Array.method('reduce', function (parameters){
 
 Used with `regexp.exec`, `regexp.test`, `string.match`, `string.replace`, `string.search` and `string.split` to interact with string (more in [Chapter 8 - Methods](#chapter8))
 
-Quite convoluted and difficult to read as **do not allow comments or whitespace** so a JavaScript regular expression **must be on a single line**
+Quite convoluted and difficult to read as they **do not allow comments or whitespace** so a JavaScript regular expression **must be on a single line**
 
 ### An Example
 
