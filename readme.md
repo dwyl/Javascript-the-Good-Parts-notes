@@ -1009,8 +1009,7 @@ _NB. You're calling the prototype here, not replacing 'String' with your own var
 Each feature you add to something has a lot of different costs (documentation costs, specification, design, testing and development costs) and these are often not properly accounted for.
 > Features that offer value to a minority of users impose a cost on all users
 
-> We cope with the complexity of feature-driven design by finding and sticking with the good parts
-For example, microwaves do a ton of different things, but most people just use one setting, the timer and the clock. So why not design with just the good parts?
+> We cope with the complexity of feature-driven design by finding and sticking with the good parts. For example, microwaves do a ton of different things, but most people just use one setting, the timer and the clock. So why not design with just the good parts?
 
 
 ## <a name="AppendixA"/> Appendix A - the Awful Parts
