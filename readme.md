@@ -818,7 +818,7 @@ A _quantifier_ at the end of a factor indicates how many times the factor should
 ### Arrays
 
 #### _array_.concat(_item..._)
-Produces **new array** copying the original array with the `items` appended to it (does not modify the original array like `array.push(item)` does. If the `item` is an array, its elements are appended.
+Produces **new array** copying the original array with the `items` appended to it (does not modify the original array like `array.push(item)` does). If the `item` is an array, its elements are appended.
 
 #### _array_.join(_separator_)
 Creates a string of all the array's elements, separated by the `separator`. Use an empty string `separator` ('') to join without separation.
