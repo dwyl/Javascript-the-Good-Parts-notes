@@ -871,7 +871,7 @@ Converts _number_ to a string in **exponential form** (e.g. 3.14e+0). `fractionD
 Converts _number_ to a string in **decimal form** (e.g. 3.1415927). `fractionDigits` (from 0 to 20) gives the number of decimal places.
 
 #### _number_.toPrecision(_precision_)
-Converts _number_ to a string in decimal form (e.g. 3.1415927). The difference from `toFixed` is that `fractionDigits` (from 0 to 20) gives the number of **total digits*.
+Converts _number_ to a string in decimal form (e.g. 3.1415927). The difference from `toFixed` is that `precision` (from 0 to 21) gives the number of **total digits**.
 
 #### _number_.toString(_radix_)
 Converts _number_ to a **string**. `radix` is an _optional_ parameter between 2 and 36 and gives the _base_. The default radix is 10.
