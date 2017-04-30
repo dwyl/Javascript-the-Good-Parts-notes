@@ -1088,7 +1088,7 @@ To test if value is an array:
 ```javascript
 if (my_value && typeof my_value === 'object' && typeof my_value.length === 'number' &&
 	!(my_value.propertyIsEnumerable('length'))) {
-		//my_value is definitelyy an array!
+		//my_value is definitely an array!
 }
 ```
 The `arguments` array isn't an array, just an object with a length property.
