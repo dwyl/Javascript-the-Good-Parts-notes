@@ -956,7 +956,7 @@ The `g` flag is **ignored**.
 #### _string_.slice(_start, end_)
 Creates a **new string** by copying the characters from the `start` position to the character before the `end` position in _string_.
 
-The `end` parameter is _optiona_ and defaults to _string_.length. If either parameter is negative, _string_.length is added to it.
+The `end` parameter is _optional_ and defaults to _string_.length. If either parameter is negative, _string_.length is added to it.
 
 #### _string_.split(_separator, limit_)
 Creates an **array of strings** by splitting apart _string_ at the points where the `separator` appears (e.g. if the separator is '.', ab.cd' becomes ['ab', 'cd']).
