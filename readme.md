@@ -794,7 +794,7 @@ Four kinds of groups:
 #### <a name="RegexpClass"/> Regexp Class
 
 * Conveniently and easily specifies one of a set of characters using square brackets `[]`, for example vowels: `[aeiou]`
-* Can shorten specification of all 32 ASCII special characters to **[!-\/:-@\[-'{-˜]** (note that the ' in this piece of code should be a back-tick which I can't use as part of these notes)
+* Can shorten specification of all 32 ASCII special characters to **[!-\/:-@\[-\`{-˜]** (note that the \` in this piece of code is a back-tick)
 * Also allows `ˆ` as the first character after the opening `[` to mean _NOT_ the characters in the character set
 
 #### Regexp Class Escape
