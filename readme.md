@@ -42,7 +42,6 @@ Javascript has a _class free_ object makeup, relying instead on objects inheriti
 
 Always use // for comments, even multi-line ones to avoid having to escape `/*` characters.  
 
-
 ### Numbers
 
 * There is a single, 64-bit floating point number type.
