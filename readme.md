@@ -40,7 +40,7 @@ Javascript has a _class free_ object makeup, relying instead on objects inheriti
 
 ## <a name="chapter2"/> Chapter 2 - Grammar
 
-Always use // for comments, even multi-line ones to avoid having to escape `/*` characters.  
+Always use // for comments, even multi-line ones to avoid having to escape `/*` characters.
 
 ### Numbers
 
