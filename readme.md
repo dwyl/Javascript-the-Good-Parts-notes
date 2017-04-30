@@ -1129,7 +1129,7 @@ To use JavaScript well, important to understand that **functions are values**.
 **Typed wrappers:**
 **Don't use `new Boolean` or `new String` or `new Number`**, it's completely unnecessary. Also avoid `new Object` and `new Array` and use `{}` and `[]` instead.
 
-** <a name="new"/> `new` operator:**
+**<a name="new"/>`new` operator:**
 Functions that are intended to be used with `new` (conventionally starting with a capital letter) should be avoided (don't define them) as they can cause all kinds of issues and complex bugs which are difficult to catch.
 
 **void**:
