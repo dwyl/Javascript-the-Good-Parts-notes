@@ -813,8 +813,7 @@ A _quantifier_ at the end of a factor indicates how many times the factor should
 **Prefer to use 'zero or more' or 'one or more' matching over the 'zero or one' matching** - i.e. prefer _greedy_ matching over _lazy_ matching
 
 
-<a name="chapter8"/>
-## Chapter 8 - Methods
+## <a name="chapter8"/> Chapter 8 - Methods
 
 ### Arrays
 
@@ -988,8 +987,7 @@ Produces a **new string** from a series of numbers.
 _NB. You're calling the prototype here, not replacing 'String' with your own variable._
 
 
-<a name="chapter9"/>
-## Chapter 9 - Style
+## <a name="chapter9"/> Chapter 9 - Style
 > JavaScripts's loose typing and excessive error tolerance provide little compile-time assurance of our programs' quality, so to compensate, we should code with strict discipline.
 
 * We should **avoid** the _bad parts_ of JavaScript, but also the **useful parts that can be occasionally dangerous**
@@ -1006,8 +1004,7 @@ _NB. You're calling the prototype here, not replacing 'String' with your own var
 > I use a single global variable to contain an application or library. Every object has its own namespace, so it is easy to use objects to organize my code. Use of closure provides further information hiding, increasing the strength of my modules.
 
 
-<a name="chapter10"/>
-## Chapter 10 - Beautiful Features
+## <a name="chapter10"/> Chapter 10 - Beautiful Features
 
 Each feature you add to something has a lot of different costs (documentation costs, specification, design, testing and development costs) and these are often not properly accounted for.
 > Features that offer value to a minority of users impose a cost on all users
@@ -1016,8 +1013,7 @@ Each feature you add to something has a lot of different costs (documentation co
 For example, microwaves do a ton of different things, but most people just use one setting, the timer and the clock. So why not design with just the good parts?
 
 
-<a name="AppendixA">
-## Appendix A - the Awful Parts
+## <a name="AppendixA"/> Appendix A - the Awful Parts
 
 **Need to know what all the pitfalls are with these parts.**
 
@@ -1034,8 +1030,7 @@ Although JavaScript has block _syntax_ (i.e. is written in blocks) like a lot of
 
 Variables should all be declared at the top of the function and not littered throughout the block.
 
-<a name="#SemicolonInsertion">
-### Semicolon Insertion
+### <a name="#SemicolonInsertion"/> Semicolon Insertion
 Attempts to correct faulty programs by automatically inserting semicolons. **Do not depend on this** as it can hide underlying issues.
 
 Also ensure opening curly braces ({) are on the first line of a statement, otherwise semicolons will be erroneously inserted and cause problems:
@@ -1109,8 +1104,7 @@ JavaScript objects inherit members from the prototype chain so they are _never t
 
 To test for membership without prototype chain involvement, use the `hasOwnProperty` method or limit your results (for example, to specific types like number so you know you're not dragging in object members from up the prototype for example if that's what's causing the problem).
 
-<a name="AppendixB">
-## Appendix B - the Bad Parts
+## <a name="AppendixB"/> Appendix B - the Bad Parts
 
 **Avoid these altogether**
 
@@ -1136,7 +1130,7 @@ To use JavaScript well, important to understand that **functions are values**.
 **Typed wrappers:**
 **Don't use `new Boolean` or `new String` or `new Number`**, it's completely unnecessary. Also avoid `new Object` and `new Array` and use `{}` and `[]` instead.
 
-<a name="#new">
+<a name="#new"/>
 **`new` operator:**
 Functions that are intended to be used with `new` (conventionally starting with a capital letter) should be avoided (don't define them) as they can cause all kinds of issues and complex bugs which are difficult to catch.
 
@@ -1144,8 +1138,7 @@ Functions that are intended to be used with `new` (conventionally starting with 
 In JavaScript, this actually _takes_ a value and _returns_ `undefined`, which is hugely confusing and not helpful. **Don't use it**.
 
 
-<a name="AppendixC">
-## Appendix C - JSLint
+## <a name="AppendixC"/> Appendix C - JSLint
 
 JSLint is a **code quality tool** for JavaScript which checks your syntax.
 
