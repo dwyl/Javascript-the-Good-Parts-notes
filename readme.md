@@ -701,7 +701,7 @@ Breaking it down one portion([factor](#Factors)) at a time:
 	* The digit characters will be immediately preceded by a colon `:`
 	* `(\d+) will be the fourth capturing group in this expression, it is also _optional_ (`?`) and inside a non-capturing group (`(?:...)`
 * `(?:\/([ˆ?#]*))?`
-	* Another optional grou (`?`), beginning with a literal slash `/` (escaped by the backslash)
+	* Another optional group (`?`), beginning with a literal slash `/` (escaped by the backslash)
 	* The `ˆ` at the beginning of character class `[ˆ?#]` means it includes _all_ characters _except_ ? and #
 		* This acutally leave the regexp open to attack because too many characters are included in the character class
 	* The `*` indicates the character class will appear _zero or more_ times
