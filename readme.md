@@ -908,11 +908,11 @@ If _regexp_ matches the `string` it returns _true_. Otherwise it returns _false_
 
 ### String
 #### _string_.charAt(_pos_)
-Returns character at position `po` in the string _starting from 0_. If `pos` is less than zero or bigger than the string itself it return an **empty string**.
+Returns character at position `pos` in the string _starting from 0_. If `pos` is less than zero or bigger than the string itself it return an **empty string**.
 
 #### _string_.charCodeAt(_pos_)
 Same as `charAt` except it returns the **integer** that represents the _code point value of the character at position `pos`_.
-Returns `NaN` is  _string_.length < `pos` < 0.
+Returns `NaN` if  _string_.length < `pos` < 0.
 
 #### _string_.concat(_string..._)
 Creates **new string** concatenating various strings. `+` tends to be used instead of this method (e.g. `var cat = 'c'+'a'+'t';`)
