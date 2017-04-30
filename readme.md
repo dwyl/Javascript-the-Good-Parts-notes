@@ -1112,7 +1112,7 @@ To test for membership without prototype chain involvement, use the `hasOwnPrope
 * `eval`: Adds unnecessary complication and compromises the security of the application
 	* Giving string arguments to `setTimeout` and `setInterval` should also be avoided as this makes them act like `eval`
 * `continue` **statement**: Forces a loop into its next iteration but the code is usually much improved when re-written _without_ `continue`
-* `switch` **fall through**: In a `switch` statement, each `case` falls through to the next `case` unless you explicityly disrup the flow, but using these _intentional_ fall throughs makes the _unintentional_ ones that are causing errors basically impossible to find
+* `switch` **fall through**: In a `switch` statement, each `case` falls through to the next `case` unless you explicitly disrupt the flow, but using these _intentional_ fall throughs makes the _unintentional_ ones that are causing errors basically impossible to find
 	* This is one of those parts of JavaScript that appears useful but you're better off avoiding because it's occasionally very dangerous
 * **Block-less statements**: _Always_ use curly braces `{}` to block in statements so as to avoid misinterpretation and aid error finding
 * **Bitwise operators**: Shouldn't really be doing this kind of manipulations because they are quite slow in JavaScript, therefore there shouldn't be a need to use `&`, `|`, `ˆ`, `˜`, `>>`, `>>>` or `<<`
