@@ -660,8 +660,8 @@ Array.method('reduce', function (parameters){
 * Accessing a missing element will give you `undefined`
 * If you have an algorithm that relies on the array not being empty and not having `undefined` values, you can write a function that will prep your array to have a certain number of defined values, essentially initializing it with certain values in place
 	* An `Array.dim` function is oulined on page 63 which will allow `var myArray = Array.dim(10,0)` to make an array with 10 zeroes starting from the first position in the array(0)
-* Javascript only has **one dimensional arrays** but **_can_ have arrays of arrays**
-* Two dimensional arrays (matricess) will have to be set up by the programmer
+* Javascript only has **one dimensional arrays** but **_can_ have array of arrays**
+* Two dimensional arrays (matrices) will have to be set up by the programmer
 	* page 63 gives a method for this and for explicitly setting cell values so as not to have an empty matrix
 
 
