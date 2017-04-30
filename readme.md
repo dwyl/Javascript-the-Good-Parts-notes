@@ -728,7 +728,7 @@ Most of this we have seen before but here are the new bits:
 
 ### Construction
 
-3 flags exist in regular expressions: `i` means insensitive - ignore the character case, 'g` means global - to match multiple items and `m` means multiline - where ˆ and $ can match line-ending characters
+3 flags exist in regular expressions: `i` means insensitive - ignore the character case, `g` means global - to match multiple items and `m` means multiline - where ˆ and $ can match line-ending characters
 
 Two ways to build a regular expression:
 1. _Regular Expression literals_ as per the examples above start and end with a slash `/`
