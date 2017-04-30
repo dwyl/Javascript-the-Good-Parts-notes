@@ -879,7 +879,7 @@ Converts _number_ to a **string**. `radix` is an _optional_ parameter between 2 
 ### Object
 
 #### _object_.hasOwnProperty(_name_)
-*Does not look at the property chain**. Returns true if the _object_ contains the property `name`.
+**Does not look at the property chain**. Returns true if the _object_ contains the property `name`.
 
 ### RegExp
 #### _regexp_.exec(_string_)
@@ -887,7 +887,7 @@ Most powerful (and _slowest_) regexp method.
 
 Checks the `string` against the _regexp_ (starting at position 0) and returns an **array** containing the matches.
 The _regexp_ is set up with various capturing groups and these determine the elements that go in the array:
-* the 0 element of the array will contain the part of `string` that matched the _regexp
+* the 0 element of the array will contain the part of `string` that matched the _regexp_
 * element 1 of the array will contain the text captured by the first capturing group in _regexp_
 * element 2 of the array will contain the text captured by the second capturing group in _regexp_ and so on
 * if the match fails, it returns `null`
