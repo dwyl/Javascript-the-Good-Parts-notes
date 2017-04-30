@@ -699,7 +699,7 @@ Breaking it down one portion([factor](#Factors)) at a time:
 * `(?::(\d+))?`
 	* `\d` represents a _digit character_ so this will be a sequence of _one or more_ digit characters (as per the `+`)
 	* The digit characters will be immediately preceded by a colon `:`
-	* `(\d+) will be the fourth capturing group in this expression, it is also _optional_ (`?`) and inside a non-capturing group (`(?:...)`
+	* `(\d+)` will be the fourth capturing group in this expression, it is also _optional_ (`?`) and inside a non-capturing group `(?:...)`
 * `(?:\/([ˆ?#]*))?`
 	* Another optional group (`?`), beginning with a literal slash `/` (escaped by the backslash)
 	* The `ˆ` at the beginning of character class `[ˆ?#]` means it includes _all_ characters _except_ ? and #
