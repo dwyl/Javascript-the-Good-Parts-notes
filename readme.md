@@ -623,7 +623,7 @@ Arrays have their **own literal format** and their own set of methods ([Chapter 
 ### Enumeration
 
 * A `for` statement can be used to iterate over all the properties of an array (as it is an object)
-* **Do not us `for in`** as it does not iterate through the properties in order and sometimes pulls in from furhter up the prototype chain
+* **Do not use `for in`** as it does not iterate through the properties in order and sometimes pulls in from further up the prototype chain
 
 ### Confusion
 
