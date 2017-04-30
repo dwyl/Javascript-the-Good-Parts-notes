@@ -786,8 +786,8 @@ As well as escaping special characters in regexp factors, the backslash has addi
 #### Regexp Group
 
 Four kinds of groups:
-<a name="Capturing"/>* **Capturing:** `(...)` where each group is captured into the `result` array - the first capturing group in the regexp goes into `result[1]`, the second into `result[2]` and so on
-<a name="Noncapturing"/>* **Noncapturing** `(?:...)` where the text is matched, but not captured and saved anywhere, making is _slightly faster_ than a capturing group (has no bearing on numbering of capturing groups)
+* <a name="Capturing"/> **Capturing:** `(...)` where each group is captured into the `result` array - the first capturing group in the regexp goes into `result[1]`, the second into `result[2]` and so on
+* <a name="Noncapturing"/> **Noncapturing** `(?:...)` where the text is matched, but not captured and saved anywhere, making is _slightly faster_ than a capturing group (has no bearing on numbering of capturing groups)
 * _Positive lookahead_, a **bad** part: `(?=...)` acts like a noncapturing group except after the match is made, it goes back to where text started
 * _Negative lookahead_, a **bad** part: `(?!...)` is like a positive lookahead but only matches if there is no match with what is in it
 
