@@ -998,9 +998,9 @@ _NB. You're calling the prototype here, not replacing 'String' with your own var
 	* Put at most one statement on a line
 	* If you have to break a statement into 2 or more lines, indent the 2nd line onwards (an extra four spaces)
 	* _Always_ use blocks (curly braces {}) with structured statements like `if` and `while` to avoid confusion on what the statement is actually doing
-		* Put the opening brace `{` on the same (first) line as the statement to avoid JavaScript's [semicolon insertion](# SemicolonInsertion) issues - i.e `if (a) { ...`
+		* Put the opening brace `{` on the same (first) line as the statement to avoid JavaScript's [semicolon insertion](#SemicolonInsertion) issues - i.e `if (a) { ...`
 	* Use line comments `//comment` and not block commenting (unless you're _commenting out_ code)
-	* Declare all your variables at the *beginning of the function*, due to JavaScript's functional scope
+	* Declare all your variables at the **beginning of the function**, due to JavaScript's functional scope
 > I use a single global variable to contain an application or library. Every object has its own namespace, so it is easy to use objects to organize my code. Use of closure provides further information hiding, increasing the strength of my modules.
 
 
@@ -1030,7 +1030,7 @@ Although JavaScript has block _syntax_ (i.e. is written in blocks) like a lot of
 
 Variables should all be declared at the top of the function and not littered throughout the block.
 
-### <a name="#SemicolonInsertion"/> Semicolon Insertion
+### <a name="SemicolonInsertion"/> Semicolon Insertion
 Attempts to correct faulty programs by automatically inserting semicolons. **Do not depend on this** as it can hide underlying issues.
 
 Also ensure opening curly braces ({) are on the first line of a statement, otherwise semicolons will be erroneously inserted and cause problems:
