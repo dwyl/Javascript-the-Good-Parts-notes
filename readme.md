@@ -24,9 +24,7 @@ You can [buy the book from O'Reilly](http://shop.oreilly.com/product/97805965177
 * [Appendix C - JSLint](#AppendixC)
 
 
-<a name="chapter1"/>
-## Chapter 1 - Good Parts
-
+## <a name="chapter1"/> Chapter 1 - Good Parts
 > Most programming languages contain good parts and bad parts. I discovered that I could be a better programmer by using only the good parts and avoiding the bad parts. After all, how can you build something good out of bad parts?
 
 The best parts of Javascript include:
@@ -39,10 +37,11 @@ The worst parts include global variables - there is a common _global object_ nam
 
 Javascript has a _class free_ object makeup, relying instead on objects inheriting properties directly from other objects - this is **prototypal inheritance**.
 
-<a name="chapter2"/>
-## Chapter 2 - Grammar
 
-Always use // for comments, even multi-line ones to avoid having to escape `/*` characters.
+## <a name="chapter2"/> Chapter 2 - Grammar
+
+Always use // for comments, even multi-line ones to avoid having to escape `/*` characters.  
+
 
 ### Numbers
 
@@ -104,8 +103,7 @@ for (myvariable in object) {
 * More details in [Chapter 4](#chapter4)
 
 
-<a name="chapter3"/>
-## Chapter 3 - Objects
+## <a name="chapter3"/> Chapter 3 - Objects
 
 Javascript simple types:
 * numbers _(has object-like methods but they are immutable)_
@@ -215,9 +213,8 @@ MYAPP.today = {
 * [Closures](#chapter4) are also a way of mitigating the risks of global variables
 * Note: **Most [Javascript MVCs](http://coding.smashingmagazine.com/2012/07/27/journey-through-the-javascript-mvc-jungle/) these days (2014) will take care of wrapping your app for you**
 
-<a name="chapter4"/>
-## Chapter 4 - Functions
 
+## <a name="chapter4"/> Chapter 4 - Functions
 > The best thing about JavaScript is its implementation of functions.
 
 ### Function Objects
@@ -514,8 +511,8 @@ var meoizer = function (memo, fundamental) {
 }
 ```
 
-<a name="chapter5"/>
-## Chapter 5 - Inheritance
+
+## <a name="chapter5"/> Chapter 5 - Inheritance
 >Javascript is a prototypal language, which means that objects inherit directly from other objects
 
 Main benefit of inheritance is **code reuse** - you only have to specify differences.
@@ -596,8 +593,7 @@ var cat = function (spec) {
 	* For example, you can create a function that provides the object it is passed with a number of methods (which are defined in this function), where each method is a part that is added to the object
 
 
-<a name="chapter6"/>
-## Chapter 6 - Arrays
+## <a name="chapter6"/> Chapter 6 - Arrays
 
 Javascript only has **array-like objects** which are slower than 'real' arrays.
 
@@ -670,8 +666,7 @@ Array.method('reduce', function (parameters){
 	* page 63 gives a method for this and for explicitly setting cell values so as not to have an empty matrix
 
 
-<a name="chapter7"/>
-## Chapter 7 - Regular Expressions
+## <a name="chapter7"/> Chapter 7 - Regular Expressions
 > A _regular expression_ is the specification of the syntax of a simple language
 
 Used with `regexp.exec`, `regexp.test`, `string.match`, `string.replace`, `string.search` and `string.split` to interact with string (more in [Chapter 8 - Methods](#chapter8))
