@@ -56,6 +56,20 @@ Number methods are discussed in [Chapter 8](#chapter8).
 * Backslashes (\\\) are used for **escaping characters** that could cause problems in strings.
 * Strings are **immutable**.
 
+Single quotes are often used to define a String in JavaScript, but if a person's name has an apostrophe
+(and the developer does not know the difference between an apostrophe and single quote) it is useful to "escape"
+the apostrophe character:
+
+´´´
+var name = 'Patrick O\'Brian'; // using a backslash in front of the apostrophe
+console.log('name:', name); // name: Patrick O'Brian
+´´´
+
+further reading: https://webdesignledger.com/common-typography-mistakes-apostrophes-versus-quotation-marks
+
+![BackSlashExample](https://cloud.githubusercontent.com/assets/194400/25989405/e47ff6aa-36f3-11e7-9e3d-c7a3da6f1872.png "Backslash Example ")
+
+
 String methods are discussed in [Chapter 8](#chapter8).
 
 ### Statements
