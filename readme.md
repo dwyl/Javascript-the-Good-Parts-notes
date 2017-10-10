@@ -400,10 +400,11 @@ String.method ('trim', function {
 //Makes a method available to all functions, ONLY when it definitely does not already exist
 
 Function.prototype.method (methodName, func) {
-	if (!this.prototype[methodName]){
-		this.prototype[methodName] = func;
-		return this;
+	if (this.prototype[methodName]) {
+    		throw new Error('Method with name ' + methodName + ' is already defined.');
 	}
+	this.prototype[methodName] = func;
+	return this;
 };
 ```
 * Remember that **_for in_ statements don't work well with prototypes**
