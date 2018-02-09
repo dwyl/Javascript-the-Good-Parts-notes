@@ -310,7 +310,7 @@ var Quo = function (string){
 }
 
 //Now create a get_status method for Quo - this will be a public method
-Quo.prototype.get_status = function {
+Quo.prototype.get_status = function () {
 	return this.status;
 }
 
@@ -390,7 +390,7 @@ try_it();    //you could rewrite this function so the argument is passed in here
 * By augmenting the _basic types_ (essentially the root prototypes), we can improve Javascript overall
 * For example, adding a method named _trim_ to remove spaces from the end of strings, available to all String instances in your code:
 ```javascript
-String.method ('trim', function {
+String.method ('trim', function () {
 	return this.replace(/ˆ\s+|\s+$/g, '');     //uses regular expression
 });
 ```
