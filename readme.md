@@ -60,10 +60,10 @@ Single quotes are often used to define a String in JavaScript, but if a person's
 (and the developer does not know the difference between an apostrophe and single quote) it is useful to "escape"
 the apostrophe character:
 
-´´´
+```javascript
 var name = 'Patrick O\'Brian'; // using a backslash in front of the apostrophe
 console.log('name:', name); // name: Patrick O'Brian
-´´´
+```
 
 further reading: https://webdesignledger.com/common-typography-mistakes-apostrophes-versus-quotation-marks
 
