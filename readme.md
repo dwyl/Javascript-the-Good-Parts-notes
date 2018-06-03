@@ -1,12 +1,24 @@
 # Notes on _Douglas Crockford's_ Javascript the Good Parts :rocket:
+
+> These are _notes_ on the book `Javascript the Good Parts` which was published
+in **2008, before es6**. There have not been any revised editions of the book published at the time of writing,
+see http://www.github.com/dwyl/Javascript-the-Good-Parts-notes/issues/33 for the
+ongoing conversation on this.
+
 This book calls out the best parts of Javascript and tells you what to avoid (the 'bad parts').
-It's about making sure you **know the really important parts of the language** and **create good habits** instead of having to break bad ones down the line.
+It's about making sure you **know the really important parts of the language**
+and **create good habits** instead of having to break bad ones down the line.
 
-[![contributions welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat)](https://github.com/iteles/Javascript-the-Good-Parts-notes/issues) **Please don't hesitate to submit PRs** to improve these notes wherever you feel something can be clarified, improved on or have an example added to it.
+The idea of these notes is to collect the excellent information from an already
+dense book  into note form, **translating these ideas into _'plain English'_**
+where possible and _adding explanations_ throughout where the book might not make
+things obvious as it assumes prior knowledge.
 
-The idea of these notes is to collect the excellent information from an already dense book into note form, **translating these ideas into _'plain English'_** where possible and _adding explanations_ throughout where the book might not make things obvious as it assumes prior knowledge.
+You can [buy the book](https://amzn.to/2HfF5CR) or follow [Douglas Crockford on Github](https://github.com/douglascrockford).
 
-You can [buy the book from O'Reilly](http://shop.oreilly.com/product/9780596517748.do) (non-affiliate link) or follow [Douglas Crockford on Github](https://github.com/douglascrockford).
+[![contributions welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat)](https://github.com/iteles/Javascript-the-Good-Parts-notes/issues)
+**Please don't hesitate to submit PRs** to improve these notes wherever you feel
+something can be clarified, improved on or have an example added to it.
 
 ## Table of Contents
 * [Chapter 1 - Good Parts](#chapter1)
@@ -76,7 +88,7 @@ String methods are discussed in [Chapter 8](#chapter8).
 
 * _Inside_ a function, the var statement creates variables local to that function
 * _switch, while, for_ and _do_ statements can have an optional **label**  which can be used with `break` and `continue` to provide more precise [control over exactly which statement to break or continue](http://www.tutorialspoint.com/cgi-bin/practice.cgi?file=javascript_19). Format: `labelname: statement` and then `continue labelname;`
-* ES2015 presents two new keywords for declaring variables, _let_ and _const_. Whereas the _var_ keyword is function scoped (the variables are local to the function), _let_ and _const_ are both block scoped, which means they are local to any statement with {}. 
+* ES2015 presents two new keywords for declaring variables, _let_ and _const_. Whereas the _var_ keyword is function scoped (the variables are local to the function), _let_ and _const_ are both block scoped, which means they are local to any statement with {}.
 * _falsy_ values:
 	* false
 	* null
