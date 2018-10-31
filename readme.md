@@ -139,7 +139,7 @@ Javascript simple types:
 
 **All other values are _objects_** including arrays and functions.
 
-Objects are **class free**, can contain other objects and can inherit properties from their prototypes (which can _reduce object initialisatioin time and memory consumption_).
+Objects are **class free**, can contain other objects and can inherit properties from their prototypes (which can _reduce object initialisation time and memory consumption_).
 
 ### Object Literals
 
@@ -253,7 +253,7 @@ MYAPP.today = {
 	* The (reserved) word `function` itself
 	* An _optional_ name (un-named functions are considered _anonymous_ functions)
 	* Comma-seperated parameters of the function, in parentheses - `(parameters)`
-	* Set of statements in curly brakcets to be carried out when the function is invoked - `{statements}`
+	* Set of statements in curly brackets to be carried out when the function is invoked - `{statements}`
 
 ```javascript
 //Format of a function
@@ -432,7 +432,7 @@ var variable = function functionName (parameters){
 	functionName(arguments);
 };
 
-functionName (initialArguments); //initial call to the funtion
+functionName (initialArguments); //initial call to the function
 ```
 * Javascript **does not have _tail recursion optimization_** and therefore does not optimize recursive functions - this also means they sometimes fail if they "recurse very deeply"; On a side note, _tail call optimization_ is now supported in [ECMA-262](https://www.ecma-international.org/ecma-262/7.0/index.html#sec-tail-position-calls)
 
@@ -635,7 +635,7 @@ Arrays have their **own literal format** and their own set of methods ([Chapter 
 ### Length
 
 * If you add to the array, the `length` property will increase to contain the new element - it will not give an error
-* If you set the `.length` to a smaller number than the current length of the array, it will **delete any properties with a subscipt >= the new `length`**
+* If you set the `.length` to a smaller number than the current length of the array, it will **delete any properties with a subscript >= the new `length`**
 * The `push()` method is sometimes useful to add an element to the end of an array
 `numbers.push('go')    //adds the element 'go' to the end of the numbers array`
 
@@ -685,7 +685,7 @@ Array.method('reduce', function (parameters){
 * Using `[]` will create an empty array as they are not initialized in JavaScript
 * Accessing a missing element will give you `undefined`
 * If you have an algorithm that relies on the array not being empty and not having `undefined` values, you can write a function that will prep your array to have a certain number of defined values, essentially initializing it with certain values in place
-	* An `Array.dim` function is oulined on page 63 which will allow `var myArray = Array.dim(10,0)` to make an array with 10 zeroes starting from the first position in the array(0)
+	* An `Array.dim` function is outlined on page 63 which will allow `var myArray = Array.dim(10,0)` to make an array with 10 zeroes starting from the first position in the array(0)
 * Javascript only has **one dimensional arrays** but **_can_ have array of arrays**
 * Two dimensional arrays (matrices) will have to be set up by the programmer
 	* page 63 gives a method for this and for explicitly setting cell values so as not to have an empty matrix
@@ -702,7 +702,7 @@ Quite convoluted and difficult to read as they **do not allow comments or whites
 
 `/ˆ(?:([A-Za-z]+):)?(\/{0,3})([0-9.\-A-Za-z]+)(?::(\d+))?(?:\/([ˆ?#]*))?(?:\?([ˆ#]*))?(?:#(.*))?$/`
 
-Breaking it down one portion([factor](#Factors)) at a time:
+Breaking it down one portion ([factor](#Factors)) at a time:
 * Note that the string starts and ends with a slash `/`
 * `ˆ` indicates the beginning of a string
 * `(?:([A-Za-z]+):)?`
@@ -720,7 +720,7 @@ Breaking it down one portion([factor](#Factors)) at a time:
 	* `\/` The backslash `\` _escapes_ the forward slash `/` (which traditionally symbolises the end of the regular expression literal) and together they indicate that the forward slash `/` should be matched
 	* Suffix `{0,3}` means the slash `/` will be matched between 0 and 3 times
 * `([0-9.\-A-Za-z]+)`
-	* String made up of one or more (note the `+` at the end denoting possible multiple ocurrences) digits, letters (upper or lower case), full stops (.) or hyphens (-)
+	* String made up of one or more (note the `+` at the end denoting possible multiple occurrences) digits, letters (upper or lower case), full stops (.) or hyphens (-)
 		* Note that the hyphen was escaped with a backslash `\-` as hyphens usually denote a _range_ but in this case is a hyphen within the expression
 * `(?::(\d+))?`
 	* `\d` represents a _digit character_ so this will be a sequence of _one or more_ digit characters (as per the `+`)
@@ -729,7 +729,7 @@ Breaking it down one portion([factor](#Factors)) at a time:
 * `(?:\/([ˆ?#]*))?`
 	* Another optional group (`?`), beginning with a literal slash `/` (escaped by the backslash)
 	* The `ˆ` at the beginning of character class `[ˆ?#]` means it includes _all_ characters _except_ ? and #
-		* This acutally leave the regexp open to attack because too many characters are included in the character class
+		* This actually leaves the regexp open to attack because too many characters are included in the character class
 	* The `*` indicates the character class will appear _zero or more_ times
 * `(?:\?([ˆ#]*))?`
 	* We've seen everything here before: An optional capturing group starting with a literal `?` (escaped by the backslash) with zero or more characters that are not #
