@@ -523,7 +523,7 @@ Function.method('curry', function() {
 * Particularly useful when a function is **recursive** and uses the results of its previous iteration in the current iteration
 * A _memoizer_ function can be created to help memoize future functions:
 ```javascript
-var meoizer = function (memo, fundamental) {
+var memoizer = function (memo, fundamental) {
 	var shell = function (n) {
 		var result = memo[n];
 		if (typeof result !== 'number') {
