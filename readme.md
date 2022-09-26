@@ -2,7 +2,7 @@
 
 > These are _notes_ on the book `Javascript the Good Parts` which was published
 in **2008, before es6**. There have not been any revised editions of the book published at the time of writing,
-see http://www.github.com/dwyl/Javascript-the-Good-Parts-notes/issues/33 for the
+see https://www.github.com/dwyl/Javascript-the-Good-Parts-notes/issues/33 for the
 ongoing conversation on this.
 
 This book calls out the best parts of Javascript and tells you what to avoid (the 'bad parts').
@@ -236,7 +236,7 @@ MYAPP.today = {
 //Making sure all other variables (like today) are contained within this one global variable (MYAPP) means none of them have global scope and therefore the risk of naming conflicts, etc in your application is reduced
 ```
 * [Closures](#chapter4) are also a way of mitigating the risks of global variables
-* Note: **Most [Javascript MVCs](http://coding.smashingmagazine.com/2012/07/27/journey-through-the-javascript-mvc-jungle/) these days (2014) will take care of wrapping your app for you**
+* Note: **Most [Javascript MVCs](https://coding.smashingmagazine.com/2012/07/27/journey-through-the-javascript-mvc-jungle/) these days (2014) will take care of wrapping your app for you**
 
 
 ## <a name="chapter4"/> Chapter 4 - Functions
@@ -468,7 +468,7 @@ send_request_asynchronously(request, function(response){     //function being pa
 * A module is a function or object whose contents can be used, but its state and implementation are hidden
 * It is essentially using function scope and closures keep the variables and functions contained within as private as well as binding them to a non-global object - **whilst still being accessible**
 * Using the _module pattern_ is **widely used and good practice** as it promotes information hiding (avoiding naming conflicts, etc) and encapsulation
-	* This is a [good article on how to use the module pattern](http://css-tricks.com/how-do-you-structure-javascript-the-module-pattern-edition/) with examples
+	* This is a [good article on how to use the module pattern](https://css-tricks.com/how-do-you-structure-javascript-the-module-pattern-edition/) with examples
 * It can also be used to produce **secure objects** (see [durable objects](#DurableObject) below)
 	* Methods contained in the object do not make use of `this` or `that` so it becomes impossible to change them from outside of the object except in ways explicitly permitted by the methods (like passing them a parameter)
 	* The methods can be _replaced_ but the secrets of how these methods function (like how they generate a number for example) can't be revealed because they are not tied to a global object
@@ -711,7 +711,7 @@ Breaking it down one portion ([factor](#Factors)) at a time:
 	* `()` around the _([A-Za-z]+)_ indicates a [_capturing group_](#Capturing) which is therefore captured and placed in the `result` array
 		* They groups are placed in the array in order, so the first will appear in `result[1]`
 		* **Noncapturing groups are preferred to capturing groups** because capturing groups have a performance penalty (on account of saving to the result array)
-		* You can also have **capturing groups _within_ noncapturing groups** such as [`(?:Bob says: (\w+))`](http://www.rexegg.com/regex-disambiguation.html)
+		* You can also have **capturing groups _within_ noncapturing groups** such as [`(?:Bob says: (\w+))`](https://www.rexegg.com/regex-disambiguation.html)
 	* `[...]` indicates a character class
 	* `A-Za-z` is a character class containing all 26 letters of the alphabet in both upper and lower case
 	* Suffix `+` means character class will be matched _one or more times_
@@ -1166,8 +1166,8 @@ In JavaScript, this actually _takes_ a value and _returns_ `undefined`, which is
 
 JSLint is a **code quality tool** for JavaScript which checks your syntax.
 
-Having read through this appendix (you can read more about [JSLint here](http://www.jslint.com)), I tend more towards [**_JSHint_**](http://jshint.com/about/), a _fork_ of JSLint. It allows programmers to customise for themselves which the good parts and bad parts are and define their own subset, although naturally there are a number of pre-defined options. [This is a really fantastic article on using JSHint](https://github.com/nelsonic/learn-jshint); it's simple and aimed at having you using JSHint in a few minutes as well as providing various sources for pre-defined subsets.
+Having read through this appendix (you can read more about [JSLint here](https://www.jslint.com)), I tend more towards [**_JSHint_**](http://jshint.com/about/), a _fork_ of JSLint. It allows programmers to customise for themselves which the good parts and bad parts are and define their own subset, although naturally there are a number of pre-defined options. [This is a really fantastic article on using JSHint](https://github.com/nelsonic/learn-jshint); it's simple and aimed at having you using JSHint in a few minutes as well as providing various sources for pre-defined subsets.
 
 
 
-Interesting article on prototypes: http://sporto.github.io/blog/2013/02/22/a-plain-english-guide-to-javascript-prototypes/
+Interesting article on prototypes: https://sporto.github.io/blog/2013/02/22/a-plain-english-guide-to-javascript-prototypes/
