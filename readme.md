@@ -205,9 +205,18 @@ var i;
 var properties = [
 	'day', 'month', 'year'
 	];
+var today = {
+  day: '5',
+  month: 'September',
+  year: '2001'
+};	
 for (i = 0; i < properties.length; i++) {
 	document.writeIn(properties[i] + ':' + today[properties[i]]);
 }
+//OUTPUT
+// day:5
+// month:September
+// year:2001
 ```
 * This ensures you get the **properties you want** (i.e. not up the prototype chain) and in the **order you want**, as opposed to a _for in_ loop which achieves neither of these
 
